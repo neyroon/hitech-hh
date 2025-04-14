@@ -22,13 +22,13 @@ export default function Support() {
               Для быстрой связи с тех.поддержкой выберите способ и свяжитесь
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-[10px] sm:gap-[20px] sm:max-w-[450px]">
-              <Link href="https://tg" className="">
+              <Link href="https://t.me/+79811895734" className="">
                 <div className="flex items-center justify-center gap-[10px] py-[16px] px-[15px] rounded-[4px] text-[16px] font-semibold bg-tg text-white">
                   <TgIcon />
                   Telegram менеджер
                 </div>
               </Link>
-              <Link href="https://tg">
+              <Link href="https://wa.me/+79811895734">
                 <div className="flex items-center justify-center gap-[10px] py-[16px] px-[15px] rounded-[4px] text-[16px] font-semibold bg-whatsapp text-white">
                   <WhatsAppIcon />
                   WhatsApp
@@ -85,7 +85,7 @@ export default function Support() {
           </div>
         </div>
       </Section>
-      <Section>
+      <Section className="mb-[100px]">
         <div className="flex gap-[30px] justify-between flex-col lg:flex-row">
           <div>
             <h2 className="hidden lg:block text-[24px] lg:text-[32px] font-semibold mb-[20px]">
@@ -97,7 +97,7 @@ export default function Support() {
             <p className="text-[18px] font-semibold mb-[15px] lg:mb-[10px]">
               Будьте в центре событий:
             </p>
-            <div className="text-[16px] flex gap-[10px] flex-wrap items-center max-w-[680px] mb-[40px]">
+            <div className="text-[18px] flex gap-[10px] flex-wrap items-center max-w-[680px] mb-[40px]">
               <span>узнавайте первыми о</span>
               <span className="px-[10px] py-[5px] bg-bg-grey rounded-[4px]">
                 новинках
