@@ -1,10 +1,16 @@
 import React from "react";
 
-export const LogoIcon = () => {
+export const LogoIcon = ({
+  width = 384,
+  height = 47,
+}: {
+  width?: number;
+  height?: number;
+}) => {
   return (
     <svg
-      width="384"
-      height="47"
+      width={width}
+      height={height}
       viewBox="0 0 384 47"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

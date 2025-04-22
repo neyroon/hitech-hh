@@ -1,12 +1,16 @@
 @import "tailwindcss";
 
 @theme {
+  --color-grey: #a4a0a0;
+  --color-main2: #17152d;
+
   --color-tg: #27a6e5;
   --color-whatsapp: #48c95f;
   --color-bg-email: #17152d;
   --color-bg-inst: #ee2a7b;
   --color-bg-grey: #f9f9f9;
   --color-bg-green: #00a43d;
+  --color-bg-red: #dc1b26;
 }
 
 body {

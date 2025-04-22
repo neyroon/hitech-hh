@@ -29,9 +29,9 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={`${montserattSans.variable} antialiased`}>
-        {/* <Header /> */}
+        <Header />
         <main>{children}</main>
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );
