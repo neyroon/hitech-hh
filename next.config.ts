@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         port: "1337",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "hitech-hh.com",
+        pathname: "/**",
+      },
     ],
   },
 };
