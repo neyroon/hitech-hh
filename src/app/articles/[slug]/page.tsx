@@ -26,8 +26,8 @@ export default async function Articles({
         ]}
       />
       <Section className="pt-[30px] pb-[50px] lg:pb-0 bg-bg-grey">
-        <div className="flex flex-col lg:flex-row gap-[50px] items-start w-full">
-          <div className="p-[20px] lg:p-[30px] bg-white lg:mb-[100px] rounded-[10px]">
+        <div className="flex flex-col lg:flex-row gap-[50px] items-start ">
+          <div className="p-[20px] lg:p-[30px] bg-white lg:mb-[100px] rounded-[10px] w-full">
             <h1 className="text-[22px] font-medium mb-[20px]">
               {articleItem.data[0].title}
             </h1>
