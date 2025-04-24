@@ -2,16 +2,19 @@ import Link from "next/link";
 import React from "react";
 import { LogoIcon } from "../icons/logo";
 import { CatalogButton } from "../caralog-button";
+import { SearchIcon } from "../icons/search";
+import { CartIcon } from "../icons/cart";
+import { HeaderMobile } from "./header-mobile";
 
 export const Header = () => {
   return (
-    <header className="flex justify-center">
-      <div className="w-[1264px] ">
+    <header className="lg:flex lg:justify-center">
+      <div className="hidden lg:block w-[1264px] px-[20px]">
         <nav className="flex justify-between text-grey py-[14px]">
           <ul className="flex gap-[20px]">
             <li>
               <Link
-                href="/"
+                href="/about"
                 className="hover:text-main2   transition-colors duration-300"
               >
                 О компании
@@ -19,7 +22,7 @@ export const Header = () => {
             </li>
             <li>
               <Link
-                href="/"
+                href="/delivery"
                 className="hover:text-main2  transition-colors duration-300"
               >
                 Доставка и оплата
@@ -27,7 +30,7 @@ export const Header = () => {
             </li>
             <li>
               <Link
-                href="/"
+                href="/warranty"
                 className="hover:text-main2  transition-colors duration-300"
               >
                 Гарантия и сервисные центры
@@ -54,7 +57,7 @@ export const Header = () => {
           </ul>
         </nav>
         <nav className="flex items-center gap-[20px] text-grey">
-          <Link href="/">
+          <Link href="/" className="text-main2">
             <LogoIcon width={211} height={50} />
           </Link>
           <CatalogButton />
@@ -65,13 +68,28 @@ export const Header = () => {
             Главная
           </Link>
           <Link
-            href="/"
+            href="/articles"
             className="hover:text-main2  transition-colors duration-300"
           >
             Статьи
           </Link>
+          <div className="px-[15px] py-[9px] gap-[20px] flex items-center bg-bg-grey rounded-[8px] w-[42%]">
+            <SearchIcon />
+            <input
+              type="search"
+              className="grow text-[16px] text-grey"
+              placeholder="Поиск по сайту"
+            />
+          </div>
+          <div className="p-[12px]  font-(family-name:--font-roboto) relative">
+            <CartIcon />
+            <div className="bg-bg-red text-white rounded-[5px] text-[12px] h-[22px] w-[22px] absolute right-[-4px] top-[-4px] flex items-center justify-center">
+              <span className="">10</span>
+            </div>
+          </div>
         </nav>
       </div>
+      <HeaderMobile />
     </header>
   );
 };

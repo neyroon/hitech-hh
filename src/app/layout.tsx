@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-
-const montserattSans = Montserrat({
-  weight: ["600", "400", "500"],
-  variable: "--font-montserrat-sans",
-  subsets: ["cyrillic", "latin"],
-});
+import { Montserrat, Roboto } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Выберите бытовую технику для дома и бизнеса",
@@ -21,6 +15,18 @@ export const metadata: Metadata = {
   },
 };
 
+const montserattSans = Montserrat({
+  weight: ["600", "400", "500"],
+  variable: "--font-montserrat-sans",
+  subsets: ["cyrillic", "latin"],
+});
+
+const RobotoSans = Roboto({
+  weight: ["600", "400", "500"],
+  variable: "--font-roboto",
+  subsets: ["cyrillic", "latin"],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,7 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`${montserattSans.variable} antialiased`}>
+      <body
+        className={`${montserattSans.variable} ${RobotoSans.variable} antialiased`}
+      >
         <Header />
         <main>{children}</main>
         <Footer />

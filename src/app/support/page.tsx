@@ -80,7 +80,7 @@ export default function Support() {
               Нововведение
             </span>
           </div>
-          <div className="bg-white w-full lg:w-[482px] h-[72px] lg:h-[111px] flex items-center justify-center rounded-[2px]">
+          <div className="bg-white w-full lg:w-[482px] h-[72px] lg:h-[111px] flex items-center justify-center rounded-[2px] text-main2">
             <LogoIcon />
           </div>
         </div>

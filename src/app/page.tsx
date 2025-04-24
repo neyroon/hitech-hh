@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { Section } from "@/components/section";
 
 export default function Home() {
-  redirect("/support");
+  return <Section></Section>;
 }
