@@ -143,17 +143,19 @@ export default function About() {
               </div>
             ))}
           </div>
-          <div className="p-[20px] rounded-[10px] bg-bg-grey">
-            <p className="text-[18px] font-semibold mb-[20px]">Наша миссия</p>
-            <p className="text-[18px]">
-              Мы создаём технику,{" "}
-              <span className="font-semibold">
-                которая освобождает вас от рутины и даёт больше свободы для
-                жизни
-              </span>
-              . С HiTech вы забываете о сложностях быта и делаете только то, что
-              приносит удовольствие.
-            </p>
+          <div className="p-[20px] lg:py-0 rounded-[10px] bg-bg-grey">
+            <div className="lg:sticky lg:top-0 lg:pt-[20px]">
+              <p className="text-[18px] font-semibold mb-[20px]">Наша миссия</p>
+              <p className="text-[18px]">
+                Мы создаём технику,{" "}
+                <span className="font-semibold">
+                  которая освобождает вас от рутины и даёт больше свободы для
+                  жизни
+                </span>
+                . С HiTech вы забываете о сложностях быта и делаете только то,
+                что приносит удовольствие.
+              </p>
+            </div>
           </div>
         </div>
       </Section>
