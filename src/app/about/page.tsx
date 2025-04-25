@@ -181,7 +181,7 @@ export default function About() {
             width="100%"
             height="272"
             loading="lazy"
-            className="lg:w-[710px]"
+            className="lg:w-[710px] rounded-[8px]"
             frameBorder="0"
           ></iframe>
         </div>
