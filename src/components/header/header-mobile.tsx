@@ -109,11 +109,11 @@ export const HeaderMobile = () => {
                 Гарантия и сервисные центры
               </Link>
             </nav>
-            <Link href="/" className="text-grey">
-              +7 000 000-00-00
+            <Link href="tel:+79811895734" className="text-grey">
+              +7 (981) 189-57-34
             </Link>
-            <Link href="/" className="text-grey">
-              почта@gmail.ru
+            <Link href="mailto:hitech.comp@mail.ru" className="text-grey">
+              hitech.comp@mail.ru
             </Link>
           </>
         )}

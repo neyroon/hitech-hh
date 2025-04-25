@@ -28,3 +28,7 @@ span,
 p {
   line-height: 140%;
 }
+
+.swiper-slide {
+  height: auto !important;
+}

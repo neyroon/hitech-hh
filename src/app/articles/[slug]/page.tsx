@@ -35,7 +35,7 @@ export default async function Articles({
               {articleItem.data[0].content}
             </Markdown>
           </div>
-          <div className="p-[30px] bg-white pb-0 lg:w-[362px] shrink-0 w-full">
+          <div className="mx-[-20px] lg:mx-0 w-[calc(100%+40px)] p-[20px] pr-0 lg:p-[30px] bg-white pb-0 lg:w-[362px] max-h-[1250px] shrink-0 rounded-[10px] overflow-hidden">
             <ArticleWithSwiper articleItems={articleItems} />
           </div>
         </div>

@@ -58,10 +58,10 @@ export const Footer = () => {
           <p>Контакты</p>
           <div>
             <div className="flex justify-between mb-[10px]">
-              <Link href="tel:7918282733">+7 000 000-00-00</Link>
+              <Link href="tel:+79811895734">+7 (981) 189-57-34</Link>
               <span>вт-вс 11:00-20:00</span>
             </div>
-            <Link href="mailto:ht@yandex.ru">почта@mail.ru</Link>
+            <Link href="mailto:hitech.comp@mail.ru">hitech.comp@mail.ru</Link>
           </div>
           <div className="flex gap-[10px]">
             <Link href="inst">
