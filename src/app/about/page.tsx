@@ -160,18 +160,31 @@ export default function About() {
         </div>
       </Section>
       <Section className="py-[50px] ">
-        <h2 className="text-[22px] lg:text-[24px] font-medium lg:font-semibold mb-[40px]">
-          Контакты
-        </h2>
-        <p className="text-[18px] mb-[20px]">Адрес: г. Москва </p>
-        <p className="text-[18px] mb-[20px]">+7 000 000-00-00</p>
-        <p className="text-[18px] mb-[40px]">вт-вс 11:00-20:00</p>
-        <Link
-          href="/"
-          className="bg-bg-red flex justify-center items-center w-[213px] h-[45px] rounded-[4px] text-white text-[18px] font-medium"
-        >
-          Связаться
-        </Link>
+        <div className="flex flex-col lg:flex-row gap-[40px] justify-between">
+          <div>
+            <h2 className="text-[22px] lg:text-[24px] font-medium lg:font-semibold mb-[40px]">
+              Контакты
+            </h2>
+            <p className="text-[18px] mb-[20px]">Адрес: г. Москва </p>
+            <p className="text-[18px] mb-[20px]">+7 000 000-00-00</p>
+            <p className="text-[18px] mb-[40px]">вт-вс 11:00-20:00</p>
+            <Link
+              href="/"
+              className="bg-bg-red flex justify-center items-center w-[213px] h-[45px] rounded-[4px] text-white text-[18px] font-medium"
+            >
+              Связаться
+            </Link>
+          </div>
+
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3A2ee97a497c5220a13fe34ae8e3f3b559a3ebfb31922e7ca238854d6e95a6a7e9&amp;source=constructor"
+            width="100%"
+            height="272"
+            loading="lazy"
+            className="lg:w-[710px]"
+            frameBorder="0"
+          ></iframe>
+        </div>
       </Section>
     </>
   );
