@@ -74,17 +74,17 @@ export default function Warranty() {
               <input
                 type="text"
                 placeholder="Ваше имя"
-                className="text-[16px] p-[15px] bg-bg-grey w-full text-grey rounded-[6px]"
+                className="text-[16px] p-[15px] bg-bg-grey w-full text-main2 placeholder:text-grey rounded-[6px]"
               />
               <input
                 type="tel"
                 placeholder="Ваш номер телефона"
-                className="text-[16px] p-[15px] bg-bg-grey w-full text-grey rounded-[6px]"
+                className="text-[16px] p-[15px] bg-bg-grey w-full text-main2 placeholder:text-grey rounded-[6px]"
               />
               <input
                 type="text"
                 placeholder="Опишите проблему"
-                className="text-[16px] p-[15px] bg-bg-grey w-full text-grey rounded-[6px]"
+                className="text-[16px] p-[15px] bg-bg-grey w-full text-main2 placeholder:text-grey rounded-[6px]"
               />
             </form>
             <div className="flex flex-col lg:flex-row items-start lg:items-center gap-[20px]">

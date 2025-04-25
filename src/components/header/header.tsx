@@ -77,16 +77,19 @@ export const Header = () => {
             <SearchIcon />
             <input
               type="search"
-              className="grow text-[16px] text-grey"
+              className="grow text-[16px] text-main2 placeholder:text-grey"
               placeholder="Поиск по сайту"
             />
           </div>
-          <div className="p-[12px]  font-(family-name:--font-roboto) relative">
+          <Link
+            href="/card"
+            className="p-[12px] text-grey hover:text-bg-red group  transition-colors duration-300 font-(family-name:--font-roboto) relative"
+          >
             <CartIcon />
             <div className="bg-bg-red text-white rounded-[5px] text-[12px] h-[22px] w-[22px] absolute right-[-4px] top-[-4px] flex items-center justify-center">
               <span className="">10</span>
             </div>
-          </div>
+          </Link>
         </nav>
       </div>
       <HeaderMobile />

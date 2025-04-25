@@ -67,7 +67,7 @@ export const HeaderMobile = () => {
               <SearchIcon />
               <input
                 type="search"
-                className="text-[16px] text-grey"
+                className="text-[16px] text-main2 placeholder:text-grey"
                 placeholder="Поиск по сайту"
               />
             </div>

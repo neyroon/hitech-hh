@@ -151,27 +151,27 @@ export default function Delivery() {
               <input
                 type="text"
                 placeholder="Ваше имя"
-                className="text-[16px] p-[15px] bg-bg-grey w-full text-grey rounded-[6px]"
+                className="text-[16px] p-[15px] bg-bg-grey w-full text-main2 placeholder:text-grey rounded-[6px]"
               />
               <input
                 type="text"
                 placeholder="Название компании"
-                className="text-[16px] p-[15px] bg-bg-grey w-full text-grey rounded-[6px]"
+                className="text-[16px] p-[15px] bg-bg-grey w-full text-main2 placeholder:text-grey rounded-[6px]"
               />
               <input
                 type="tel"
                 placeholder="Ваш номер телефона"
-                className="text-[16px] p-[15px] bg-bg-grey w-full text-grey rounded-[6px]"
+                className="text-[16px] p-[15px] bg-bg-grey w-full text-main2 placeholder:text-grey rounded-[6px]"
               />
               <input
                 type="email"
                 placeholder="Ваш e-mail"
-                className="text-[16px] p-[15px] bg-bg-grey w-full text-grey rounded-[6px]"
+                className="text-[16px] p-[15px] bg-bg-grey w-full text-main2 placeholder:text-grey rounded-[6px]"
               />
               <input
                 type="text"
                 placeholder="Комментарий (не обязательно)"
-                className="text-[16px] p-[15px] bg-bg-grey w-full text-grey rounded-[6px]"
+                className="text-[16px] p-[15px] bg-bg-grey w-full text-main2 placeholder:text-grey rounded-[6px]"
               />
             </form>
 

@@ -11,7 +11,10 @@ export const Breadcrumbs = ({
   return (
     <Section className="py-[14px]">
       <div className="flex gap-[8px] items-center">
-        <Link href="/">
+        <Link
+          href="/"
+          className="text-grey hover:text-bg-red transition-colors duration-300"
+        >
           <HomeIcon />
         </Link>
         {items.map((item) => (
