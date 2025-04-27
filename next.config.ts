@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  publicRuntimeConfig: {
+    NEXT_PUBLIC_STRAPI_API_TOKEN: process.env.NEXT_PUBLIC_STRAPI_API_TOKEN,
+  },
 };
 
 export default nextConfig;

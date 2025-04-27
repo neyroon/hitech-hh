@@ -1,13 +1,28 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LogoIcon } from "../icons/logo";
 import classnames from "classnames";
 import { SearchIcon } from "../icons/search";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { RightIcon } from "../icons/right";
+import { getStrapiMedia } from "@/utils/strapi";
 
-export const HeaderMobile = () => {
+export const HeaderMobile = ({ categories }: { categories: any }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState(categories[0]);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (isOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "visible";
+  }, [isOpen]);
 
   return (
     <div className="flex justify-between lg:hidden px-[20px] py-[5px]">
@@ -58,7 +73,7 @@ export const HeaderMobile = () => {
             "translate-x-[0]": isOpen,
             "translate-x-[-100%]": !isOpen,
           },
-          " bg-white fixed top-0 left-0 bottom-0 right-0 w-[100%] px-[20px]  z-20  transition-transform duration-300 supports-[-webkit-touch-callout: none]:h-[webkit-fill-available]"
+          " bg-white fixed top-0 left-0 bottom-0 right-0 w-[100%] px-[20px]  z-20  transition-transform duration-300 supports-[-webkit-touch-callout: none]:h-[webkit-fill-available] overflow-auto"
         )}
       >
         {!isCatalogOpen && (
@@ -141,6 +156,65 @@ export const HeaderMobile = () => {
 
               <span>Каталог</span>
             </button>
+            <div
+              className={classnames(
+                "flex flex-col gap-[20px] py-[10px] bg-white "
+              )}
+            >
+              <div className="flex flex-col gap-[10px]">
+                {categories.map((category) => (
+                  <>
+                    <button
+                      className={classnames(
+                        "flex items-center justify-between p-[10px]  rounded-[10px] cursor-pointer",
+                        {
+                          "shadow-[0px_4px_19px_0px_rgba(0,0,0,0.08)]":
+                            category.name === currentCategory.name,
+                        }
+                      )}
+                      key={category.name}
+                      onClick={() => setCurrentCategory(category)}
+                    >
+                      <div className="flex  gap-[10px] items-center">
+                        <Image
+                          src={getStrapiMedia(category.image.url)}
+                          width={40}
+                          height={40}
+                          alt="Изображение категории"
+                          className="w-[40px] h-[40px]"
+                        />
+                        <span className="text-black">{category.name}</span>
+                      </div>
+                    </button>
+                    {category.name === currentCategory.name && (
+                      <div className="mb-[40px] mt-[20px]">
+                        <div className="flex flex-wrap gap-[10px] items-stretch">
+                          {category.device_types.map((type) => (
+                            <Link
+                              href={`/catalog?category=${currentCategory.slug}&deviceTypes=${type.slug}`}
+                              key={type.name}
+                            >
+                              <div className="w-[105px]">
+                                <Image
+                                  width={105}
+                                  height={107}
+                                  src={getStrapiMedia(type.image.url)}
+                                  alt="Изображение типа товара"
+                                  className="h-[107px] w-[105px] object-contain"
+                                />
+                                <p className="text-[10px] text-center text-black">
+                                  {type.name}
+                                </p>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </>
+                ))}
+              </div>
+            </div>
           </>
         )}
       </aside>

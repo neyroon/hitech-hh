@@ -568,22 +568,22 @@ export const PayReceiptIcon = () => {
           d="M78.5215 60.9469C78.6751 60.3325 90.0703 40.9277 90.0703 40.9277"
           stroke="#407BFF"
           strokeWidth="0.96"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M90.0035 40.8414C90.0035 40.8414 85.3507 40.3614 86.6499 38.1726C87.9491 35.9838 90.0035 40.8414 90.0035 40.8414Z"
           stroke="#407BFF"
           strokeWidth="0.96"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M90.1152 40.7745C90.1152 40.7745 93.792 40.3969 92.7648 38.6657C91.7376 36.9345 90.1152 40.7745 90.1152 40.7745Z"
           stroke="#407BFF"
           strokeWidth="0.96"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M53.4912 42.5728C53.3728 42.864 58.5664 50.4864 59.2064 53.2608C59.92 56.3584 58.416 63.2576 58.5664 63.6896C58.5664 63.6896 53.7024 67.1104 41.4336 65.1808C41.4336 61.5616 42.432 48.1664 43.6992 44.6144C43.6992 44.6144 46.704 42.3488 47.744 42.272C47.744 42.272 53.3536 47.4112 53.488 42.5728H53.4912Z"

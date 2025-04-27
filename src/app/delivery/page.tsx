@@ -101,7 +101,7 @@ export default function Delivery() {
 
               <Link
                 href="/catalog"
-                className="text-[16px] text-grey mt-[30px] lg:mt-auto border-b-[1px] border-dashed border-grey self-start"
+                className="text-[16px] text-grey mt-[30px] lg:mt-auto border-b-[1px] border-dashed border-grey self-start hover:text-main2   transition-colors duration-300"
               >
                 Перейти в каталог
               </Link>

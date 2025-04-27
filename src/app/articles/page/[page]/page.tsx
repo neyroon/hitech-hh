@@ -2,6 +2,7 @@ import { ArticleCard } from "@/components/article-card";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Pagination } from "@/components/pagination";
 import { Section } from "@/components/section";
+import { isMobileDevice } from "@/utils/is-mobile";
 import { fetchAPI } from "@/utils/strapi";
 import React from "react";
 
@@ -11,7 +12,8 @@ export default async function Articles({
   params: Promise<{ page: string }>;
 }) {
   const { page } = await params;
-  const pageSize = 16;
+  const pageSize = (await isMobileDevice()) ? 10 : 16;
+  console.log(pageSize);
   const articleItems = await fetchAPI(
     `/articles?populate=*&sort=updatedAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`
   );
@@ -26,10 +28,7 @@ export default async function Articles({
             <ArticleCard key={article.documentId} article={article} />
           ))}
         </div>
-        <Pagination
-          paginationData={articleItems.meta.pagination}
-          currentPage={page}
-        />
+        <Pagination paginationData={articleItems.meta.pagination} />
       </Section>
     </>
   );

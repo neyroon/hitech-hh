@@ -15,7 +15,7 @@ export const ArticleWithSwiper = ({ articleItems }: { articleItems: any }) => {
       className=""
     >
       {articleItems.data.map((article) => (
-        <SwiperSlide key={article.documentId}>
+        <SwiperSlide key={article.documentId} className="h-auto!">
           <ArticleCard article={article} />
         </SwiperSlide>
       ))}

@@ -6,16 +6,30 @@
   --color-tg-form: #00b0f2;
 
   --color-tg: #27a6e5;
+  --color-red-like: #ff2c0c;
   --color-whatsapp: #48c95f;
   --color-bg-email: #17152d;
   --color-bg-inst: #ee2a7b;
   --color-bg-grey: #f9f9f9;
   --color-bg-green: #00a43d;
   --color-bg-red: #dc1b26;
+  --color-bg-orange: #ff8000;
+  --color-bg-purple: #a73afd;
+}
+
+@layer components {
+  input[type="range"] {
+    @apply appearance-none bg-transparent;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    @apply bg-bg-red border-none cursor-pointer w-[20px] h-[20px] pointer-events-auto relative rounded-full;
+  }
 }
 
 body {
   font-family: var(--font-montserrat-sans);
+  font-size: 14px;
 }
 
 h1,
@@ -29,6 +43,20 @@ p {
   line-height: 140%;
 }
 
-.swiper-slide {
-  height: auto !important;
+input[type="range"]::-webkit-slider-thumb {
+  background-color: brown;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+  border: 1px solid #a4a0a0;
+}
+.swiper-pagination-bullet.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: #dc1b26;
+  width: 9px;
+  height: 9px;
+  border: none;
+  opacity: 1;
 }

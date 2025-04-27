@@ -1,37 +1,188 @@
+import { ArticleWithSwiperHorizontal } from "@/components/article-card";
+import { ProductsHits } from "@/components/products-hits";
+import { ProductsOfDay } from "@/components/products-of-day";
 import { Section } from "@/components/section";
+import { SituationsMobile } from "@/components/situations-mobile";
+import { isMobileDevice } from "@/utils/is-mobile";
+import { fetchAPI } from "@/utils/strapi";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
-  return (
-    <Section className="[&>div]:px-0  py-[20px] lg:py-[80px] bg-bg-grey">
-      <div className="flex gap-[20px]">
-        <div className="bg-main2 px-[20px] pt-[40px] pb-0 lg:p-[30px] lg:h-[366px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px] relative w-full lg:w-[61%]">
-          <div className="flex flex-col  gap-[20px]">
-            <h1 className="font-semibold text-[24px] lg:text-[32px]">
-              Производитель <br /> бытовой техники Hitech
-            </h1>
-            <p className="text-[16px] mb-[30px]">
-              Выберите бытовую технику <br />
-              для вашего дома и бизнеса
-            </p>
+export default async function Home() {
+  const itemsCount = 10;
+  const productsOfDay = await fetchAPI(
+    `/products-day?populate[products][populate]=*`
+  );
+  const productHits = await fetchAPI(
+    `/products?filters\[is_hit\][$eq]=true&populate=*&pagination[page]=1&pagination[pageSize]=${itemsCount}`
+  );
+  const articleItems = await fetchAPI(
+    `/articles?populate=*&sort=updatedAt:desc&&pagination[page]=1&pagination[pageSize]=${itemsCount}`
+  );
+  const situationItems = [
+    {
+      text: (
+        <>
+          Дома с детьми – <br />
+          чистота без усилий
+        </>
+      ),
+      imageLink: "/situation-1.png",
+    },
+    {
+      text: (
+        <>
+          Есть питомцы? <br />
+          Забудьте про шерсть!
+        </>
+      ),
+      imageLink: "/situation-2.png",
+    },
+    {
+      text: (
+        <>
+          Заняты на работе? <br />
+          Техника сэкономит время
+        </>
+      ),
+      imageLink: "/situation-3.png",
+    },
+    {
+      text: (
+        <>
+          Мало места? <br /> Компактные решения
+        </>
+      ),
+      imageLink: "/situation-4.png",
+    },
+    {
+      text: <>Аллергия или маленькие дети? Чистота без химии</>,
+      imageLink: "/situation-5.png",
+    },
+    {
+      text: (
+        <>
+          Не любите гладить? <br /> Отпариватель
+        </>
+      ),
+      imageLink: "/situation-6.png",
+    },
+    {
+      text: (
+        <>
+          Быстрая готовка <br />
+          без хлопот
+        </>
+      ),
+      imageLink: "/situation-7.png",
+    },
+    {
+      text: <>Экономия на химчистке</>,
+      imageLink: "/situation-8.png",
+    },
+  ];
 
-            <Link
-              href="/catalog"
-              className="bg-white self-center lg:self-auto flex justify-center items-center w-[230px] h-[45px] rounded-[4px] text-black text-[18px] font-medium"
-            >
-              Перейти в каталог
-            </Link>
+  const isMobile = await isMobileDevice();
+
+  return (
+    <>
+      <Section className="[&>div]:px-0  py-[50px] lg:py-[80px] bg-bg-grey">
+        <div className="flex flex-col lg:flex-row gap-[20px]">
+          <div className="bg-main2 px-[20px] pt-[40px] pb-0 lg:p-[30px] lg:h-[366px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px] relative w-full lg:w-[calc(61%-10px)]">
+            <div className="flex flex-col  gap-[20px]">
+              <h1 className="font-semibold text-[24px] lg:text-[32px]">
+                Производитель <br /> бытовой техники Hitech
+              </h1>
+              <p className="text-[16px] mb-[30px]">
+                Выберите бытовую технику <br />
+                для вашего дома и бизнеса
+              </p>
+
+              <Link
+                href="/catalog"
+                className="bg-white self-center lg:self-auto flex justify-center items-center w-[230px] h-[45px] rounded-[4px] text-black text-[18px] font-medium"
+              >
+                Перейти в каталог
+              </Link>
+            </div>
+            <Image
+              src="/main-banner.png"
+              width={409}
+              height={264}
+              alt="Гарантия"
+              className="w-full h-[248px] mt-[20px] lg:mt-0 relative lg:top-[27px] lg:w-[409px] lg:h-[264px] object-contain  self-center lg:self-auto"
+            />
           </div>
-          <Image
-            src="/main-banner.png"
-            width={409}
-            height={264}
-            alt="Гарантия"
-            className="w-full h-[248px] mt-[20px] lg:mt-0 relative lg:top-[27px] lg:w-[409px] lg:h-[264px] object-contain  self-center lg:self-auto"
-          />
+          <div className="lg:w-[calc(39%-10px)] p-[30px] bg-white rounded-[10px] relative">
+            <h2 className="text-[18px] font-semibold mb-[30px]">Товары дня</h2>
+            <ProductsOfDay productsOfDay={productsOfDay.data.products} />
+          </div>
         </div>
-      </div>
-    </Section>
+      </Section>
+      <Section className=" py-[50px] lg:py-[80px] ">
+        <div className="flex gap-[10px] justify-between items-center mb-[50px]">
+          <h2 className="text-[22px] lg:text-[24px] font-medium lg:font-semibold ">
+            Хиты продаж
+          </h2>
+          <Link
+            href="/catalog"
+            className="text-grey border-b-[1px] border-dashed border-grey hover:text-main2   transition-colors duration-300"
+          >
+            Смотреть все
+          </Link>
+        </div>
+        <div className="relative mr-[-20px] lg:mr-0">
+          <ProductsHits productsOfDay={productHits.data} />
+        </div>
+      </Section>
+      <Section className=" py-[50px] lg:py-[80px] ">
+        <h2 className="text-[22px] lg:text-[24px] font-medium lg:font-semibold mb-[50px]">
+          Ситуации и решения
+        </h2>
+        <div className="lg:grid grid-cols-3 gap-[10px] mr-[-20px] lg:mr-0">
+          <>
+            {isMobile ? (
+              <SituationsMobile situations={situationItems} />
+            ) : (
+              <>
+                {situationItems.map((item, i) => (
+                  <div
+                    key={i}
+                    className="bg-bg-grey rounded-[8px] flex  gap-[10px] p-[10px] lg:p-[20px]"
+                  >
+                    <p className="grow text-[12px] lg:text-[14px]">
+                      {item.text}
+                    </p>
+                    <Image
+                      src={item.imageLink}
+                      alt="Изображение ситуации"
+                      width={167}
+                      height={123}
+                      className="mt-[-20px] h-[80px] w-[108px] lg:h-[123px] object-contain lg:w-[167px]"
+                    />
+                  </div>
+                ))}
+              </>
+            )}
+          </>
+        </div>
+      </Section>
+      <Section className=" py-[50px] lg:py-[80px] ">
+        <div className="flex flex-col lg:flex-row gap-[10px] justify-between lg:items-center mb-[50px]">
+          <h2 className="text-[22px] lg:text-[24px] font-medium lg:font-semibold ">
+            Полезный материал
+          </h2>
+          <Link
+            href="/articles"
+            className="text-grey border-b-[1px] self-start border-dashed border-grey hover:text-main2   transition-colors duration-300"
+          >
+            Смотреть все
+          </Link>
+        </div>
+        <div className="relative mr-[-20px] lg:mr-0">
+          <ArticleWithSwiperHorizontal articleItems={articleItems} />
+        </div>
+      </Section>
+    </>
   );
 }

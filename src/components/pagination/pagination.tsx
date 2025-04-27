@@ -5,6 +5,7 @@ import React from "react";
 
 export const Pagination = ({
   paginationData,
+  setCurrentPage,
 }: {
   paginationData: {
     page: number;
@@ -12,7 +13,7 @@ export const Pagination = ({
     pageCount: number;
     total: number;
   };
-  currentPage: string;
+  setCurrentPage?: (page: number) => void;
 }) => {
   const visiblePages = [];
 
@@ -52,7 +53,15 @@ export const Pagination = ({
                 {el}
               </span>
             );
-          return (
+          return setCurrentPage ? (
+            <button
+              key={el}
+              className="w-[40px] h-[40px]  flex items-center justify-center text-[16px] cursor-pointer"
+              onClick={() => setCurrentPage(el)}
+            >
+              {el}
+            </button>
+          ) : (
             <Link
               key={el}
               href={`/articles/page/${el}`}

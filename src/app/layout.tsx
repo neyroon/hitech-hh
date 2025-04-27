@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Montserrat, Roboto } from "next/font/google";
+import { CartProvider } from "@/components/context/cart";
 
 export const metadata: Metadata = {
   title: "Выберите бытовую технику для дома и бизнеса",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 const montserattSans = Montserrat({
-  weight: ["600", "400", "500"],
+  weight: ["600", "400", "500", "300"],
   variable: "--font-montserrat-sans",
   subsets: ["cyrillic", "latin"],
 });
@@ -37,8 +38,10 @@ export default function RootLayout({
       <body
         className={`${montserattSans.variable} ${RobotoSans.variable} antialiased`}
       >
-        <Header />
-        <main>{children}</main>
+        <CartProvider>
+          <Header />
+          <main>{children}</main>
+        </CartProvider>
         <Footer />
       </body>
     </html>
