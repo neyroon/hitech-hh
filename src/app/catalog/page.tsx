@@ -315,10 +315,10 @@ export default function Catalog({
               <p className="mb-[8px]">Цена</p>
 
               <MultiRangeSlider
-                min={0}
-                max={400000}
-                defaultMinValue={price.min}
-                defaultMaxValue={price.max}
+                min={price.min}
+                max={price.max}
+                defaultMinValue={0}
+                defaultMaxValue={400000}
                 onChange={handlePriceChange}
               />
             </div>
@@ -439,7 +439,7 @@ export default function Catalog({
                           width={300}
                           height={340}
                           alt="Изображение товара"
-                          className="h-[340px] object-contain"
+                          className="w-full h-[340px] object-contain"
                         />
                         {product.is_promotion && (
                           <div className="py-[3px] px-[5px] rounded-[2px] bg-bg-orange text-white absolute top-[10px] right-[10px]">
@@ -490,10 +490,10 @@ export default function Catalog({
               <p className="mb-[8px]">Цена</p>
 
               <MultiRangeSlider
-                min={0}
-                max={400000}
-                defaultMinValue={price.min}
-                defaultMaxValue={price.max}
+                min={price.min}
+                max={price.max}
+                defaultMinValue={0}
+                defaultMaxValue={400000}
                 onChange={handlePriceChange}
               />
             </div>

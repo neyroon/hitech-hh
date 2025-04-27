@@ -16,48 +16,47 @@ export const MultiRangeSlider = ({
   defaultMaxValue?: number;
   onChange: ({ min, max }: { min: number; max: number }) => void;
 }) => {
-  const [minVal, setMinVal] = useState(defaultMinValue);
-  const [maxVal, setMaxVal] = useState(defaultMaxValue);
-  const minValRef = useRef<HTMLInputElement | null>(null);
-  const maxValRef = useRef<HTMLInputElement | null>(null);
-  const range = useRef(null);
-  const trottledOnchange = useRef(debounce(onChange, 500));
+  const [sliderMinValue] = useState(defaultMinValue);
+  const [sliderMaxValue] = useState(defaultMaxValue);
 
-  // Convert to percentage
-  const getPercent = useCallback(
-    (value: number) => Math.round(((value - min) / (max - min)) * 100),
-    [min, max]
-  );
+  const [minVal, setMinVal] = useState(min);
+  const [maxVal, setMaxVal] = useState(max);
+  const onChangeDebounced = useRef(debounce(onChange, 500));
 
-  // Set width of the range to decrease from the left side
-  useEffect(() => {
-    if (maxValRef.current) {
-      const minPercent = getPercent(minVal);
-      const maxPercent = getPercent(+maxValRef.current.value); // Preceding with '+' converts the value from type string to type number
+  const sliderTrack = useRef<HTMLDivElement | null>(null);
 
-      if (range.current) {
-        range.current.style.left = `${minPercent}%`;
-        range.current.style.width = `${maxPercent - minPercent}%`;
-      }
+  const minGap = 5;
+  const slideMin = (e) => {
+    const value = parseInt(e.target.value, 10);
+    if (value >= sliderMinValue && maxVal - value >= minGap) {
+      setMinVal(value);
     }
-  }, [minVal, getPercent]);
+  };
 
-  // Set width of the range to decrease from the right side
-  useEffect(() => {
-    if (minValRef.current) {
-      const minPercent = getPercent(+minValRef.current.value);
-      const maxPercent = getPercent(maxVal);
-
-      if (range.current) {
-        range.current.style.width = `${maxPercent - minPercent}%`;
-      }
+  const slideMax = (e) => {
+    const value = parseInt(e.target.value, 10);
+    if (value <= sliderMaxValue && value - minVal >= minGap) {
+      setMaxVal(value);
     }
-  }, [maxVal, getPercent]);
+  };
+  const setSliderTrack = () => {
+    const range = sliderTrack.current;
 
-  // Get min and max values when their state changes
+    if (range) {
+      const minPercent =
+        ((minVal - sliderMinValue) / (sliderMaxValue - sliderMinValue)) * 100;
+      const maxPercent =
+        ((maxVal - sliderMinValue) / (sliderMaxValue - sliderMinValue)) * 100;
+
+      range.style.left = `${minPercent}%`;
+      range.style.right = `${100 - maxPercent}%`;
+    }
+  };
+
   useEffect(() => {
-    trottledOnchange.current({ min: minVal, max: maxVal });
-  }, [minVal, maxVal, onChange]);
+    setSliderTrack();
+    onChangeDebounced.current({ min: minVal, max: maxVal });
+  }, [minVal, maxVal]);
 
   return (
     <>
@@ -65,39 +64,24 @@ export const MultiRangeSlider = ({
         <span className="font-light">{minVal}</span>
         <span className="font-light">{maxVal}</span>
       </div>
-      <div className="relative h-[20px]">
-        <div className="rounded-[4px] h-[4px] top-[8px] absolute w-full bg-bg-grey z-1" />
-        <div ref={range} className="bg-bg-red top-[8px] absolute h-[4px] z-2" />
+
+      <div className="range-slider">
+        <div className="slider-track" ref={sliderTrack}></div>
         <input
           type="range"
-          min={min}
-          max={max}
+          min={sliderMinValue}
+          max={sliderMaxValue}
           value={minVal}
-          ref={minValRef}
-          onChange={(event) => {
-            const value = Math.min(+event.target.value, maxVal - 1);
-            setMinVal(value);
-            event.target.value = value.toString();
-          }}
-          className={classNames(
-            "pointer-events-none absolute top-[8px] h-0 w-full lg:w-[241px] outline-none appearance-none  z-3",
-            {
-              "z-5": minVal > max - 100,
-            }
-          )}
+          onChange={slideMin}
+          className="min-val"
         />
         <input
           type="range"
-          min={min}
-          max={max}
+          min={sliderMinValue}
+          max={sliderMaxValue}
           value={maxVal}
-          ref={maxValRef}
-          onChange={(event) => {
-            const value = Math.max(+event.target.value, minVal + 1);
-            setMaxVal(value);
-            event.target.value = value.toString();
-          }}
-          className="pointer-events-none top-[8px] absolute h-0 w-full lg:w-[241px] outline-none appearance-none  z-4"
+          onChange={slideMax}
+          className="max-val"
         />
       </div>
     </>
