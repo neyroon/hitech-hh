@@ -64,13 +64,15 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
               </div>
               <div className="w-[calc(50%-10px)]">
                 <p className="mb-[14px]">{product.title}</p>
-                <Markdown className="text-[12px] mb-[14px]">
-                  {product.description}
-                </Markdown>
+                <div className="mb-[14px]">
+                  <Markdown className="text-[12px] ">
+                    {product.description}
+                  </Markdown>
+                </div>
                 <button
                   className="p-[12px] mb-[12px] rounded-[4px] bg-bg-red text-white flex gap-[14px] justify-center w-full items-center cursor-pointer"
                   onClick={() => {
-                    addToCart(product.documentId, 1);
+                    addToCart(product, 1);
                   }}
                 >
                   <CartProduct />

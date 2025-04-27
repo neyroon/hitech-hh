@@ -6,6 +6,7 @@ import React from "react";
 
 export const ButtonsBuy = ({ product }: { product: any }) => {
   const { addToCart } = useCart();
+  console.log(product);
   return (
     <div>
       <button

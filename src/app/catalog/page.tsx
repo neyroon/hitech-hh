@@ -146,8 +146,7 @@ export default function Catalog({
     const params = new URLSearchParams(withSearchParams);
     params.set("priceFrom", price.min.toString());
     params.set("priceTo", price.max.toString());
-    console.log(pickedDeviceTypesSlug, "pickedDeviceTypesSlug");
-    console.log(pickedCategorySlug, "pickedCategorySlug");
+
     if (pickedCategorySlug) {
       params.set("category", pickedCategorySlug);
     } else params.delete("category");

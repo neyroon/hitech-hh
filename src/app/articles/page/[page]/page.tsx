@@ -13,7 +13,7 @@ export default async function Articles({
 }) {
   const { page } = await params;
   const pageSize = (await isMobileDevice()) ? 10 : 16;
-  console.log(pageSize);
+
   const articleItems = await fetchAPI(
     `/articles?populate=*&sort=updatedAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`
   );

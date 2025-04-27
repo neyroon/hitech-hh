@@ -14,10 +14,10 @@ export const CatalogButton = ({ categories }: { categories: any }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const outsideRef = useOutsideClick(() => setIsCatalogOpen(false));
+
   useEffect(() => {
     setIsCatalogOpen(false);
   }, [searchParams, pathname]);
-  console.log(isCatalogOpen, "isCatalogOpen");
 
   return (
     <div ref={outsideRef}>

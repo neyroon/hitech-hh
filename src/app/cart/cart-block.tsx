@@ -16,7 +16,6 @@ export const CartBlock = () => {
   const [isReady, setReady] = useState(false);
 
   useEffect(() => {
-    console.log(isReady);
     if (isReady) {
       const widget = new SafeRouteCartWidget("saferoute-cart-widget", {
         apiScript: "http://localhost:3200/php/saferoute-widget-api.php",
@@ -61,9 +60,11 @@ export const CartBlock = () => {
                           />
                           <div className="flex flex-col gap-[14px] w-[383px]">
                             <p>{product.title}</p>
-                            <Markdown className="text-[12px]">
-                              {product.description}
-                            </Markdown>
+                            <div>
+                              <Markdown className="text-[12px]">
+                                {product.description}
+                              </Markdown>
+                            </div>
                           </div>
                         </div>
                         <div className="flex flex-col gap-[8px]">
