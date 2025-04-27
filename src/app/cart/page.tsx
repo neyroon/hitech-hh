@@ -7,7 +7,7 @@ export default function Cart() {
   return (
     <>
       <Breadcrumbs items={[{ text: "Корзина" }]} />
-      <Section className="pt-[30px] pb-[100px] bg-bg-grey">
+      <Section className="pt-[30px] pb-[50px] lg:pb-[100px] bg-bg-grey">
         <CartBlock />
       </Section>
     </>

@@ -2,6 +2,7 @@
 import { useCart } from "@/components/context/cart";
 import { MinusIcon } from "@/components/icons/minus";
 import { PlusIcon } from "@/components/icons/plus";
+import { formatPrice } from "@/utils/format-price";
 import { morph } from "@/utils/morph";
 import { getStrapiMedia } from "@/utils/strapi";
 import Markdown from "markdown-to-jsx";
@@ -19,7 +20,7 @@ export const CartBlock = () => {
     if (isReady) {
       const widget = new SafeRouteCartWidget("saferoute-cart-widget", {
         apiScript: "http://localhost:3200/php/saferoute-widget-api.php",
-
+        enableAcquiring: true,
         products: cart.products.map((product) => ({
           name: product.title,
           count: product.quantity,
@@ -27,6 +28,13 @@ export const CartBlock = () => {
         })),
       });
     }
+    console.log(
+      cart.products.map((product) => ({
+        name: product.title,
+        count: product.quantity,
+        price: product.price,
+      }))
+    );
   }, [isReady]);
 
   return (
@@ -40,17 +48,19 @@ export const CartBlock = () => {
             </>
           ) : (
             <>
-              <h1 className="text-[24px] font-semibold mb-[50px]">Корзина</h1>
-              <div className="flex gap-[20px]">
-                <div className="flex flex-col grow gap-[20px] p-[30px] bg-white rounded-[10px]">
+              <h1 className="text-[24px] font-semibold mb-[30px] lg:mb-[50px]">
+                Корзина
+              </h1>
+              <div className="flex flex-col lg:flex-row gap-[20px]">
+                <div className="flex flex-col grow gap-[20px] px-[10px] py-[20px] lg:p-[30px] bg-white rounded-[10px]">
                   <span className="text-[16px]">Вы набрали:</span>
-                  <div className="flex flex-col ">
+                  <div className="flex flex-col gap-[20px]">
                     {cart.products.map((product) => (
                       <div
                         key={product.documentId}
-                        className="flex gap-[30px] items-center justify-between"
+                        className="flex flex-col lg:flex-row gap-[30px] items-center justify-between"
                       >
-                        <div className="flex gap-[10px]">
+                        <div className="flex flex-row gap-[10px]">
                           <Image
                             src={getStrapiMedia(product.image.url)}
                             width={88}
@@ -58,7 +68,7 @@ export const CartBlock = () => {
                             alt="Изображение товара"
                             className="w-[88px] h-[88px] object-contain"
                           />
-                          <div className="flex flex-col gap-[14px] w-[383px]">
+                          <div className="flex flex-col gap-[14px] lg:w-[383px]">
                             <p>{product.title}</p>
                             <div>
                               <Markdown className="text-[12px]">
@@ -67,35 +77,47 @@ export const CartBlock = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="flex flex-col gap-[8px]">
-                          <span className="text-[18px]">{product.price}</span>
-                          <span className="text-[12px] text-grey line-through">
-                            {product.price_discount}
-                          </span>
+                        <div className="flex w-full justify-between items-center flex-row">
+                          <div className="flex flex-col lg:gap-[8px]">
+                            <span className="text-[16px] lg:text-[18px]">
+                              {formatPrice(product.price)}
+                            </span>
+                            {product.price_discount && (
+                              <span className="text-[12px] text-grey line-through">
+                                {formatPrice(product.price_discount)}
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-[20px]">
+                            <div className="px-[8px] lg:px-[14px] py-[6px] w-[124px] lg:w-[120px] lg:h-[50px] bg-bg-grey rounded-[8px] flex items-center justify-between ">
+                              <button
+                                onClick={() =>
+                                  decreaseQuantity(product.documentId)
+                                }
+                                className="text-grey cursor-pointer"
+                              >
+                                <MinusIcon />
+                              </button>
+                              <span className="text-[16px]">
+                                {product.quantity}
+                              </span>
+                              <button
+                                onClick={() =>
+                                  increaseQuantity(product.documentId)
+                                }
+                                className="cursor-pointer"
+                              >
+                                <PlusIcon />
+                              </button>
+                            </div>
+                            <button
+                              className="text-[12px] text-grey cursor-pointer"
+                              onClick={() => removeFromCart(product.documentId)}
+                            >
+                              Удалить
+                            </button>
+                          </div>
                         </div>
-                        <div className="px-[14px] py-[6px] w-[120px] h-[50px] bg-bg-grey rounded-[8px] flex items-center justify-between ">
-                          <button
-                            onClick={() => decreaseQuantity(product.documentId)}
-                            className="text-grey cursor-pointer"
-                          >
-                            <MinusIcon />
-                          </button>
-                          <span className="text-[16px]">
-                            {product.quantity}
-                          </span>
-                          <button
-                            onClick={() => increaseQuantity(product.documentId)}
-                            className="cursor-pointer"
-                          >
-                            <PlusIcon />
-                          </button>
-                        </div>
-                        <button
-                          className="text-[12px] text-grey cursor-pointer"
-                          onClick={() => removeFromCart(product.documentId)}
-                        >
-                          Удалить
-                        </button>
                       </div>
                     ))}
                   </div>
@@ -108,7 +130,7 @@ export const CartBlock = () => {
                     <p>Доставка: бесплатно.</p>
                     <p>Способы оплаты:</p>
                   </div>
-                  <div className="bg-white p-[30px] rounded-[10px]">
+                  <div className="bg-white p-[20px] lg:p-[30px] rounded-[10px]">
                     <div className="mb-[20px] flex items-center justify-between">
                       <h3 className="text-[22px] font-medium">Итого:</h3>
                       <span className="text-[24px] font-semibold">
@@ -130,7 +152,7 @@ export const CartBlock = () => {
                       </div>
                     )}
                     <button
-                      className="bg-bg-red mt-[20px] px-[20px] py-[15px] text-[18px] text-white rounded-[4px] cursor-pointer"
+                      className="bg-bg-red mt-[20px] w-full lg:w-auto px-[33px] lg:px-[20px] py-[15px] text-[18px] text-white rounded-[4px] cursor-pointer"
                       onClick={() => setReady(true)}
                     >
                       Перейти к оформлению

@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Montserrat, Roboto } from "next/font/google";
 import { CartProvider } from "@/components/context/cart";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Выберите бытовую технику для дома и бизнеса",
@@ -36,12 +37,13 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body
-        className={`${montserattSans.variable} ${RobotoSans.variable} antialiased`}
+        className={`${montserattSans.variable} ${RobotoSans.variable} antialiased pb-[75px] lg:pb-0`}
       >
         <CartProvider>
           <Header />
           <main className="min-h-[512px]">{children}</main>
         </CartProvider>
+
         <Footer />
       </body>
     </html>

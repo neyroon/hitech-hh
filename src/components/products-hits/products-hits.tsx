@@ -41,7 +41,7 @@ export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
         ref={swiperRef}
       >
         {productsOfDay.map((product) => (
-          <SwiperSlide key={product.documentId}>
+          <SwiperSlide key={product.documentId} className="h-auto!">
             <div className="flex flex-col gap-[20px] h-full">
               <div className=" relative bg-bg-grey rounded-[8px] ">
                 <Image
@@ -82,7 +82,7 @@ export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
                   </button>
                   <Link
                     href="/cart"
-                    className="p-[12px] rounded-[4px] bg-bg-grey w-full block text-center"
+                    className="p-[12px] rounded-[4px] bg-bg-grey w-full block text-cente text-[18px] font-medium"
                   >
                     Купить сейчас
                   </Link>

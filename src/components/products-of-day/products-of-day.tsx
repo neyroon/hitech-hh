@@ -82,7 +82,7 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
                 </button>
                 <Link
                   href="/cart"
-                  className="p-[12px] rounded-[4px] bg-bg-grey w-full block text-center"
+                  className="p-[12px] text-[18px] rounded-[4px] bg-bg-grey w-full block text-center font-medium"
                 >
                   Купить сейчас
                 </Link>
