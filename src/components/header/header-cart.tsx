@@ -6,7 +6,6 @@ import { useCart } from "../context/cart";
 
 export const HeaderCart = () => {
   const { cart } = useCart();
-  console.log(cart, "cartheader");
   return (
     <Link
       href="/cart"
