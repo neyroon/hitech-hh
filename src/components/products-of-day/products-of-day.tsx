@@ -11,6 +11,7 @@ import Link from "next/link";
 import { LeftIcon } from "../icons/left";
 import { RightIcon } from "../icons/right";
 import { useCart } from "../context/cart";
+import { formatPrice } from "@/utils/format-price";
 
 export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
   const swiperRef = useRef<null | SwiperRef>(null);
@@ -67,14 +68,14 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
                   {product.description}
                 </Markdown>
                 <button
-                  className="p-[12px] mb-[12px] rounded-[4px] bg-bg-red text-white flex gap-[14px] justify-center w-full items-center"
+                  className="p-[12px] mb-[12px] rounded-[4px] bg-bg-red text-white flex gap-[14px] justify-center w-full items-center cursor-pointer"
                   onClick={() => {
                     addToCart(product.documentId, 1);
                   }}
                 >
                   <CartProduct />
                   <span className="text-[18px] font-medium">
-                    {product.price}
+                    {formatPrice(product.price)}
                   </span>
                 </button>
                 <Link

@@ -15,6 +15,7 @@ import Markdown from "markdown-to-jsx";
 import classNames from "classnames";
 import { Description } from "./description";
 import { CartProvider } from "@/components/context/cart";
+import { formatPrice } from "@/utils/format-price";
 
 export default async function Product({
   params,
@@ -76,11 +77,11 @@ export default async function Product({
             <div className="flex items-center justify-between mb-[20px]">
               <div className="flex items-center gap-[8px]">
                 <span className="text-[22px] font-medium">
-                  {product.data[0].price}
+                  {formatPrice(product.data[0].price)}
                 </span>
                 {product.data[0].price_discount && (
                   <span className="text-[12px] text-grey line-through">
-                    {product.data[0].price_discount}
+                    {formatPrice(product.data[0].price_discount)}
                   </span>
                 )}
               </div>

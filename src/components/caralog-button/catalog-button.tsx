@@ -17,9 +17,10 @@ export const CatalogButton = ({ categories }: { categories: any }) => {
   useEffect(() => {
     setIsCatalogOpen(false);
   }, [searchParams, pathname]);
+  console.log(isCatalogOpen, "isCatalogOpen");
 
   return (
-    <>
+    <div ref={outsideRef}>
       <button
         className={classnames(
           "bg-bg-red transition-colors duration-300 flex gap-[8px] p-[15px] items-center cursor-pointer text-white rounded-[8px]",
@@ -60,7 +61,6 @@ export const CatalogButton = ({ categories }: { categories: any }) => {
           "absolute h-fit top-[103px] left-[20px] right-[20px] xl:right-0 xl:w-[1264px] xl:left-[50%] xl:translate-x-[-50%] flex gap-[20px] py-[20px] bg-white z-50 invisible opacity-0 transition-opacity duration-300 max-h-[calc(100vh-103px-20px)] overflow-y-auto",
           { "opacity-100 visible": isCatalogOpen }
         )}
-        ref={outsideRef}
       >
         <div className="flex flex-col gap-[10px]">
           {categories.map((category) => (
@@ -118,6 +118,6 @@ export const CatalogButton = ({ categories }: { categories: any }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
