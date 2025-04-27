@@ -1,7 +1,6 @@
 "use client";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { BottomIcon } from "@/components/icons/bottom";
-import { CartProduct } from "@/components/icons/cart-product";
 import { MinusIcon } from "@/components/icons/minus";
 import { PlusIcon } from "@/components/icons/plus";
 import { RatingIcon } from "@/components/icons/rating";
@@ -14,13 +13,12 @@ import Image from "next/image";
 import Link from "next/link";
 import qs from "qs";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { use, useCallback, useEffect, useRef, useState } from "react";
+import { use, useCallback, useEffect, useState } from "react";
 import { FilterIcon } from "@/components/icons/filter";
 import { RightIcon } from "@/components/icons/right";
 import { Pagination } from "@/components/pagination";
 import { CloseIcon } from "@/components/icons/close";
 import { ButtonsBuy } from "./buttons-but";
-import { CartProvider } from "@/components/context/cart";
 
 export default function Catalog({
   searchParams,

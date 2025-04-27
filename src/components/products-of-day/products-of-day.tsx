@@ -10,9 +10,11 @@ import { CartProduct } from "../icons/cart-product";
 import Link from "next/link";
 import { LeftIcon } from "../icons/left";
 import { RightIcon } from "../icons/right";
+import { useCart } from "../context/cart";
 
 export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
   const swiperRef = useRef<null | SwiperRef>(null);
+  const { addToCart } = useCart();
 
   const handleButtonLeftClick = () => {
     swiperRef.current?.swiper.slidePrev();
@@ -64,7 +66,12 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
                 <Markdown className="text-[12px] mb-[14px]">
                   {product.description}
                 </Markdown>
-                <button className="p-[12px] mb-[12px] rounded-[4px] bg-bg-red text-white flex gap-[14px] justify-center w-full items-center">
+                <button
+                  className="p-[12px] mb-[12px] rounded-[4px] bg-bg-red text-white flex gap-[14px] justify-center w-full items-center"
+                  onClick={() => {
+                    addToCart(product.documentId, 1);
+                  }}
+                >
                   <CartProduct />
                   <span className="text-[18px] font-medium">
                     {product.price}

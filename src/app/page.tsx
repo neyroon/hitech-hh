@@ -88,7 +88,7 @@ export default async function Home() {
     <>
       <Section className="[&>div]:px-0  py-[50px] lg:py-[80px] bg-bg-grey">
         <div className="flex flex-col lg:flex-row gap-[20px]">
-          <div className="bg-main2 px-[20px] pt-[40px] pb-0 lg:p-[30px] lg:h-[366px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px] relative w-full lg:w-[calc(61%-10px)]">
+          <div className="bg-main2 px-[20px] pt-[40px] pb-0 lg:p-[30px] lg:min-h-[366px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px] relative w-full lg:w-[calc(61%-10px)]">
             <div className="flex flex-col  gap-[20px]">
               <h1 className="font-semibold text-[24px] lg:text-[32px]">
                 Производитель <br /> бытовой техники Hitech

@@ -3,11 +3,9 @@ import React from "react";
 import { LogoIcon } from "../icons/logo";
 import { CatalogButton } from "../caralog-button";
 import { SearchIcon } from "../icons/search";
-import { CartIcon } from "../icons/cart";
 import { HeaderMobile } from "./header-mobile";
 import { fetchAPI } from "@/utils/strapi";
 import { isMobileDevice } from "@/utils/is-mobile";
-import { CartProvider } from "../context/cart";
 import { HeaderCart } from "./header-cart";
 
 export const Header = async () => {
