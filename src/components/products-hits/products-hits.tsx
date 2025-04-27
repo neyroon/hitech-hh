@@ -73,7 +73,7 @@ export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
                 <div>
                   <button
                     className="p-[12px] mb-[12px] rounded-[4px] bg-main2 text-white flex gap-[14px] justify-center w-full items-center cursor-pointer"
-                    onClick={() => addToCart(product.documentId, 1)}
+                    onClick={() => addToCart(product, 1)}
                   >
                     <CartProduct />
                     <span className="text-[18px] font-medium">
