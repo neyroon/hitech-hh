@@ -109,6 +109,7 @@ export default async function Home() {
               src="/main-banner.png"
               width={409}
               height={264}
+              priority
               alt="Гарантия"
               className="w-full h-[248px] mt-[20px] lg:mt-0 relative lg:top-[27px] lg:w-[409px] lg:h-[264px] object-contain  self-center lg:self-auto"
             />

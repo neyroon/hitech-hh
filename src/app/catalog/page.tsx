@@ -168,6 +168,13 @@ export default function Catalog({
     }
   }, [pickedDeviceTypes]);
 
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      setParams();
+      fetchProducts();
+    }
+  }, [topFilters]);
+
   const handleDeviceTypeCheck = (val, deviceType) => {
     if (val.target.checked) {
       setPickedDeviceTypes((picked) => [...picked, deviceType]);

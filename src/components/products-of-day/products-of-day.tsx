@@ -70,7 +70,7 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
                   </Markdown>
                 </div>
                 <button
-                  className="p-[12px] mb-[12px] rounded-[4px] bg-bg-red text-white flex gap-[14px] justify-center w-full items-center cursor-pointer"
+                  className="p-[12px] mb-[12px] rounded-[4px] bg-bg-red hover:bg-main2 text-white flex gap-[14px] justify-center w-full items-center cursor-pointer transition-colors duration-300"
                   onClick={() => {
                     addToCart(product, 1);
                   }}
