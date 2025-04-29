@@ -2,7 +2,6 @@ import { convertDate } from "@/utils/date";
 import { getStrapiMedia } from "@/utils/strapi";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export const ArticleCard = ({ article }: { article: any }) => {
   return (

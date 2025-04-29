@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useEffect,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 interface CartType {
   products: any[];

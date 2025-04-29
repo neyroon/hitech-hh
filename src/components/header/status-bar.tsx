@@ -1,13 +1,12 @@
 "use client";
+import classNames from "classnames";
 import Link from "next/link";
-import React from "react";
+import { usePathname } from "next/navigation";
+import { useCart } from "../context/cart";
+import { CartIcon } from "../icons/cart";
+import { CatalogIcon } from "../icons/catalog";
 import { HomeIcon } from "../icons/home";
 import { HomeStatusBarIcon } from "../icons/home-status-bar";
-import { CatalogIcon } from "../icons/catalog";
-import { usePathname } from "next/navigation";
-import classNames from "classnames";
-import { CartIcon } from "../icons/cart";
-import { useCart } from "../context/cart";
 
 export const StatusBar = () => {
   const pathname = usePathname();

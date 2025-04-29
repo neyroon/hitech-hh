@@ -1,10 +1,10 @@
 "use client";
-import React, { useRef } from "react";
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
-import { ArticleCard } from "./article-card";
+import { useRef } from "react";
 import "swiper/css";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { LeftIcon } from "../icons/left";
 import { RightIcon } from "../icons/right";
+import { ArticleCard } from "./article-card";
 
 export const ArticleWithSwiperHorizontal = ({
   articleItems,

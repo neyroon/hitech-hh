@@ -1,17 +1,17 @@
 "use client";
-import React, { useRef } from "react";
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import Image from "next/image";
-import { getStrapiMedia } from "@/utils/strapi";
-import { RatingIcon } from "../icons/rating";
-import Markdown from "markdown-to-jsx";
-import { CartProduct } from "../icons/cart-product";
-import Link from "next/link";
-import { LeftIcon } from "../icons/left";
-import { RightIcon } from "../icons/right";
-import { useCart } from "../context/cart";
 import { formatPrice } from "@/utils/format-price";
+import { getStrapiMedia } from "@/utils/strapi";
+import Markdown from "markdown-to-jsx";
+import Image from "next/image";
+import Link from "next/link";
+import { useRef } from "react";
+import "swiper/css";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { useCart } from "../context/cart";
+import { CartProduct } from "../icons/cart-product";
+import { LeftIcon } from "../icons/left";
+import { RatingIcon } from "../icons/rating";
+import { RightIcon } from "../icons/right";
 
 export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
   const swiperRef = useRef<null | SwiperRef>(null);
@@ -44,12 +44,14 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
           <SwiperSlide key={product.documentId}>
             <div className="flex gap-[20px] min-h-[288px] lg:min-h-[251px] ">
               <div className="w-[calc(50%-10px)] relative bg-bg-grey rounded-[8px] ">
-                <Image
-                  src={getStrapiMedia(product.image.url)}
-                  fill
-                  alt="Изображение товара"
-                  className="object-contain"
-                />
+                <Link href={`/catalog/${product.slug}`}>
+                  <Image
+                    src={getStrapiMedia(product.image.url)}
+                    fill
+                    alt="Изображение товара"
+                    className="object-contain"
+                  />
+                </Link>
                 {product.is_promotion && (
                   <div className="py-[3px] px-[5px] rounded-[2px] bg-bg-orange text-white absolute top-[10px] right-[10px]">
                     Акция

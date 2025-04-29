@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 export const SituationsMobile = ({ situations }: { situations: any }) => {

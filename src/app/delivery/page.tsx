@@ -4,7 +4,6 @@ import { PaySiteIcon } from "@/components/icons/pay-site";
 import { Section } from "@/components/section";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export default function Delivery() {
   const cardItems = [

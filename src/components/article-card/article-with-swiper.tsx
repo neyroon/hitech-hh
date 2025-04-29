@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
+import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ArticleCard } from "./article-card";
-import "swiper/css";
 
 export const ArticleWithSwiper = ({ articleItems }: { articleItems: any }) => {
   return (

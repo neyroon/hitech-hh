@@ -16,6 +16,11 @@ const nextConfig: NextConfig = {
         hostname: "hitech-hh.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "feedback08.wbbasket.ru",
+        pathname: "/**",
+      },
     ],
   },
   publicRuntimeConfig: {

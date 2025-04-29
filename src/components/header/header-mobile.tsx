@@ -1,11 +1,11 @@
 "use client";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { LogoIcon } from "../icons/logo";
-import classnames from "classnames";
-import { usePathname } from "next/navigation";
-import Image from "next/image";
 import { getStrapiMedia } from "@/utils/strapi";
+import classnames from "classnames";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { LogoIcon } from "../icons/logo";
 import { SearchBar } from "../search-bar";
 
 export const HeaderMobile = ({ categories }: { categories: any }) => {

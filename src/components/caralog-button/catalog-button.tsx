@@ -1,12 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useOutsideClick } from "@/hooks/click-outside";
+import { getStrapiMedia } from "@/utils/strapi";
 import classnames from "classnames";
 import Image from "next/image";
-import { getStrapiMedia } from "@/utils/strapi";
-import { RightIcon } from "../icons/right";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useOutsideClick } from "@/hooks/click-outside";
+import { useEffect, useState } from "react";
+import { RightIcon } from "../icons/right";
 
 export const CatalogButton = ({ categories }: { categories: any }) => {
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);

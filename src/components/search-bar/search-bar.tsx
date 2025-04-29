@@ -1,6 +1,11 @@
 "use client";
 import { debounce } from "@/utils/debounce";
-import React, {
+import { fetchAPI } from "@/utils/strapi";
+import classNames from "classnames";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import QueryString from "qs";
+import {
   ChangeEvent,
   KeyboardEvent,
   useCallback,
@@ -9,11 +14,6 @@ import React, {
   useState,
 } from "react";
 import { SearchIcon } from "../icons/search";
-import classNames from "classnames";
-import QueryString from "qs";
-import { fetchAPI } from "@/utils/strapi";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");

@@ -1,4 +1,3 @@
-import getConfig from "next/config";
 import qs from "qs";
 
 export function getStrapiURL(path = "") {

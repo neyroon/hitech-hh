@@ -1,12 +1,11 @@
-import React from "react";
-import { LogoIcon } from "../icons/logo";
 import Link from "next/link";
 import { InstagramFooterIcon } from "../icons/instagram-footer";
-import { VkFooterIcon } from "../icons/vk-footer";
+import { LogoIcon } from "../icons/logo";
+import { RutubeFooterIcon } from "../icons/rutube-footer";
 import { TgFooterIcon } from "../icons/tg-footer";
+import { VkFooterIcon } from "../icons/vk-footer";
 import { WhatsappFooterIcon } from "../icons/whatsapp-footer";
 import { YoutubeFooterIcon } from "../icons/youtube-footer";
-import { RutubeFooterIcon } from "../icons/rutube-footer";
 
 export const Footer = () => {
   const navItems = [

@@ -2,7 +2,6 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Section } from "@/components/section";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export default function About() {
   const cardItems = [

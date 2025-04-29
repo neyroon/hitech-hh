@@ -1,16 +1,16 @@
 "use client";
-import React, { useRef } from "react";
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import Image from "next/image";
-import { getStrapiMedia } from "@/utils/strapi";
-import { RatingIcon } from "../icons/rating";
-import { CartProduct } from "../icons/cart-product";
-import Link from "next/link";
-import { LeftIcon } from "../icons/left";
-import { RightIcon } from "../icons/right";
-import { useCart } from "../context/cart";
 import { formatPrice } from "@/utils/format-price";
+import { getStrapiMedia } from "@/utils/strapi";
+import Image from "next/image";
+import Link from "next/link";
+import { useRef } from "react";
+import "swiper/css";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { useCart } from "../context/cart";
+import { CartProduct } from "../icons/cart-product";
+import { LeftIcon } from "../icons/left";
+import { RatingIcon } from "../icons/rating";
+import { RightIcon } from "../icons/right";
 
 export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
   const swiperRef = useRef<null | SwiperRef>(null);
@@ -82,7 +82,7 @@ export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
                   </button>
                   <Link
                     href="/cart"
-                    className="p-[12px] rounded-[4px] bg-bg-grey w-full block text-cente text-[18px] font-medium"
+                    className="p-[12px] rounded-[4px] bg-bg-grey w-full block text-center text-[18px] font-medium"
                   >
                     Купить сейчас
                   </Link>

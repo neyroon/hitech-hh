@@ -4,7 +4,6 @@ import { Pagination } from "@/components/pagination";
 import { Section } from "@/components/section";
 import { isMobileDevice } from "@/utils/is-mobile";
 import { fetchAPI } from "@/utils/strapi";
-import React from "react";
 
 export default async function Articles({
   params,

@@ -1,8 +1,7 @@
 "use client";
 import Link from "next/link";
-import React from "react";
-import { CartIcon } from "../icons/cart";
 import { useCart } from "../context/cart";
+import { CartIcon } from "../icons/cart";
 
 export const HeaderCart = () => {
   const { cart } = useCart();

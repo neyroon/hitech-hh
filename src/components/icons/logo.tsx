@@ -1,5 +1,3 @@
-import React from "react";
-
 export const LogoIcon = ({
   width = 384,
   height = 47,

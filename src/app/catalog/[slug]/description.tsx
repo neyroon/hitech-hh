@@ -1,7 +1,7 @@
 "use client";
 import classNames from "classnames";
 import Markdown from "markdown-to-jsx";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export const Description = ({ product }: { product: any }) => {
   const [isTruncate, setIsTruncate] = useState(true);
@@ -14,7 +14,7 @@ export const Description = ({ product }: { product: any }) => {
             "truncate line-clamp-6": isTruncate,
           })}
         >
-          {product.data[0].description}
+          {product.description}
         </Markdown>
       </div>
       <button

@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
-import { HomeIcon } from "../icons/home";
 import Link from "next/link";
+import { Fragment } from "react";
+import { HomeIcon } from "../icons/home";
 import { Section } from "../section";
 
 export const Breadcrumbs = ({

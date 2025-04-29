@@ -1,23 +1,23 @@
 "use client";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { BottomIcon } from "@/components/icons/bottom";
+import { CloseIcon } from "@/components/icons/close";
+import { FilterIcon } from "@/components/icons/filter";
 import { MinusIcon } from "@/components/icons/minus";
 import { PlusIcon } from "@/components/icons/plus";
 import { RatingIcon } from "@/components/icons/rating";
+import { RightIcon } from "@/components/icons/right";
 import { UpIcon } from "@/components/icons/up";
 import { MultiRangeSlider } from "@/components/multi-range-slider";
+import { Pagination } from "@/components/pagination";
 import { Section } from "@/components/section";
 import { fetchAPI, getStrapiMedia } from "@/utils/strapi";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
-import qs from "qs";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import qs from "qs";
 import { use, useCallback, useEffect, useState } from "react";
-import { FilterIcon } from "@/components/icons/filter";
-import { RightIcon } from "@/components/icons/right";
-import { Pagination } from "@/components/pagination";
-import { CloseIcon } from "@/components/icons/close";
 import { ButtonsBuy } from "./buttons-but";
 
 export default function Catalog({

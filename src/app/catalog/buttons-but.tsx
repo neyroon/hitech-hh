@@ -2,7 +2,6 @@
 import { useCart } from "@/components/context/cart";
 import { CartProduct } from "@/components/icons/cart-product";
 import { formatPrice } from "@/utils/format-price";
-import React from "react";
 
 export const ButtonsBuy = ({ product }: { product: any }) => {
   const { addToCart } = useCart();

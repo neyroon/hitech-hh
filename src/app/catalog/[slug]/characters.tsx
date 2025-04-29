@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export const Characters = ({ characters }: { characters: any }) => {
   const [countCharacterToShow, setCountCharacterToShow] = useState(5);

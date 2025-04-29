@@ -4,7 +4,6 @@ import { UploadIcon } from "@/components/icons/upload";
 import { Section } from "@/components/section";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export default function Warranty() {
   return (

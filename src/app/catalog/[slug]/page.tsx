@@ -1,21 +1,17 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { Section } from "@/components/section";
-import { fetchAPI } from "@/utils/strapi";
-import React from "react";
-import { SwiperThumbs } from "./swiper-thumbs";
+import { LogoIcon } from "@/components/icons/logo";
 import { RatingIcon } from "@/components/icons/rating";
-import { MinusIcon } from "@/components/icons/minus";
-import { PlusIcon } from "@/components/icons/plus";
-import { ButtonsBuy } from "./buttons-buy";
-import QueryString from "qs";
-import { Characters } from "./characters";
+import { Section } from "@/components/section";
+import { fetchFromServer } from "@/utils/fetch";
+import { formatPrice } from "@/utils/format-price";
+import { fetchAPI } from "@/utils/strapi";
 import Image from "next/image";
 import Link from "next/link";
-import Markdown from "markdown-to-jsx";
-import classNames from "classnames";
+import QueryString from "qs";
+import { ButtonsBuy } from "./buttons-buy";
+import { Characters } from "./characters";
 import { Description } from "./description";
-import { CartProvider } from "@/components/context/cart";
-import { formatPrice } from "@/utils/format-price";
+import { SwiperThumbs } from "./swiper-thumbs";
 
 export default async function Product({
   params,
@@ -40,77 +36,102 @@ export default async function Product({
       skipNulls: true,
     }
   );
-  const product = await fetchAPI(`/products?${query}`);
+  const productWithData = await fetchAPI(`/products?${query}`);
+  const product = productWithData.data[0];
   const characters = [
-    { title: "Категория товара:", description: product.data[0].category.name },
+    { title: "Категория товара:", description: product.category.name },
     {
       title: "Тип устройства:",
-      description: product.data[0].device_types[0].name,
+      description: product.device_types[0].name,
     },
     {
       title: "Ситуация:",
-      description: product.data[0].device_types[0]?.situation?.name,
+      description: product.device_types[0]?.situation?.name,
     },
-    ...product.data[0].characters.map((character) => ({
+    ...product.characters.map((character) => ({
       title: character.character,
       description: character.character_value,
     })),
   ];
 
+  const reviews = product.wb_article
+    ? await fetchFromServer(
+        "https://feedbacks-api.wildberries.ru/api/v1/feedbacks",
+        {
+          isAnswered: true,
+          take: 70,
+          skip: 0,
+          nmId: product.wb_article,
+        },
+        { headers: { Authorization: process.env.NEXT_PUBLIC_WB_TOKEN } }
+      )
+    : { data: { feedbacks: [] } };
+
   return (
     <>
       <Breadcrumbs
-        items={[
-          { text: "Каталог", link: "/catalog" },
-          { text: product.data[0].title },
-        ]}
+        items={[{ text: "Каталог", link: "/catalog" }, { text: product.title }]}
       />
       <Section className="pt-[30px] pb-[60px]">
         <div className="flex flex-col lg:flex-row gap-[30px] ">
           <div className="lg:w-[461px] ">
-            <SwiperThumbs product={product.data[0]} />
+            <SwiperThumbs product={product} />
           </div>
           <div className="grow">
             <h1 className="text-[24px] font-semibold mb-[20px]">
-              {product.data[0].title}
+              {product.title}
             </h1>
             <div className="flex items-center justify-between mb-[20px]">
               <div className="flex items-center gap-[8px]">
                 <span className="text-[22px] font-medium">
-                  {formatPrice(product.data[0].price)}
+                  {formatPrice(product.price)}
                 </span>
-                {product.data[0].price_discount && (
+                {product.price_discount && (
                   <span className="text-[12px] text-grey line-through">
-                    {formatPrice(product.data[0].price_discount)}
+                    {formatPrice(product.price_discount)}
                   </span>
                 )}
               </div>
               <div className="text-[22px] font-medium flex items-center">
                 <RatingIcon />
-                <span className="text-[16px] text-grey">
-                  {product.data[0].rating}
-                </span>
+                <span className="text-[16px] text-grey">{product.rating}</span>
               </div>
             </div>
-            <ButtonsBuy product={product.data[0]} />
+            <ButtonsBuy product={product} />
             <Characters characters={characters} />
             <div className="p-[20px] rounded-[8px] bg-bg-grey flex flex-col gap-[20px] mb-[20px]">
               <p className="text-[16px] font-semibold">Где нас купить:</p>
               <div className="flex flex-col lg:flex-row gap-[14px] justify-between items-center">
-                <button className="w-full lg:w-[169px] h-[55px] bg-bg-purple rounded-[8px] flex items-center justify-center">
+                <div className="w-full lg:w-[169px] h-[55px] text-main2 bg-white rounded-[8px] flex items-center justify-center">
+                  <LogoIcon width={144} height={17} />
+                </div>
+                <div className="flex gap-[20px] w-full lg:w-auto items-center">
+                  <span className="text-[18px] text-bg-green">
+                    {formatPrice(product.wb_price)}
+                  </span>
+                  <Link
+                    href={product.wb_link}
+                    className="px-[16px] bg-bg-red text-white grow py-[8px] rounded-[4px] text-center"
+                  >
+                    Купить
+                  </Link>
+                </div>
+              </div>
+              <div className="flex flex-col lg:flex-row gap-[14px] justify-between items-center">
+                <div className="w-full lg:w-[169px] h-[55px] bg-bg-purple rounded-[8px] flex items-center justify-center">
                   <Image
                     src="/wb-logo.png"
                     width={129}
                     height={35}
                     alt="Логотип WB"
                   />
-                </button>
+                </div>
                 <div className="flex gap-[20px] w-full lg:w-auto items-center">
                   <span className="text-[18px] text-bg-green">
-                    {product.data[0].wb_price}
+                    {formatPrice(product.wb_price)}
                   </span>
                   <Link
-                    href={product.data[0].wb_link}
+                    href={product.wb_link}
                     className="bg-white px-[20px] grow py-[8px] rounded-[4px] text-center"
                   >
                     Купить

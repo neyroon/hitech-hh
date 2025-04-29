@@ -3,7 +3,7 @@ import { useCart } from "@/components/context/cart";
 import { CartProduct } from "@/components/icons/cart-product";
 import { MinusIcon } from "@/components/icons/minus";
 import { PlusIcon } from "@/components/icons/plus";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export const ButtonsBuy = ({ product }: { product: any }) => {
   const [productCount, setProductCount] = useState(1);
@@ -31,7 +31,7 @@ export const ButtonsBuy = ({ product }: { product: any }) => {
         </button>
       </div>
       <button
-        className="p-[12px] w-full lg:w-auto rounded-[4px] bg-bg-red text-white flex gap-[10px] justify-center items-center cursor-pointer"
+        className="p-[12px] w-full lg:w-auto rounded-[4px] bg-bg-red transition-colors duration-300 hover:bg-main2 text-white flex gap-[10px] justify-center items-center cursor-pointer"
         onClick={() => addToCart(product, 1)}
       >
         <CartProduct />

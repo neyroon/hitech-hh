@@ -1,7 +1,6 @@
-import { Section } from "@/components/section";
-import React from "react";
-import { CartBlock } from "./cart-block";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Section } from "@/components/section";
+import { CartBlock } from "./cart-block";
 
 export default function Cart() {
   return (

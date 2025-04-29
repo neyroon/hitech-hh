@@ -1,11 +1,11 @@
 "use client";
 import { getStrapiMedia } from "@/utils/strapi";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { useRef } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Navigation, Pagination, Thumbs } from "swiper/modules";
+import { Pagination, Thumbs } from "swiper/modules";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 
 export const SwiperThumbs = ({ product }: { product: any }) => {
   const thumbs = useRef<SwiperRef | null>(null);
@@ -33,7 +33,7 @@ export const SwiperThumbs = ({ product }: { product: any }) => {
                 width={461}
                 height={583}
                 alt="Изображение товара"
-                className="lg:w-[461px] h-[419px] lg:h-[583px]"
+                className="lg:w-[461px] h-[419px] rounded-[8px] lg:h-[583px]"
               />
               <div className="absolute top-[10px] right-[10px] flex gap-[5px]">
                 {product.is_hit && (
@@ -71,7 +71,7 @@ export const SwiperThumbs = ({ product }: { product: any }) => {
                 width={147}
                 height={165}
                 alt="Изображение товара"
-                className="w-[147px] h-[123px] lg:h-[165px]"
+                className="w-[147px] h-[123px] lg:h-[165px] rounded-[8px]"
               />
             </div>
           </SwiperSlide>

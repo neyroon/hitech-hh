@@ -3,7 +3,6 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Section } from "@/components/section";
 import { fetchAPI } from "@/utils/strapi";
 import Markdown from "markdown-to-jsx";
-import React from "react";
 
 export default async function Articles({
   params,

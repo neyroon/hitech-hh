@@ -1,5 +1,3 @@
-import React from "react";
-
 export const CartProduct = () => {
   return (
     <svg

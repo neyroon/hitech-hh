@@ -1,13 +1,12 @@
-import Link from "next/link";
-import React from "react";
-import { LogoIcon } from "../icons/logo";
-import { CatalogButton } from "../caralog-button";
-import { HeaderMobile } from "./header-mobile";
-import { fetchAPI } from "@/utils/strapi";
 import { isMobileDevice } from "@/utils/is-mobile";
-import { HeaderCart } from "./header-cart";
-import { StatusBar } from "./status-bar";
+import { fetchAPI } from "@/utils/strapi";
+import Link from "next/link";
+import { CatalogButton } from "../caralog-button";
+import { LogoIcon } from "../icons/logo";
 import { SearchBar } from "../search-bar";
+import { HeaderCart } from "./header-cart";
+import { HeaderMobile } from "./header-mobile";
+import { StatusBar } from "./status-bar";
 
 export const Header = async () => {
   const categories = await fetchAPI(

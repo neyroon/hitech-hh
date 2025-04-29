@@ -1,12 +1,15 @@
 import { ArticleWithSwiperHorizontal } from "@/components/article-card";
 import { ProductsHits } from "@/components/products-hits";
 import { ProductsOfDay } from "@/components/products-of-day";
+import { Reviews } from "@/components/reviews";
 import { Section } from "@/components/section";
 import { SituationsMobile } from "@/components/situations-mobile";
+import { fetchFromServer } from "@/utils/fetch";
 import { isMobileDevice } from "@/utils/is-mobile";
 import { fetchAPI } from "@/utils/strapi";
 import Image from "next/image";
 import Link from "next/link";
+import "swiper/css";
 
 export default async function Home() {
   const itemsCount = 10;
@@ -18,6 +21,18 @@ export default async function Home() {
   );
   const articleItems = await fetchAPI(
     `/articles?populate=*&sort=updatedAt:desc&&pagination[page]=1&pagination[pageSize]=${itemsCount}`
+  );
+  const reviews = await fetchFromServer(
+    "https://feedbacks-api.wildberries.ru/api/v1/feedbacks",
+    {
+      isAnswered: true,
+      take: 70,
+      skip: 0,
+    },
+    { headers: { Authorization: process.env.NEXT_PUBLIC_WB_TOKEN } }
+  );
+  const reviewsWithFilter = reviews.data.feedbacks.filter(
+    (feedback) => feedback.pros && feedback.cons && feedback.photoLinks
   );
   const situationItems = [
     {
@@ -167,6 +182,15 @@ export default async function Home() {
             )}
           </>
         </div>
+      </Section>
+      <Section className="py-[50px] lg:py-[80px] bg-bg-grey ">
+        <div className="flex flex-wrap items-center gap-[10px] lg:gap-[20px] mb-[50px]">
+          <h2 className="text-[24px] font-semibold">Отзывы покупателей</h2>
+          <div className="text-white bg-bg-purple py-[8px] px-[12px] rounded-[3px]">
+            Wildberries
+          </div>
+        </div>
+        <Reviews reviews={reviewsWithFilter} isMobile={isMobile} />
       </Section>
       <Section className=" py-[50px] lg:py-[80px] ">
         <div className="flex flex-col lg:flex-row gap-[10px] justify-between lg:items-center mb-[50px]">
