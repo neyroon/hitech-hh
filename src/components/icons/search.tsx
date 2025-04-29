@@ -13,13 +13,13 @@ export const SearchIcon = () => {
         cx="7.33217"
         cy="7.19252"
         r="5.35902"
-        stroke="#A4A0A0"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="square"
       />
       <path
         d="M10.9917 11.1387L14.0274 14.1664"
-        stroke="#A4A0A0"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="square"
       />

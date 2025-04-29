@@ -3,10 +3,8 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { LogoIcon } from "../icons/logo";
 import classnames from "classnames";
-import { SearchIcon } from "../icons/search";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { RightIcon } from "../icons/right";
 import { getStrapiMedia } from "@/utils/strapi";
 import { SearchBar } from "../search-bar";
 

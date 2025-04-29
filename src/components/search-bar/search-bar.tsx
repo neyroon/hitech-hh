@@ -2,7 +2,6 @@
 import { debounce } from "@/utils/debounce";
 import React, {
   ChangeEvent,
-  InputHTMLAttributes,
   KeyboardEvent,
   useCallback,
   useEffect,
@@ -90,7 +89,7 @@ export const SearchBar = () => {
     <>
       <div
         className={classNames(
-          "px-[15px] py-[9px] gap-[20px] flex items-center relative bg-bg-grey rounded-[8px] mt-[50px] lg:mt-0 lg:w-[42%]",
+          "px-[15px] py-[9px] gap-[20px] flex items-center relative bg-bg-grey focus-within:text-bg-red text-grey rounded-[8px] mt-[50px] lg:mt-0 lg:w-[42%]",
           { "rounded-b-none": showResults }
         )}
       >
@@ -104,7 +103,7 @@ export const SearchBar = () => {
           placeholder="Поиск по сайту"
         />
         {showResults && (
-          <div className="absolute z-50 left-0 right-0 top-[42px]  bg-bg-grey rounded-b-[8px] shadow-lg">
+          <div className="absolute z-50 left-0 right-0 top-[42px] text-main2  bg-bg-grey rounded-b-[8px] shadow-lg">
             {productResults.length > 0 || articleResults.length > 0 ? (
               <ul className="max-h-60 overflow-auto">
                 {productResults.length > 0 &&
@@ -139,7 +138,7 @@ export const SearchBar = () => {
                   ))}
               </ul>
             ) : (
-              <p>По данному запросу ничего не найдено</p>
+              <p className="px-[15px]">По данному запросу ничего не найдено</p>
             )}
           </div>
         )}

@@ -2,7 +2,6 @@ import Link from "next/link";
 import React from "react";
 import { LogoIcon } from "../icons/logo";
 import { CatalogButton } from "../caralog-button";
-import { SearchIcon } from "../icons/search";
 import { HeaderMobile } from "./header-mobile";
 import { fetchAPI } from "@/utils/strapi";
 import { isMobileDevice } from "@/utils/is-mobile";
