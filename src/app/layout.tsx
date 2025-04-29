@@ -41,7 +41,7 @@ export default function RootLayout({
       >
         <CartProvider>
           <Header />
-          <main className="min-h-[512px]">{children}</main>
+          <main className="min-h-[246px] lg:min-h-[512px]">{children}</main>
         </CartProvider>
 
         <Footer />

@@ -1,5 +1,5 @@
 "use client";
-import { debounce, throttle } from "@/utils/throttle";
+import { debounce, throttle } from "@/utils/debounce";
 import classNames from "classnames";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 

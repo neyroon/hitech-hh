@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { RightIcon } from "../icons/right";
 import { getStrapiMedia } from "@/utils/strapi";
+import { SearchBar } from "../search-bar";
 
 export const HeaderMobile = ({ categories }: { categories: any }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,14 +79,7 @@ export const HeaderMobile = ({ categories }: { categories: any }) => {
       >
         {!isCatalogOpen && (
           <>
-            <div className="px-[15px] py-[9px] gap-[20px] flex items-center bg-bg-grey rounded-[8px] mt-[50px]">
-              <SearchIcon />
-              <input
-                type="search"
-                className="text-[16px] text-main2 placeholder:text-grey"
-                placeholder="Поиск по сайту"
-              />
-            </div>
+            <SearchBar />
             <nav className="flex flex-col gap-[20px] my-[30px] text-grey">
               <Link href="/" className="text-[16px] text-grey">
                 Главная

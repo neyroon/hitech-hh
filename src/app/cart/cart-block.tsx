@@ -19,7 +19,7 @@ export const CartBlock = () => {
   useEffect(() => {
     if (isReady) {
       const widget = new SafeRouteCartWidget("saferoute-cart-widget", {
-        apiScript: "/saferoute-widget-api.php",
+        apiScript: "http://localhost:3200/php/saferoute-widget-api.php",
         discount: cart.totalPriceDiscount - cart.totalPrice,
         enableAcquiring: true,
         splitFullnameInput: true,
@@ -29,6 +29,7 @@ export const CartBlock = () => {
           price: product.price,
         })),
       });
+      console.log(widget);
       widget.on("start", () => console.log("start"));
     }
   }, [isReady]);

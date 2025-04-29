@@ -8,6 +8,7 @@ import { fetchAPI } from "@/utils/strapi";
 import { isMobileDevice } from "@/utils/is-mobile";
 import { HeaderCart } from "./header-cart";
 import { StatusBar } from "./status-bar";
+import { SearchBar } from "../search-bar";
 
 export const Header = async () => {
   const categories = await fetchAPI(
@@ -82,14 +83,7 @@ export const Header = async () => {
               >
                 Статьи
               </Link>
-              <div className="px-[15px] py-[9px] gap-[20px] flex items-center bg-bg-grey rounded-[8px] w-[42%]">
-                <SearchIcon />
-                <input
-                  type="search"
-                  className="grow text-[16px] text-main2 placeholder:text-grey"
-                  placeholder="Поиск по сайту"
-                />
-              </div>
+              <SearchBar />
               <HeaderCart />
             </nav>
           </div>
