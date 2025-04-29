@@ -38,7 +38,6 @@ export default async function Home() {
   const situations = await fetchAPI(
     `/situations?populate[device_types][populate]=*&populate[image][populate]=*&populate[category][populate]=*`
   );
-
   const isMobile = await isMobileDevice();
 
   return (
@@ -109,7 +108,7 @@ export default async function Home() {
                       key={item.documentId}
                       href={`/catalog?category=${
                         item.category.slug
-                      }${item.category.device_types
+                      }${item.device_types
                         .map((item) => `&deviceTypes=${item.slug}`)
                         .join("")}`}
                       className="bg-bg-grey rounded-[8px] flex  gap-[10px] p-[10px] lg:p-[20px]"
