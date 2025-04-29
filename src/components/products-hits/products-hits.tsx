@@ -44,13 +44,15 @@ export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
           <SwiperSlide key={product.documentId} className="h-auto!">
             <div className="flex flex-col gap-[20px] h-full">
               <div className=" relative bg-bg-grey rounded-[8px] ">
-                <Image
-                  src={getStrapiMedia(product.image.url)}
-                  width={300}
-                  height={340}
-                  alt="Изображение товара"
-                  className="h-[340px] object-contain"
-                />
+                <Link href={`/catalog/${product.slug}`}>
+                  <Image
+                    src={getStrapiMedia(product.image.url)}
+                    width={300}
+                    height={340}
+                    alt="Изображение товара"
+                    className="h-[340px] object-contain"
+                  />
+                </Link>
                 {product.is_promotion && (
                   <div className="py-[3px] px-[5px] rounded-[2px] bg-bg-orange text-white absolute top-[10px] right-[10px]">
                     Акция

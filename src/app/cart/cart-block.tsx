@@ -29,7 +29,6 @@ export const CartBlock = () => {
           price: product.price,
         })),
       });
-      console.log(widget);
       widget.on("start", () => console.log("start"));
     }
   }, [isReady]);

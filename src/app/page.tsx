@@ -6,7 +6,8 @@ import { Section } from "@/components/section";
 import { SituationsMobile } from "@/components/situations-mobile";
 import { fetchFromServer } from "@/utils/fetch";
 import { isMobileDevice } from "@/utils/is-mobile";
-import { fetchAPI } from "@/utils/strapi";
+import { fetchAPI, getStrapiMedia } from "@/utils/strapi";
+import Markdown from "markdown-to-jsx";
 import Image from "next/image";
 import Link from "next/link";
 import "swiper/css";
@@ -34,68 +35,9 @@ export default async function Home() {
   const reviewsWithFilter = reviews.data.feedbacks.filter(
     (feedback) => feedback.pros && feedback.cons && feedback.photoLinks
   );
-  const situationItems = [
-    {
-      text: (
-        <>
-          Дома с детьми – <br />
-          чистота без усилий
-        </>
-      ),
-      imageLink: "/situation-1.png",
-    },
-    {
-      text: (
-        <>
-          Есть питомцы? <br />
-          Забудьте про шерсть!
-        </>
-      ),
-      imageLink: "/situation-2.png",
-    },
-    {
-      text: (
-        <>
-          Заняты на работе? <br />
-          Техника сэкономит время
-        </>
-      ),
-      imageLink: "/situation-3.png",
-    },
-    {
-      text: (
-        <>
-          Мало места? <br /> Компактные решения
-        </>
-      ),
-      imageLink: "/situation-4.png",
-    },
-    {
-      text: <>Аллергия или маленькие дети? Чистота без химии</>,
-      imageLink: "/situation-5.png",
-    },
-    {
-      text: (
-        <>
-          Не любите гладить? <br /> Отпариватель
-        </>
-      ),
-      imageLink: "/situation-6.png",
-    },
-    {
-      text: (
-        <>
-          Быстрая готовка <br />
-          без хлопот
-        </>
-      ),
-      imageLink: "/situation-7.png",
-    },
-    {
-      text: <>Экономия на химчистке</>,
-      imageLink: "/situation-8.png",
-    },
-  ];
+  const situations = await fetchAPI(
+    `/situations?populate[device_types][populate]=*&populate[image][populate]=*&populate[category][populate]=*`
+  );
 
   const isMobile = await isMobileDevice();
 
@@ -158,26 +100,33 @@ export default async function Home() {
         <div className="lg:grid grid-cols-3 gap-[10px] mr-[-20px] lg:mr-0">
           <>
             {isMobile ? (
-              <SituationsMobile situations={situationItems} />
+              <SituationsMobile situations={situations.data} />
             ) : (
               <>
-                {situationItems.map((item, i) => (
-                  <div
-                    key={i}
-                    className="bg-bg-grey rounded-[8px] flex  gap-[10px] p-[10px] lg:p-[20px]"
-                  >
-                    <p className="grow text-[12px] lg:text-[14px]">
-                      {item.text}
-                    </p>
-                    <Image
-                      src={item.imageLink}
-                      alt="Изображение ситуации"
-                      width={167}
-                      height={123}
-                      className="mt-[-20px] h-[80px] w-[108px] lg:h-[123px] object-contain lg:w-[167px]"
-                    />
-                  </div>
-                ))}
+                {situations.data.map((item, i) => {
+                  return (
+                    <Link
+                      key={item.documentId}
+                      href={`/catalog?category=${
+                        item.category.slug
+                      }${item.category.device_types
+                        .map((item) => `&deviceTypes=${item.slug}`)
+                        .join("")}`}
+                      className="bg-bg-grey rounded-[8px] flex  gap-[10px] p-[10px] lg:p-[20px]"
+                    >
+                      <Markdown className="grow text-[12px] lg:text-[14px]">
+                        {item.name}
+                      </Markdown>
+                      <Image
+                        src={getStrapiMedia(item.image.url)}
+                        alt="Изображение ситуации"
+                        width={167}
+                        height={123}
+                        className="mt-[-20px] h-[80px] w-[108px] lg:h-[123px] object-contain lg:w-[167px]"
+                      />
+                    </Link>
+                  );
+                })}
               </>
             )}
           </>

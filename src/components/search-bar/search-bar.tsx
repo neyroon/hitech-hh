@@ -62,7 +62,6 @@ export const SearchBar = () => {
 
       const products = await fetchAPI(`/products?populate=*&${queryProducts}`);
       const articles = await fetchAPI(`/articles?populate=*&${queryArticles}`);
-      console.log(queryProducts, queryArticles, query);
       setProductResults(products.data);
       setArticleResults(articles.data);
       setShowResults(query.length > 0);

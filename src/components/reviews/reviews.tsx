@@ -14,7 +14,6 @@ export const Reviews = ({
   isMobile: boolean;
 }) => {
   const swiperRef = useRef<null | SwiperRef>(null);
-  console.log(reviews);
   const handleButtonLeftClick = () => {
     swiperRef.current?.swiper.slidePrev();
   };
