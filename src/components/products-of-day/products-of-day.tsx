@@ -45,7 +45,7 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
               <div className="w-[calc(50%-10px)] relative bg-bg-grey rounded-[8px] ">
                 <Link href={`/catalog/${product.slug}`}>
                   <Image
-                    src={getStrapiMedia(product.image.url)}
+                    src={getStrapiMedia(product.images[0]?.url)}
                     fill
                     alt="Изображение товара"
                     className="object-contain"

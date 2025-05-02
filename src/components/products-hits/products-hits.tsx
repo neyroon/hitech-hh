@@ -46,7 +46,7 @@ export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
               <div className=" relative bg-bg-grey rounded-[8px] ">
                 <Link href={`/catalog/${product.slug}`}>
                   <Image
-                    src={getStrapiMedia(product.image.url)}
+                    src={getStrapiMedia(product.images[0]?.url)}
                     width={300}
                     height={340}
                     alt="Изображение товара"

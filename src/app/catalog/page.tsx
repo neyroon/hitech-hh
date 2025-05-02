@@ -493,7 +493,7 @@ export default function Catalog({
                     <Link href={`/catalog/${product.slug}`}>
                       <div className=" relative   ">
                         <Image
-                          src={getStrapiMedia(product.image.url)}
+                          src={getStrapiMedia(product.images[0]?.url)}
                           width={300}
                           height={340}
                           alt="Изображение товара"
