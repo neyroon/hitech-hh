@@ -59,6 +59,7 @@ export default async function Product({
   const producSimilar = await fetchAPI(
     `/products?filters\[category\]\[slug\][$eq]=${product.category.slug}&populate=*&pagination[page]=1&pagination[pageSize]=10`
   );
+  console.log(producSimilar);
   // const reviews = product.wb_article
   //   ? await fetchFromServer(
   //       "https://feedbacks-api.wildberries.ru/api/v1/feedbacks",
