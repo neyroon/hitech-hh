@@ -58,7 +58,7 @@ export const CartBlock = () => {
                       >
                         <div className="flex flex-row gap-[10px]">
                           <Image
-                            src={getStrapiMedia(product.image.url)}
+                            src={getStrapiMedia(product?.image?.url)}
                             width={88}
                             height={88}
                             alt="Изображение товара"

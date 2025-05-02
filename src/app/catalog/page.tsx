@@ -518,7 +518,9 @@ export default function Catalog({
                       </div>
                     </Link>
                     <div className="flex flex-col justify-between h-full">
-                      <p className="mb-[14px]">{product.title}</p>
+                      <Link href={`/catalog/${product.slug}`}>
+                        <p className="mb-[14px]">{product.title}</p>
+                      </Link>
 
                       <ButtonsBuy product={product} />
                     </div>

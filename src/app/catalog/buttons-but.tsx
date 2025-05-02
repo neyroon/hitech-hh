@@ -8,7 +8,7 @@ export const ButtonsBuy = ({ product }: { product: any }) => {
   return (
     <div>
       <button
-        className="p-[12px] mb-[12px] rounded-[4px] bg-main2 text-white flex gap-[14px] justify-center w-full items-center cursor-pointer"
+        className="p-[12px] mb-[12px] rounded-[4px] bg-main2 text-white flex gap-[14px] justify-center w-full items-center cursor-pointer hover:bg-bg-red hover:text-white transition-colors duration-300"
         onClick={() => addToCart(product, 1)}
       >
         <CartProduct />
@@ -16,7 +16,7 @@ export const ButtonsBuy = ({ product }: { product: any }) => {
           {formatPrice(product.price)}
         </span>
       </button>
-      <button className="p-[12px] rounded-[4px] text-[18px] font-medium bg-bg-grey w-full block text-center cursor-pointer">
+      <button className="p-[12px] rounded-[4px] text-[18px] font-medium bg-bg-grey w-full block text-center cursor-pointer hover:bg-bg-red hover:text-white transition-colors duration-300">
         Купить сейчас
       </button>
     </div>
