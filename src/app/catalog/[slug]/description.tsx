@@ -11,7 +11,7 @@ export const Description = ({ product }: { product: any }) => {
       <div className="mb-[10px]">
         <Markdown
           className={classNames("text-[12px]  ", {
-            "truncate line-clamp-6": isTruncate,
+            "line-clamp-6": isTruncate,
           })}
         >
           {product.description}
