@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-input/mask": "^2.0.4",
     "@types/ua-parser-js": "^0.7.39",
     "classnames": "^2.5.1",
     "markdown-to-jsx": "^7.7.6",
