@@ -1,14 +1,14 @@
 "use client";
 import { getStrapiMedia } from "@/utils/strapi";
 import Image from "next/image";
-import { useRef } from "react";
+import { useState } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Thumbs } from "swiper/modules";
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export const SwiperThumbs = ({ product }: { product: any }) => {
-  const thumbs = useRef<SwiperRef | null>(null);
+  const [thumbs, setThumbs] = useState(null);
 
   return (
     <>
@@ -18,10 +18,7 @@ export const SwiperThumbs = ({ product }: { product: any }) => {
         spaceBetween={10}
         modules={[Pagination, Thumbs]}
         thumbs={{
-          swiper:
-            thumbs.current?.swiper && !thumbs.current.swiper.destroyed
-              ? thumbs.current.swiper
-              : null,
+          swiper: thumbs,
         }}
         pagination
       >
@@ -60,7 +57,7 @@ export const SwiperThumbs = ({ product }: { product: any }) => {
         slidesPerView={3}
         speed={700}
         spaceBetween={10}
-        ref={thumbs}
+        onSwiper={setThumbs}
         className="mt-[10px]"
       >
         {product.images.map((image) => (
