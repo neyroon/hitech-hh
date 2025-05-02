@@ -1,10 +1,10 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LogoIcon } from "@/components/icons/logo";
 import { RatingIcon } from "@/components/icons/rating";
+import { ProductsHits } from "@/components/products-hits";
 import { Section } from "@/components/section";
-import { fetchFromServer } from "@/utils/fetch";
 import { formatPrice } from "@/utils/format-price";
-import { fetchAPI } from "@/utils/strapi";
+import { fetchAPI, getStrapiMedia } from "@/utils/strapi";
 import Image from "next/image";
 import Link from "next/link";
 import QueryString from "qs";
@@ -29,6 +29,7 @@ export default async function Product({
         category: { populate: "*" },
         images: { populate: "*" },
         characters: { populate: "*" },
+        certificates: { populate: "*" },
       },
     },
     {
@@ -38,8 +39,8 @@ export default async function Product({
   );
   const productWithData = await fetchAPI(`/products?${query}`);
   const product = productWithData.data[0];
-
   const characters = [
+    { title: "Артикул:", description: product.wb_article },
     { title: "Категория товара:", description: product.category.name },
     {
       title: "Тип устройства:",
@@ -55,18 +56,21 @@ export default async function Product({
     })),
   ];
 
-  const reviews = product.wb_article
-    ? await fetchFromServer(
-        "https://feedbacks-api.wildberries.ru/api/v1/feedbacks",
-        {
-          isAnswered: true,
-          take: 70,
-          skip: 0,
-          nmId: product.wb_article,
-        },
-        { headers: { Authorization: process.env.NEXT_PUBLIC_WB_TOKEN } }
-      )
-    : { data: { feedbacks: [] } };
+  const producSimilar = await fetchAPI(
+    `/products?filters\[category\]\[slug\][$eq]=${product.category.slug}&populate=*&pagination[page]=1&pagination[pageSize]=10`
+  );
+  // const reviews = product.wb_article
+  //   ? await fetchFromServer(
+  //       "https://feedbacks-api.wildberries.ru/api/v1/feedbacks",
+  //       {
+  //         isAnswered: true,
+  //         take: 70,
+  //         skip: 0,
+  //         nmId: product.wb_article,
+  //       },
+  //       { headers: { Authorization: process.env.NEXT_PUBLIC_WB_TOKEN } }
+  //     )
+  //   : { data: { feedbacks: [] } };
 
   return (
     <>
@@ -99,9 +103,6 @@ export default async function Product({
               </div>
             </div>
             <ButtonsBuy product={product} />
-            <div>
-              <p>Цвет:</p>
-            </div>
             <Characters characters={characters} />
             <div className="p-[20px] rounded-[8px] bg-bg-grey flex flex-col gap-[20px] mb-[20px]">
               <p className="text-[16px] font-semibold">Где нас купить:</p>
@@ -115,7 +116,7 @@ export default async function Product({
                   </span>
                   <Link
                     href={product.wb_link}
-                    className="px-[16px] bg-bg-red text-white grow py-[8px] rounded-[4px] text-center"
+                    className="px-[16px] bg-bg-red text-white grow py-[8px] rounded-[4px] text-center hover:bg-main2  hover:text-white transition-colors duration-300"
                   >
                     Купить
                   </Link>
@@ -136,7 +137,7 @@ export default async function Product({
                   </span>
                   <Link
                     href={product.wb_link}
-                    className="bg-white px-[20px] grow py-[8px] rounded-[4px] text-center"
+                    className="bg-white px-[20px] grow py-[8px] rounded-[4px] text-center hover:bg-bg-red  hover:text-white transition-colors duration-300"
                   >
                     Купить
                   </Link>
@@ -189,10 +190,56 @@ export default async function Product({
                 </ul>
               </div>
             </div>
-            <div className="  p-[20px] rounded-[8px] bg-bg-grey flex flex-col gap-[20px]">
-              <p className="text-[16px] font-semibold">Дополнение:</p>
-            </div>
+            {product.certificates[0] && (
+              <div className="  p-[20px] rounded-[8px] bg-bg-grey flex flex-col gap-[20px]">
+                <p className="text-[16px] font-semibold">Дополнение:</p>
+                <div className="flex gap-[10px]">
+                  <Link
+                    href={getStrapiMedia(product.certificates[0].url)}
+                    className="bg-white rounded-[4px] p-[12px] flex flex-col items-center gap-[10px] border border-white hover:border-bg-red transition-colors duration-300 "
+                  >
+                    <Image
+                      src="/cert.png"
+                      width={40}
+                      height={40}
+                      alt="Сертификат"
+                      className="w-[40px] h-[40px] "
+                    />
+                    <p className="text-[12px]">Сертификат</p>
+                  </Link>
+                  <Link
+                    href=""
+                    className="bg-white rounded-[4px] p-[12px] flex flex-col items-center gap-[10px] border border-white hover:border-bg-red transition-colors duration-300 "
+                  >
+                    <Image
+                      src="/instruction.png"
+                      width={40}
+                      height={40}
+                      alt="Инструкция"
+                      className="w-[40px] h-[40px] "
+                    />
+                    <p className="text-[12px]">Инструкция</p>
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
+        </div>
+      </Section>
+      <Section className="py-[50px] lg:py-[100px]">
+        <h2 className="text-[22px] font-medium lg:text-[24px] lg:font-semibold mb-[50px]">
+          С этим товаром покупают
+        </h2>
+        <div className="relative">
+          <ProductsHits productsOfDay={producSimilar.data} />
+        </div>
+      </Section>
+      <Section className="py-[50px] lg:py-[100px]">
+        <h2 className="text-[22px] font-medium lg:text-[24px] lg:font-semibold mb-[50px]">
+          Похожие товары:
+        </h2>
+        <div className="relative">
+          <ProductsHits productsOfDay={producSimilar.data} />
         </div>
       </Section>
     </>
