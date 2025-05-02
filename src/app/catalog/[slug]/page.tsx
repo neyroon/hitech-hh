@@ -1,7 +1,6 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LogoIcon } from "@/components/icons/logo";
 import { RatingIcon } from "@/components/icons/rating";
-import { ProductsHits } from "@/components/products-hits";
 import { Section } from "@/components/section";
 import { formatPrice } from "@/utils/format-price";
 import { fetchAPI, getStrapiMedia } from "@/utils/strapi";
@@ -55,11 +54,6 @@ export default async function Product({
       description: character.character_value,
     })),
   ];
-
-  const producSimilar = await fetchAPI(
-    `/products?filters\[category\]\[slug\][$eq]=${product.category.slug}&populate=*&pagination[page]=1&pagination[pageSize]=10`
-  );
-  console.log(producSimilar);
   // const reviews = product.wb_article
   //   ? await fetchFromServer(
   //       "https://feedbacks-api.wildberries.ru/api/v1/feedbacks",
@@ -225,22 +219,6 @@ export default async function Product({
               </div>
             )}
           </div>
-        </div>
-      </Section>
-      <Section className="py-[50px] lg:py-[100px]">
-        <h2 className="text-[22px] font-medium lg:text-[24px] lg:font-semibold mb-[50px]">
-          С этим товаром покупают
-        </h2>
-        <div className="relative">
-          <ProductsHits productsOfDay={producSimilar.data} />
-        </div>
-      </Section>
-      <Section className="py-[50px] lg:py-[100px]">
-        <h2 className="text-[22px] font-medium lg:text-[24px] lg:font-semibold mb-[50px]">
-          Похожие товары:
-        </h2>
-        <div className="relative">
-          <ProductsHits productsOfDay={producSimilar.data} />
         </div>
       </Section>
     </>
