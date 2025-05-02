@@ -58,63 +58,65 @@ export const CatalogButton = ({ categories }: { categories: any }) => {
       </button>
       <div
         className={classnames(
-          "absolute h-fit top-[103px] left-[20px] right-[20px] xl:right-0 xl:w-[1264px] xl:left-[50%] xl:translate-x-[-50%] flex gap-[20px] py-[20px] bg-white z-50 invisible opacity-0 transition-opacity duration-300 max-h-[calc(100vh-103px-20px)] overflow-y-auto",
+          "absolute h-fit top-[103px] left-[0] right-[0] flex justify-center  py-[20px] bg-white z-50 invisible opacity-0 transition-opacity duration-300 max-h-[calc(100vh-103px-20px)] overflow-y-auto",
           { "opacity-100 visible": isCatalogOpen }
         )}
       >
-        <div className="flex flex-col gap-[10px]">
-          {categories.map((category) => (
-            <button
-              className={classnames(
-                "flex items-center justify-between p-[10px] w-[290px] rounded-[10px] cursor-pointer",
-                {
-                  "shadow-[0px_4px_19px_0px_rgba(0,0,0,0.08)]":
-                    category.name === currentCategory.name,
-                }
-              )}
-              key={category.name}
-              onClick={() => setCurrentCategory(category)}
-            >
-              <div className="flex  gap-[10px] items-center">
-                <Image
-                  src={getStrapiMedia(category.image.url)}
-                  width={40}
-                  height={40}
-                  alt="Изображение категории"
-                  className="w-[40px] h-[40px]"
-                />
-                <span className="text-black text-left">{category.name}</span>
-              </div>
-              {category.name === currentCategory.name && (
-                <div className="text-black">
-                  <RightIcon />
-                </div>
-              )}
-            </button>
-          ))}
-        </div>
-        <div className="h-full">
-          <h3 className="text-[16px] text-black font-semibold mb-[30px]">
-            {currentCategory.name}
-          </h3>
-          <div className="flex flex-wrap gap-[20px] items-stretch">
-            {currentCategory.device_types.map((type) => (
-              <Link
-                href={`/catalog?category=${currentCategory.slug}&deviceTypes=${type.slug}`}
-                key={type.name}
+        <div className="flex gap-[20px] xl:w-[1264px] ">
+          <div className="flex flex-col gap-[10px]">
+            {categories.map((category) => (
+              <button
+                className={classnames(
+                  "flex items-center justify-between p-[10px] w-[290px] rounded-[10px] cursor-pointer",
+                  {
+                    "shadow-[0px_4px_19px_0px_rgba(0,0,0,0.08)]":
+                      category.name === currentCategory.name,
+                  }
+                )}
+                key={category.name}
+                onClick={() => setCurrentCategory(category)}
               >
-                <div className="w-[175px]">
+                <div className="flex  gap-[10px] items-center">
                   <Image
-                    width={175}
-                    height={179}
-                    src={getStrapiMedia(type.image.url)}
-                    alt="Изображение типа товара"
-                    className="h-[179px] w-[175px] object-contain"
+                    src={getStrapiMedia(category.image.url)}
+                    width={40}
+                    height={40}
+                    alt="Изображение категории"
+                    className="w-[40px] h-[40px]"
                   />
-                  <p className="text-center text-black">{type.name}</p>
+                  <span className="text-black text-left">{category.name}</span>
                 </div>
-              </Link>
+                {category.name === currentCategory.name && (
+                  <div className="text-black">
+                    <RightIcon />
+                  </div>
+                )}
+              </button>
             ))}
+          </div>
+          <div className="h-full">
+            <h3 className="text-[16px] text-black font-semibold mb-[30px]">
+              {currentCategory.name}
+            </h3>
+            <div className="flex flex-wrap gap-[20px] items-stretch">
+              {currentCategory.device_types.map((type) => (
+                <Link
+                  href={`/catalog?category=${currentCategory.slug}&deviceTypes=${type.slug}`}
+                  key={type.name}
+                >
+                  <div className="w-[175px]">
+                    <Image
+                      width={175}
+                      height={179}
+                      src={getStrapiMedia(type.image.url)}
+                      alt="Изображение типа товара"
+                      className="h-[179px] w-[175px] object-contain"
+                    />
+                    <p className="text-center text-black">{type.name}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
