@@ -29,7 +29,6 @@ export default async function Product({
         category: { populate: "*" },
         images: { populate: "*" },
         characters: { populate: "*" },
-        colors: { populate: "*" },
       },
     },
     {
@@ -39,7 +38,7 @@ export default async function Product({
   );
   const productWithData = await fetchAPI(`/products?${query}`);
   const product = productWithData.data[0];
-  console.log(product);
+
   const characters = [
     { title: "Категория товара:", description: product.category.name },
     {
@@ -102,7 +101,6 @@ export default async function Product({
             <ButtonsBuy product={product} />
             <div>
               <p>Цвет:</p>
-              <div>{product.colors.map(() => {})}</div>
             </div>
             <Characters characters={characters} />
             <div className="p-[20px] rounded-[8px] bg-bg-grey flex flex-col gap-[20px] mb-[20px]">
