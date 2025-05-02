@@ -83,7 +83,7 @@ export const CatalogButton = ({ categories }: { categories: any }) => {
                   alt="Изображение категории"
                   className="w-[40px] h-[40px]"
                 />
-                <span className="text-black">{category.name}</span>
+                <span className="text-black text-left">{category.name}</span>
               </div>
               {category.name === currentCategory.name && (
                 <div className="text-black">

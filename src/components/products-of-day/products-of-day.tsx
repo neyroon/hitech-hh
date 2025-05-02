@@ -1,7 +1,6 @@
 "use client";
 import { formatPrice } from "@/utils/format-price";
 import { getStrapiMedia } from "@/utils/strapi";
-import Markdown from "markdown-to-jsx";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
@@ -64,30 +63,29 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
                   </span>
                 </div>
               </div>
-              <div className="w-[calc(50%-10px)]">
-                <p className="mb-[14px]">{product.title}</p>
-                <div className="mb-[14px]">
-                  <Markdown className="text-[12px] ">
-                    {product.description}
-                  </Markdown>
-                </div>
-                <button
-                  className="p-[12px] mb-[12px] rounded-[4px] bg-bg-red hover:bg-main2 text-white flex gap-[14px] justify-center w-full items-center cursor-pointer transition-colors duration-300"
-                  onClick={() => {
-                    addToCart(product, 1);
-                  }}
-                >
-                  <CartProduct />
-                  <span className="text-[18px] font-medium">
-                    {formatPrice(product.price)}
-                  </span>
-                </button>
-                <Link
-                  href="/cart"
-                  className="p-[12px] text-[18px] rounded-[4px] bg-bg-grey w-full block text-center font-medium"
-                >
-                  Купить сейчас
+              <div className="w-[calc(50%-10px)] flex flex-col justify-between">
+                <Link href={`/catalog/${product.slug}`}>
+                  <p>{product.title}</p>
                 </Link>
+                <div className="mt-auto">
+                  <button
+                    className="p-[12px] mb-[12px] rounded-[4px] bg-bg-red hover:bg-main2 text-white flex gap-[14px] justify-center w-full items-center cursor-pointer transition-colors duration-300"
+                    onClick={() => {
+                      addToCart(product, 1);
+                    }}
+                  >
+                    <CartProduct />
+                    <span className="text-[18px] font-medium">
+                      {formatPrice(product.price)}
+                    </span>
+                  </button>
+                  <Link
+                    href="/cart"
+                    className="p-[12px] text-[18px] rounded-[4px] bg-bg-grey w-full block text-center font-medium hover:bg-bg-red hover:text-white transition-colors duration-300"
+                  >
+                    Купить сейчас
+                  </Link>
+                </div>
               </div>
             </div>
           </SwiperSlide>

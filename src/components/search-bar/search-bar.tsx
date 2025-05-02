@@ -88,7 +88,7 @@ export const SearchBar = () => {
     <>
       <div
         className={classNames(
-          "px-[15px] py-[9px] gap-[20px] flex items-center relative bg-bg-grey focus-within:text-bg-red text-grey rounded-[8px] mt-[50px] lg:mt-0 lg:w-[42%]",
+          "px-[15px] py-[9px] gap-[20px] flex items-center relative bg-bg-grey focus-within:text-bg-red text-grey rounded-[8px] mt-[50px] lg:mt-0 grow",
           { "rounded-b-none": showResults }
         )}
       >

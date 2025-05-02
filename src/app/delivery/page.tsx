@@ -59,7 +59,7 @@ export default function Delivery() {
             <p className="text-[16px] mb-[20px]">Способы доставки и оплаты</p>
             <Link
               href="/catalog"
-              className="bg-white flex justify-center items-center lg:w-[264px] h-[45px] rounded-[4px] text-black text-[18px] font-medium"
+              className="bg-white flex justify-center items-center lg:w-[264px] h-[45px] rounded-[4px] text-black text-[18px] font-medium hover:bg-bg-red hover:text-white transition-colors duration-300"
             >
               Перейти в каталог
             </Link>
@@ -81,7 +81,7 @@ export default function Delivery() {
           {cardItems.map((item) => (
             <div
               key={item.title}
-              className="p-[20px] rounded-[10px] bg-white w-full lg:h-[285px] flex flex-col"
+              className="p-[20px] rounded-[10px] bg-white w-full lg:h-[285px] flex flex-col  hover:shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] transition-shadow duration-300"
             >
               <p className="text-[18px] font-semibold mb-[10px]">
                 {item.title}
@@ -109,14 +109,12 @@ export default function Delivery() {
         </div>
       </Section>
       <Section className="py-[50px] lg:py-[60px] bg-bg-grey">
-        <h2 className="text-[24px] font-semibold mb-[40px]">
-          Как работает доставка
-        </h2>
+        <h2 className="text-[24px] font-semibold mb-[40px]">Способ оплаты</h2>
         <div className="flex gap-[10px] flex-col lg:flex-row ">
           {payItems.map((item) => (
             <div
               key={item.title}
-              className="p-[10px] lg:p-[20px] rounded-[10px] bg-white w-full  flex flex-row lg:gap-[40px] justify-between"
+              className="p-[10px] lg:p-[20px] rounded-[10px] bg-white w-full  flex flex-row lg:gap-[40px] justify-between hover:shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] transition-shadow duration-300"
             >
               <div>
                 <p className="text-[16px] lg:text-[18px] font-medium lg:font-semibold mb-[10px]">
@@ -130,7 +128,7 @@ export default function Delivery() {
                   ))}
                 </ul>
               </div>
-              <div className="lg:mr-[19px] [&>svg]:w-[97px] [&>svg]:h-[97px]">
+              <div className="lg:mr-[19px] [&>svg]:w-[97px] [&>svg]:h-[97px] lg:[&>svg]:w-[160px] lg:[&>svg]:h-[160px]">
                 {item.icon}
               </div>
             </div>
@@ -176,7 +174,7 @@ export default function Delivery() {
 
             <Link
               href="/"
-              className="bg-bg-red flex justify-center text-center items-center lg:w-[436px] h-[55px] rounded-[4px] text-white text-[18px] font-medium"
+              className="bg-bg-red flex justify-center text-center items-center lg:w-[436px] h-[55px] rounded-[4px] text-white text-[18px] font-medium hover:bg-main2 transition-colors duration-300"
             >
               Получить индивидуальное предложение
             </Link>

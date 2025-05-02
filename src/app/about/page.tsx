@@ -1,9 +1,12 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Reviews } from "@/components/reviews";
 import { Section } from "@/components/section";
+import { fetchFromServer } from "@/utils/fetch";
+import { isMobileDevice } from "@/utils/is-mobile";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function About() {
+export default async function About() {
   const cardItems = [
     {
       title: "Как всё началось: решение, которого не было",
@@ -87,6 +90,21 @@ export default function About() {
     },
   ];
 
+  const reviews = await fetchFromServer(
+    "https://feedbacks-api.wildberries.ru/api/v1/feedbacks",
+    {
+      isAnswered: true,
+      take: 70,
+      skip: 0,
+    },
+    { headers: { Authorization: process.env.NEXT_PUBLIC_WB_TOKEN } }
+  );
+  const reviewsWithFilter = reviews.data.feedbacks.filter(
+    (feedback) => feedback.pros && feedback.cons && feedback.photoLinks
+  );
+
+  const isMobile = await isMobileDevice();
+
   return (
     <>
       <Breadcrumbs items={[{ text: "О компании" }]} />
@@ -106,7 +124,7 @@ export default function About() {
             </p>
             <Link
               href="/catalog"
-              className="bg-white flex justify-center items-center lg:w-[264px] h-[45px] rounded-[4px] text-black text-[18px] font-medium"
+              className="bg-white flex justify-center items-center lg:w-[264px] h-[45px] rounded-[4px] text-black text-[18px] font-medium hover:bg-bg-red hover:text-white transition-colors duration-300"
             >
               Перейти в каталог
             </Link>
@@ -143,7 +161,7 @@ export default function About() {
             ))}
           </div>
           <div className="p-[20px] lg:py-0 rounded-[10px] bg-bg-grey">
-            <div className="lg:sticky lg:top-0 lg:pt-[20px]">
+            <div className="lg:sticky lg:top-[103px] lg:pt-[20px]">
               <p className="text-[18px] font-semibold mb-[20px]">Наша миссия</p>
               <p className="text-[18px]">
                 Мы создаём технику,{" "}
@@ -158,6 +176,15 @@ export default function About() {
           </div>
         </div>
       </Section>
+      <Section className="py-[50px] lg:py-[100px] bg-bg-grey">
+        <div className="flex flex-wrap items-center gap-[10px] lg:gap-[20px] mb-[50px]">
+          <h2 className="text-[24px] font-semibold">Отзывы покупателей</h2>
+          <div className="text-white bg-bg-purple py-[8px] px-[12px] rounded-[3px]">
+            Wildberries
+          </div>
+        </div>
+        <Reviews reviews={reviewsWithFilter} isMobile={isMobile} />
+      </Section>
       <Section className="py-[50px] ">
         <div className="flex flex-col lg:flex-row gap-[40px] justify-between">
           <div>
@@ -165,11 +192,11 @@ export default function About() {
               Контакты
             </h2>
             <p className="text-[18px] mb-[20px]">Адрес: г. Москва </p>
-            <p className="text-[18px] mb-[20px]">+7 000 000-00-00</p>
+            <p className="text-[18px] mb-[20px]">+7 (981) 189-57-34</p>
             <p className="text-[18px] mb-[40px]">вт-вс 11:00-20:00</p>
             <Link
-              href="/"
-              className="bg-bg-red flex justify-center items-center w-[213px] h-[45px] rounded-[4px] text-white text-[18px] font-medium"
+              href="tel:+79811895734"
+              className="bg-bg-red flex justify-center items-center w-[213px] h-[45px] rounded-[4px] text-white text-[18px] font-medium transition-colors duration-300 hover:bg-main2"
             >
               Связаться
             </Link>

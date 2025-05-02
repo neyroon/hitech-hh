@@ -71,7 +71,9 @@ export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
                 </div>
               </div>
               <div className="flex flex-col justify-between h-full">
-                <p className="mb-[14px]">{product.title}</p>
+                <Link href={`/catalog/${product.slug}`}>
+                  <p className="mb-[14px]">{product.title}</p>
+                </Link>
                 <div>
                   <button
                     className="p-[12px] mb-[12px] rounded-[4px] bg-main2 transition-colors duration-300 hover:bg-bg-red text-white flex gap-[14px] justify-center w-full items-center cursor-pointer"
@@ -84,7 +86,7 @@ export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
                   </button>
                   <Link
                     href="/cart"
-                    className="p-[12px] rounded-[4px] bg-bg-grey w-full block text-center text-[18px] font-medium"
+                    className="p-[12px] rounded-[4px] bg-bg-grey hover:bg-bg-red hover:text-white transition-colors duration-300 w-full block text-center text-[18px] font-medium "
                   >
                     Купить сейчас
                   </Link>

@@ -1,9 +1,9 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { TgFormIcon } from "@/components/icons/tg-form";
-import { UploadIcon } from "@/components/icons/upload";
 import { Section } from "@/components/section";
 import Image from "next/image";
 import Link from "next/link";
+import { Form } from "./form";
 
 export default function Warranty() {
   return (
@@ -69,39 +69,7 @@ export default function Warranty() {
                 Дождитесь инструкций по ремонту или обмен
               </li>
             </ul>
-            <form className="flex flex-col gap-[20px]">
-              <input
-                type="text"
-                placeholder="Ваше имя"
-                className="text-[16px] p-[15px] bg-bg-grey w-full text-main2 placeholder:text-grey rounded-[6px]"
-              />
-              <input
-                type="tel"
-                placeholder="Ваш номер телефона"
-                className="text-[16px] p-[15px] bg-bg-grey w-full text-main2 placeholder:text-grey rounded-[6px]"
-              />
-              <input
-                type="text"
-                placeholder="Опишите проблему"
-                className="text-[16px] p-[15px] bg-bg-grey w-full text-main2 placeholder:text-grey rounded-[6px]"
-              />
-            </form>
-            <div className="flex flex-col lg:flex-row items-start lg:items-center gap-[20px]">
-              <div className="flex items-center gap-[8px] p-[10px] rounded-[6px] bg-bg-grey">
-                <UploadIcon />
-                <span>Прикрепить изображение</span>
-              </div>
-              <div className="flex items-center gap-[8px] p-[10px] rounded-[6px] bg-bg-grey">
-                <UploadIcon />
-                <span>Прикрепить чек</span>
-              </div>
-            </div>
-            <Link
-              href="/"
-              className="bg-bg-red flex justify-center items-center lg:w-[213px] h-[45px] rounded-[4px] text-white text-[18px] font-medium"
-            >
-              Связаться
-            </Link>
+            <Form />
           </div>
           <Image
             src="/form.png"

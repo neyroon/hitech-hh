@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRef } from "react";
+import "swiper/css";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { LeftIcon } from "../icons/left";
 import { RightIcon } from "../icons/right";
@@ -76,13 +77,13 @@ export const Reviews = ({
                 </div>
                 <p className="hidden lg:block text-grey">{feedback.userName}</p>
                 <p className="text-[12px] lg:text-[14px]">Достоинства:</p>
-                <p className="text-grey text-[12px] lg:text-[14px]">
+                <p className="text-grey text-[12px] lg:text-[14px] line-clamp-3">
                   {feedback.pros}
                 </p>
                 <p className="text-[12px] lg:text-[14px] mt-auto">
                   Недостатки:
                 </p>
-                <p className="text-grey text-[12px] lg:text-[14px]">
+                <p className="text-grey text-[12px] lg:text-[14px] line-clamp-3">
                   {feedback.cons}
                 </p>
                 <div className="flex gap-[10px]">

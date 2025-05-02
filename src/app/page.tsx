@@ -44,7 +44,7 @@ export default async function Home() {
     <>
       <Section className="[&>div]:px-0 pt-[20px] pb-[50px] lg:py-[80px] bg-bg-grey">
         <div className="flex flex-col lg:flex-row gap-[20px]">
-          <div className="bg-main2 px-[20px] pt-[40px] pb-0 lg:p-[30px] lg:min-h-[366px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px] relative w-full lg:w-[calc(61%-10px)]">
+          <div className="bg-main2 px-[20px] pt-[40px] pb-0 lg:p-[30px] lg:pr-0 lg:min-h-[366px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px] relative w-full lg:w-[calc(61%-10px)]">
             <div className="flex flex-col  gap-[20px]">
               <h1 className="font-semibold text-[24px] lg:text-[32px]">
                 Производитель <br /> бытовой техники Hitech
@@ -56,7 +56,7 @@ export default async function Home() {
 
               <Link
                 href="/catalog"
-                className="bg-white self-center lg:self-auto flex justify-center items-center w-[230px] h-[45px] rounded-[4px] text-black text-[18px] font-medium"
+                className="bg-white self-center lg:self-auto flex justify-center items-center w-[230px] h-[45px] rounded-[4px] hover:bg-bg-red hover:text-white text-black text-[18px] font-medium transition-colors duration-300"
               >
                 Перейти в каталог
               </Link>
@@ -67,7 +67,7 @@ export default async function Home() {
               height={264}
               priority
               alt="Гарантия"
-              className="w-full h-[248px] mt-[20px] lg:mt-0 relative lg:top-[27px] lg:w-[409px] lg:h-[264px] object-contain  self-center lg:self-auto"
+              className="w-full h-[248px] mt-[20px] lg:mt-0 relative lg:top-[27px] lg:w-[278px] lg:h-[264px] object-contain  self-center lg:self-auto"
             />
           </div>
           <div className="lg:w-[calc(39%-10px)] p-[30px] bg-white rounded-[10px] relative">
@@ -111,7 +111,7 @@ export default async function Home() {
                       }${item.device_types
                         .map((item) => `&deviceTypes=${item.slug}`)
                         .join("")}`}
-                      className="bg-bg-grey rounded-[8px] flex  gap-[10px] p-[10px] lg:p-[20px]"
+                      className="bg-bg-grey rounded-[8px] flex  gap-[10px] p-[10px] lg:p-[20px] hover:shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] transition-shadow duration-300"
                     >
                       <Markdown className="grow text-[12px] lg:text-[14px]">
                         {item.name}

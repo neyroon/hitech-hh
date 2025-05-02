@@ -343,7 +343,7 @@ export default function Catalog({
                 categories.map((category) => (
                   <div key={category.name} className="flex flex-col mb-[14px] ">
                     <div
-                      className="flex gap-[8px] items-center justify-between cursor-pointer px-[10px] mb-[8px]"
+                      className="flex gap-[8px] items-center justify-between cursor-pointer px-[10px] "
                       onClick={() => {
                         setPickedCategory((newCategory) =>
                           newCategory?.slug === category.slug ? null : category
@@ -360,7 +360,7 @@ export default function Catalog({
                       )}
                     </div>
                     {pickedCategory?.slug === category.slug && (
-                      <div className="flex flex-col  ">
+                      <div className="flex flex-col mt-[8px] ">
                         {category.device_types.map((deviceType) => (
                           <div
                             key={deviceType.name}
@@ -418,7 +418,7 @@ export default function Catalog({
                 ))}
             </div>
             <button
-              className="px-[20px] py-[8px] rounded-[4px] text-white text-[18px] font-medium bg-bg-red self-start cursor-pointer"
+              className="px-[20px] py-[8px] w-full rounded-[4px] text-white text-[18px] font-medium bg-bg-red self-start cursor-pointer"
               onClick={handleApplyFilters}
             >
               Применить
@@ -436,10 +436,10 @@ export default function Catalog({
                 products.map((product) => (
                   <div
                     key={product.documentId}
-                    className="flex flex-col gap-[20px] h-full"
+                    className="flex flex-col gap-[20px] p-[15px] bg-bg-grey h-full"
                   >
                     <Link href={`/catalog/${product.slug}`}>
-                      <div className=" relative bg-bg-grey rounded-[8px] ">
+                      <div className=" relative  rounded-[8px] ">
                         <Image
                           src={getStrapiMedia(product.image.url)}
                           width={300}
@@ -457,7 +457,7 @@ export default function Catalog({
                             Скидка
                           </div>
                         )}
-                        <div className="p-[4px] flex gap-[8px] items-center bg-white absolute bottom-[10px] left-[10px] rounded-[2px]">
+                        <div className="p-[4px] flex gap-[8px] items-center  absolute bottom-[10px] left-[10px] rounded-[2px]">
                           <RatingIcon />
                           <span className="text-[16px] text-grey">
                             {product.rating}
