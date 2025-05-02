@@ -29,6 +29,7 @@ export default async function Product({
         category: { populate: "*" },
         images: { populate: "*" },
         characters: { populate: "*" },
+        colors: { populate: "*" },
       },
     },
     {
@@ -38,6 +39,7 @@ export default async function Product({
   );
   const productWithData = await fetchAPI(`/products?${query}`);
   const product = productWithData.data[0];
+  console.log(product);
   const characters = [
     { title: "Категория товара:", description: product.category.name },
     {
@@ -98,6 +100,10 @@ export default async function Product({
               </div>
             </div>
             <ButtonsBuy product={product} />
+            <div>
+              <p>Цвет:</p>
+              <div>{product.colors.map(() => {})}</div>
+            </div>
             <Characters characters={characters} />
             <div className="p-[20px] rounded-[8px] bg-bg-grey flex flex-col gap-[20px] mb-[20px]">
               <p className="text-[16px] font-semibold">Где нас купить:</p>
@@ -141,7 +147,7 @@ export default async function Product({
             </div>
             <Description product={product} />
           </div>
-          <div className="grow lg:max-w-[246px] flex flex-col gap-[10px]">
+          <div className="grow lg:max-w-[246px] shrink-0 flex flex-col gap-[10px]">
             <div className="  p-[20px] rounded-[8px] bg-bg-grey flex flex-col gap-[20px]">
               <p className="text-[16px] font-semibold">Способы оплаты:</p>
               <div>
