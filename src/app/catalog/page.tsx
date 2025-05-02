@@ -30,6 +30,7 @@ export default function Catalog({
     priceTo,
     category: categoryParams,
     deviceTypes: deviceTypesParams,
+    colors: colorsParams,
     page,
   } = use(searchParams);
   const withSearchParams = useSearchParams();
@@ -43,11 +44,17 @@ export default function Catalog({
   const [isCategoryOpen, setIsCategoryOpen] = useState(
     categoryParams ? true : false
   );
+  const [isColorOpen, setIsColorOpen] = useState(colorsParams ? true : false);
   const [categories, setCategories] = useState<any[]>([]);
   const [pickedCategorySlug, setPickedCategorySlug] = useState(
     () => categoryParams || null
   );
+  const [colors, setColors] = useState<any[]>([]);
+  const [pickedColorSlug, setPickedColorSlug] = useState(
+    () => colorsParams || null
+  );
   const [pickedCategory, setPickedCategory] = useState(null);
+  const [pickedColors, setPickedColors] = useState(null);
   const [pickedDeviceTypesSlug, setPickedDeviceTypesSlug] = useState<any[]>(
     () => {
       if (deviceTypesParams) {
@@ -59,6 +66,7 @@ export default function Catalog({
   const [pickedDeviceTypes, setPickedDeviceTypes] = useState<any[]>([]);
   const [isFilterReset, setIsFilterReset] = useState(false);
   const [isCategoryFetched, setIsCategoryFetched] = useState(false);
+  const [isColorsFetched, setIsColorsFetched] = useState(false);
 
   const [topFilters, setTopFilters] = useState<{
     availability: null | string;
@@ -131,12 +139,25 @@ export default function Catalog({
       }
       setIsCategoryFetched(true);
     }
+    async function fetchColors() {
+      const colors = await fetchAPI("/colors?populate=*");
+      setColors(colors.data);
+      if (pickedColorSlug) {
+        const pickedColor = colors.data.find(
+          (color) => color.slug === pickedColorSlug
+        );
+        if (pickedColor) setPickedColors(pickedColor);
+      }
+      setIsColorsFetched(true);
+    }
     fetchCategories();
+    fetchColors();
   }, []);
 
   useEffect(() => {
     if (isCategoryFetched) fetchProducts();
-  }, [isCategoryFetched]);
+    if (isColorsFetched) fetchProducts();
+  }, [isCategoryFetched, isColorsFetched]);
 
   useEffect(() => {
     if (isFilterReset) fetchProducts();
@@ -154,6 +175,10 @@ export default function Catalog({
     if (pickedDeviceTypesSlug.length > 0) {
       params.set("deviceTypes", pickedDeviceTypesSlug);
     } else params.delete("deviceTypes");
+
+    if (pickedColorSlug) {
+      params.set("colors", pickedColorSlug);
+    } else params.delete("colors");
 
     router.replace(`${pathName}?${params.toString()}`);
   };
@@ -319,7 +344,6 @@ export default function Catalog({
           <div className="hidden w-[261px] shrink-0 lg:flex flex-col gap-[8px]">
             <div className="bg-white p-[10px] rounded-[6px]">
               <p className="mb-[8px]">Цена</p>
-
               <MultiRangeSlider
                 min={price.min}
                 max={price.max}
@@ -365,7 +389,7 @@ export default function Catalog({
                           <label
                             key={deviceType.name}
                             className={classNames(
-                              " p-[10px] flex gap-[6px] px-[10px] items-start cursor-pointer hover:bg-bg-grey hover:border-r hover:border-bg-red",
+                              " p-[12px] flex gap-[6px] px-[10px] items-start cursor-pointer hover:bg-bg-grey hover:border-r hover:border-bg-red",
                               {
                                 "bg-white": pickedDeviceTypes.find(
                                   (type) => type.slug !== deviceType.slug
@@ -417,6 +441,34 @@ export default function Catalog({
                   </div>
                 ))}
             </div>
+            <div className="bg-white py-[10px] rounded-[6px] flex flex-col">
+              <div
+                className={classNames(
+                  "flex px-[10px] items-center justify-between cursor-pointer ",
+                  { "mb-[14px]": isColorOpen }
+                )}
+                onClick={() => setIsColorOpen((isOpen) => !isOpen)}
+              >
+                <p className="">Цвета</p>
+                {isColorOpen ? <UpIcon /> : <BottomIcon />}
+              </div>
+              {isColorOpen &&
+                colors.map((color) => (
+                  <div key={color.name} className="flex flex-col mb-[14px] ">
+                    <div
+                      className="flex gap-[8px] items-center justify-between px-[10px] "
+                      onClick={() => {
+                        setPickedColors((newColor) =>
+                          newColor?.slug === color.slug ? null : color
+                        );
+                        setPickedColorSlug(color.slug);
+                      }}
+                    >
+                      <p>{color.name}</p>
+                    </div>
+                  </div>
+                ))}
+            </div>
             <button
               className="px-[20px] py-[8px] w-full rounded-[4px] text-white text-[18px] font-medium bg-bg-red self-start cursor-pointer"
               onClick={handleApplyFilters}
@@ -445,7 +497,7 @@ export default function Catalog({
                           width={300}
                           height={340}
                           alt="Изображение товара"
-                          className="w-full h-[340px] object-contain"
+                          className="w-full h-[340px] object-contain bg-white rounded-[8px]"
                         />
                         {product.is_promotion && (
                           <div className="py-[3px] px-[5px] rounded-[2px] bg-bg-orange text-white absolute top-[10px] right-[10px]">
