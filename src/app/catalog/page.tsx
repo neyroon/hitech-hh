@@ -362,10 +362,10 @@ export default function Catalog({
                     {pickedCategory?.slug === category.slug && (
                       <div className="flex flex-col mt-[8px] ">
                         {category.device_types.map((deviceType) => (
-                          <div
+                          <label
                             key={deviceType.name}
                             className={classNames(
-                              " p-[10px] flex gap-[6px] px-[10px] items-start",
+                              " p-[10px] flex gap-[6px] px-[10px] items-start cursor-pointer hover:bg-bg-grey hover:border-r hover:border-bg-red",
                               {
                                 "bg-white": pickedDeviceTypes.find(
                                   (type) => type.slug !== deviceType.slug
@@ -377,7 +377,7 @@ export default function Catalog({
                               }
                             )}
                           >
-                            <label className="flex items-center cursor-pointer relative">
+                            <div className="flex items-center  relative">
                               <input
                                 type="checkbox"
                                 checked={
@@ -408,9 +408,9 @@ export default function Catalog({
                                   ></path>
                                 </svg>
                               </span>
-                            </label>
+                            </div>
                             <p>{deviceType.name}</p>
-                          </div>
+                          </label>
                         ))}
                       </div>
                     )}
@@ -436,10 +436,10 @@ export default function Catalog({
                 products.map((product) => (
                   <div
                     key={product.documentId}
-                    className="flex flex-col gap-[20px] p-[15px] bg-bg-grey h-full"
+                    className="flex flex-col gap-[20px] p-[15px] bg-bg-grey h-full rounded-[8px]"
                   >
                     <Link href={`/catalog/${product.slug}`}>
-                      <div className=" relative  rounded-[8px] ">
+                      <div className=" relative   ">
                         <Image
                           src={getStrapiMedia(product.image.url)}
                           width={300}
@@ -537,10 +537,10 @@ export default function Catalog({
                     {pickedCategory?.slug === category.slug && (
                       <div className="flex flex-col  ">
                         {category.device_types.map((deviceType) => (
-                          <div
+                          <label
                             key={deviceType.name}
                             className={classNames(
-                              " p-[10px] flex gap-[6px] px-[10px] items-start",
+                              " p-[10px] flex gap-[6px] px-[10px] items-start cursor-pointer ",
                               {
                                 "bg-white": pickedDeviceTypes.find(
                                   (type) => type.slug !== deviceType.slug
@@ -552,7 +552,7 @@ export default function Catalog({
                               }
                             )}
                           >
-                            <label className="flex items-center cursor-pointer relative">
+                            <div className="flex items-center  relative">
                               <input
                                 type="checkbox"
                                 checked={
@@ -583,9 +583,9 @@ export default function Catalog({
                                   ></path>
                                 </svg>
                               </span>
-                            </label>
+                            </div>
                             <p>{deviceType.name}</p>
-                          </div>
+                          </label>
                         ))}
                       </div>
                     )}
