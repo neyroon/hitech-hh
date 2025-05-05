@@ -5,7 +5,6 @@ import { PlusIcon } from "@/components/icons/plus";
 import { formatPrice } from "@/utils/format-price";
 import { morph } from "@/utils/morph";
 import { getStrapiMedia } from "@/utils/strapi";
-import Markdown from "markdown-to-jsx";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
@@ -53,12 +52,12 @@ export const CartBlock = () => {
                   <div className="flex flex-col gap-[20px]">
                     {cart.products.map((product) => (
                       <div
-                        key={product.documentId}
+                        key={`${product.documentId}${product.pickedColor.color.slug}`}
                         className="flex flex-col lg:flex-row gap-[30px] items-center justify-between"
                       >
                         <div className="flex flex-row gap-[10px]">
                           <Image
-                            src={getStrapiMedia(product?.image?.url)}
+                            src={getStrapiMedia(product?.images[0]?.url)}
                             width={88}
                             height={88}
                             alt="Изображение товара"
@@ -66,11 +65,12 @@ export const CartBlock = () => {
                           />
                           <div className="flex flex-col gap-[14px] lg:w-[383px]">
                             <p>{product.title}</p>
-                            <div>
-                              <Markdown className="text-[12px]">
-                                {product.description}
-                              </Markdown>
-                            </div>
+                            <p className="text-grey">
+                              Цвет: {product.pickedColor.color.name}
+                            </p>
+                            <p className="text-grey">
+                              Артикул: {product.wb_article}
+                            </p>
                           </div>
                         </div>
                         <div className="flex w-full justify-between items-center flex-row">
@@ -88,7 +88,10 @@ export const CartBlock = () => {
                             <div className="px-[8px] lg:px-[14px] py-[6px] w-[124px] lg:w-[120px] lg:h-[50px] bg-bg-grey rounded-[8px] flex items-center justify-between ">
                               <button
                                 onClick={() =>
-                                  decreaseQuantity(product.documentId)
+                                  decreaseQuantity(
+                                    product.documentId,
+                                    product.pickedColor.color.slug
+                                  )
                                 }
                                 className="text-grey cursor-pointer"
                               >
@@ -99,7 +102,10 @@ export const CartBlock = () => {
                               </span>
                               <button
                                 onClick={() =>
-                                  increaseQuantity(product.documentId)
+                                  increaseQuantity(
+                                    product.documentId,
+                                    product.pickedColor.color.slug
+                                  )
                                 }
                                 className="cursor-pointer"
                               >
@@ -108,7 +114,12 @@ export const CartBlock = () => {
                             </div>
                             <button
                               className="text-[12px] text-grey cursor-pointer"
-                              onClick={() => removeFromCart(product.documentId)}
+                              onClick={() =>
+                                removeFromCart(
+                                  product.documentId,
+                                  product.pickedColor.color.slug
+                                )
+                              }
                             >
                               Удалить
                             </button>

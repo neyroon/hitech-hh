@@ -11,10 +11,10 @@ interface CartType {
 
 export interface CartContextType {
   cart: CartType;
-  addToCart: (product: any, quantity: number) => void;
-  removeFromCart: (documentId: number) => void;
-  increaseQuantity: (documentId: number) => void;
-  decreaseQuantity: (documentId: number) => void;
+  addToCart: (product: any, quantity: number, colorIndex?: number) => void;
+  removeFromCart: (documentId: number, colorSlug: string) => void;
+  increaseQuantity: (documentId: number, colorSlug: string) => void;
+  decreaseQuantity: (documentId: number, colorSlug: string) => void;
   clearCart: () => void;
 }
 
@@ -29,15 +29,23 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   });
 
   // Добавление товара в корзину (увеличение количества, если товар уже есть)
-  const addToCart = (product: any, quantity: number) => {
+  const addToCart = (
+    product: any,
+    quantity: number,
+    colorIndex: number = 0
+  ) => {
     setCart((prevCart) => {
       const existingItem = prevCart.products.find(
-        (item) => item.documentId === product.documentId
+        (item) =>
+          item.documentId === product.documentId &&
+          item.pickedColor === product.colors[colorIndex]
       );
+
       if (existingItem) {
         return {
           products: prevCart.products.map((item) =>
-            item.documentId === product.documentId
+            item.documentId === product.documentId &&
+            item.pickedColor === product.colors[colorIndex]
               ? { ...item, quantity: item.quantity + quantity }
               : item
           ),
@@ -49,7 +57,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         };
       }
       return {
-        products: [...prevCart.products, { ...product, quantity }],
+        products: [
+          ...prevCart.products,
+          { ...product, quantity, pickedColor: product.colors[colorIndex] },
+        ],
         totalPrice: prevCart.totalPrice + product.price,
         totalQuantity: prevCart.totalQuantity + quantity,
         totalPriceDiscount:
@@ -60,14 +71,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Удаление товара из корзины по id
-  const removeFromCart = (documentId: number) => {
+  const removeFromCart = (documentId: number, colorSlug: string) => {
     setCart((prevCart) => {
       const product = prevCart.products.find(
-        (item) => item.documentId === documentId
+        (item) =>
+          item.documentId === documentId &&
+          item.pickedColor.color.slug === colorSlug
       );
       return {
         products: prevCart.products.filter(
-          (item) => item.documentId !== documentId
+          (item) =>
+            item.documentId !== documentId &&
+            item.pickedColor.color.slug === colorSlug
         ),
         totalPrice: prevCart.totalPrice - product.price,
         totalQuantity: prevCart.totalQuantity - product.quantity,
@@ -79,14 +94,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Увеличение количества товара в корзине
-  const increaseQuantity = (documentId: number) => {
+  const increaseQuantity = (documentId: number, colorSlug: string) => {
     setCart((prevCart) => {
       const product = prevCart.products.find(
-        (item) => item.documentId === documentId
+        (item) =>
+          item.documentId === documentId &&
+          item.pickedColor.color.slug === colorSlug
       );
       return {
         products: prevCart.products.map((item) =>
-          item.documentId === documentId
+          item.documentId === documentId &&
+          item.pickedColor.color.slug === colorSlug
             ? { ...item, quantity: item.quantity + 1 }
             : item
         ),
@@ -100,16 +118,19 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Уменьшение количества товара в корзине, удаление если количество становится 0
-  const decreaseQuantity = (documentId: number) => {
+  const decreaseQuantity = (documentId: number, colorSlug: string) => {
     setCart((prevCart) => {
       const product = prevCart.products.find(
-        (item) => item.documentId === documentId
+        (item) =>
+          item.documentId === documentId &&
+          item.pickedColor.color.slug === colorSlug
       );
       if (product.quantity === 1) return prevCart;
       return {
         products: prevCart.products
           .map((item) =>
-            item.documentId === documentId
+            item.documentId === documentId &&
+            item.pickedColor.color.slug === colorSlug
               ? { ...item, quantity: item.quantity - 1 }
               : item
           )

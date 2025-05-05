@@ -50,11 +50,14 @@ export default function Catalog({
     () => categoryParams || null
   );
   const [colors, setColors] = useState<any[]>([]);
-  const [pickedColorSlug, setPickedColorSlug] = useState(
-    () => colorsParams || null
-  );
+  const [pickedColorsSlug, setPickedColorsSlug] = useState(() => {
+    if (colorsParams) {
+      if (Array.isArray(colorsParams)) return colorsParams;
+      else return [colorsParams];
+    } else return [];
+  });
+  const [pickedColors, setPickedColors] = useState<any[]>([]);
   const [pickedCategory, setPickedCategory] = useState(null);
-  const [pickedColors, setPickedColors] = useState(null);
   const [pickedDeviceTypesSlug, setPickedDeviceTypesSlug] = useState<any[]>(
     () => {
       if (deviceTypesParams) {
@@ -103,6 +106,17 @@ export default function Catalog({
           is_new: { $eq: topFilters.is_new },
           is_discount: { $eq: topFilters.is_discount },
           is_promotion: { $eq: topFilters.is_promotion },
+          colors: {
+            color: {
+              slug: {
+                $in: pickedColorsSlug,
+              },
+            },
+          },
+        },
+        populate: {
+          colors: { populate: "*" },
+          images: { populate: "*" },
         },
         pagination: { page: currentPage, pageSize: 12 },
       },
@@ -112,7 +126,7 @@ export default function Catalog({
       }
     );
 
-    const products = await fetchAPI(`/products?populate=*&${query}`);
+    const products = await fetchAPI(`/products?${query}`);
     setProducts(products.data);
     setMeta(products.meta.pagination);
   }
@@ -131,10 +145,11 @@ export default function Catalog({
         const pickedCategory = categories.data.find(
           (category) => category.slug === pickedCategorySlug
         );
+        if (pickedCategory) setPickedCategory(pickedCategory);
+
         const pickedDeviceTypes = pickedCategory.device_types.filter(
           (device_type) => pickedDeviceTypesSlug.includes(device_type.slug)
         );
-        if (pickedCategory) setPickedCategory(pickedCategory);
         if (pickedDeviceTypes) setPickedDeviceTypes(pickedDeviceTypes);
       }
       setIsCategoryFetched(true);
@@ -142,11 +157,12 @@ export default function Catalog({
     async function fetchColors() {
       const colors = await fetchAPI("/colors?populate=*");
       setColors(colors.data);
-      if (pickedColorSlug) {
-        const pickedColor = colors.data.find(
-          (color) => color.slug === pickedColorSlug
-        );
-        if (pickedColor) setPickedColors(pickedColor);
+
+      const pickedColors = colors.data.filter((color) =>
+        pickedColorsSlug.includes(color.slug)
+      );
+      if (pickedColors) {
+        setPickedColors(pickedColors);
       }
       setIsColorsFetched(true);
     }
@@ -167,19 +183,21 @@ export default function Catalog({
     const params = new URLSearchParams(withSearchParams);
     params.set("priceFrom", price.min.toString());
     params.set("priceTo", price.max.toString());
-
     if (pickedCategorySlug) {
       params.set("category", pickedCategorySlug);
     } else params.delete("category");
 
     if (pickedDeviceTypesSlug.length > 0) {
-      params.set("deviceTypes", pickedDeviceTypesSlug);
+      params.delete("deviceTypes");
+      pickedDeviceTypesSlug.forEach((slug) =>
+        params.append("deviceTypes", slug)
+      );
     } else params.delete("deviceTypes");
 
-    if (pickedColorSlug) {
-      params.set("colors", pickedColorSlug);
+    if (pickedColorsSlug.length > 0) {
+      params.delete("colors");
+      pickedColorsSlug.forEach((slug) => params.append("colors", slug));
     } else params.delete("colors");
-
     router.replace(`${pathName}?${params.toString()}`);
   };
 
@@ -188,28 +206,34 @@ export default function Catalog({
   }, []);
 
   useEffect(() => {
-    if (pickedDeviceTypes.length === 0) {
-      setPickedCategorySlug(null);
-    }
-  }, [pickedDeviceTypes]);
-
-  useEffect(() => {
-    if (window.innerWidth < 1024) {
-      setParams();
-      fetchProducts();
-    }
+    setParams();
+    fetchProducts();
   }, [topFilters]);
 
   const handleDeviceTypeCheck = (val, deviceType) => {
     if (val.target.checked) {
       setPickedDeviceTypes((picked) => [...picked, deviceType]);
-      setPickedDeviceTypesSlug([deviceType.slug]);
+      setPickedDeviceTypesSlug((picked) => [...picked, deviceType.slug]);
     } else {
       setPickedDeviceTypes((picked) =>
         picked.filter((pickedDevice) => pickedDevice.slug !== deviceType.slug)
       );
       setPickedDeviceTypesSlug((picked) =>
         picked.filter((pickedDevice) => pickedDevice !== deviceType.slug)
+      );
+    }
+  };
+
+  const handleColorCheck = (val, color) => {
+    if (val.target.checked) {
+      setPickedColors((picked) => [...picked, color]);
+      setPickedColorsSlug((picked) => [...picked, color.slug]);
+    } else {
+      setPickedColors((picked) =>
+        picked.filter((pickedColor) => pickedColor.slug !== color.slug)
+      );
+      setPickedColorsSlug((picked) =>
+        picked.filter((pickedColor) => pickedColor !== color.slug)
       );
     }
   };
@@ -365,15 +389,22 @@ export default function Catalog({
               </div>
               {isCategoryOpen &&
                 categories.map((category) => (
-                  <div key={category.name} className="flex flex-col mb-[14px] ">
+                  <div
+                    key={category.name}
+                    className="flex flex-col not-last:mb-[14px] "
+                  >
                     <div
                       className="flex gap-[8px] items-center justify-between cursor-pointer px-[10px] "
                       onClick={() => {
                         setPickedCategory((newCategory) =>
                           newCategory?.slug === category.slug ? null : category
                         );
-                        setPickedCategorySlug(category.slug);
+                        setPickedCategorySlug((oldSlug) =>
+                          oldSlug === category.slug ? null : category.slug
+                        );
+
                         setPickedDeviceTypes([]);
+                        setPickedDeviceTypesSlug([]);
                       }}
                     >
                       <p>{category.name}</p>
@@ -391,9 +422,6 @@ export default function Catalog({
                             className={classNames(
                               " p-[12px] flex gap-[6px] px-[10px] items-start cursor-pointer hover:bg-bg-grey hover:border-r hover:border-bg-red",
                               {
-                                "bg-white": pickedDeviceTypes.find(
-                                  (type) => type.slug !== deviceType.slug
-                                ),
                                 "bg-bg-grey border-r border-bg-red":
                                   pickedDeviceTypes.find(
                                     (type) => type.slug === deviceType.slug
@@ -454,19 +482,47 @@ export default function Catalog({
               </div>
               {isColorOpen &&
                 colors.map((color) => (
-                  <div key={color.name} className="flex flex-col mb-[14px] ">
-                    <div
-                      className="flex gap-[8px] items-center justify-between px-[10px] "
-                      onClick={() => {
-                        setPickedColors((newColor) =>
-                          newColor?.slug === color.slug ? null : color
-                        );
-                        setPickedColorSlug(color.slug);
-                      }}
-                    >
-                      <p>{color.name}</p>
+                  <label
+                    key={color.name}
+                    className={classNames(
+                      " p-[12px] flex gap-[6px] px-[10px] items-start cursor-pointer hover:bg-bg-grey hover:border-r hover:border-bg-red",
+                      {
+                        "bg-bg-grey border-r border-bg-red": pickedColors?.find(
+                          (type) => type.slug === color.slug
+                        ),
+                      }
+                    )}
+                  >
+                    <div className="flex items-center  relative">
+                      <input
+                        type="checkbox"
+                        checked={
+                          pickedColors.find((type) => type.slug === color.slug)
+                            ? true
+                            : false
+                        }
+                        onChange={(v) => handleColorCheck(v, color)}
+                        className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-[8px] border-2 border-bg-red  checked:bg-bg-red"
+                      />
+                      <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-3.5 w-3.5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          strokeWidth="1"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                      </span>
                     </div>
-                  </div>
+                    <p>{color.name}</p>
+                  </label>
                 ))}
             </div>
             <button
@@ -570,9 +626,12 @@ export default function Catalog({
               </div>
               {isCategoryOpen &&
                 categories.map((category) => (
-                  <div key={category.name} className="flex flex-col mb-[14px] ">
+                  <div
+                    key={category.name}
+                    className="flex flex-col not-last:mb-[14px] "
+                  >
                     <div
-                      className="flex gap-[8px] items-center justify-between cursor-pointer px-[10px] mb-[8px]"
+                      className="flex gap-[8px] items-center justify-between cursor-pointer px-[10px] "
                       onClick={() => {
                         setPickedCategory((newCategory) =>
                           newCategory?.slug === category.slug ? null : category
@@ -589,7 +648,7 @@ export default function Catalog({
                       )}
                     </div>
                     {pickedCategory?.slug === category.slug && (
-                      <div className="flex flex-col  ">
+                      <div className="flex flex-col mt-[8px] ">
                         {category.device_types.map((deviceType) => (
                           <label
                             key={deviceType.name}
@@ -644,6 +703,62 @@ export default function Catalog({
                       </div>
                     )}
                   </div>
+                ))}
+            </div>
+            <div className="bg-white py-[10px] rounded-[6px] flex flex-col">
+              <div
+                className={classNames(
+                  "flex px-[10px] items-center justify-between cursor-pointer ",
+                  { "mb-[14px]": isColorOpen }
+                )}
+                onClick={() => setIsColorOpen((isOpen) => !isOpen)}
+              >
+                <p className="">Цвета</p>
+                {isColorOpen ? <UpIcon /> : <BottomIcon />}
+              </div>
+              {isColorOpen &&
+                colors.map((color) => (
+                  <label
+                    key={color.name}
+                    className={classNames(
+                      " p-[12px] flex gap-[6px] px-[10px] items-start cursor-pointer hover:bg-bg-grey hover:border-r hover:border-bg-red",
+                      {
+                        "bg-bg-grey border-r border-bg-red": pickedColors?.find(
+                          (type) => type.slug === color.slug
+                        ),
+                      }
+                    )}
+                  >
+                    <div className="flex items-center  relative">
+                      <input
+                        type="checkbox"
+                        checked={
+                          pickedColors.find((type) => type.slug === color.slug)
+                            ? true
+                            : false
+                        }
+                        onChange={(v) => handleColorCheck(v, color)}
+                        className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-[8px] border-2 border-bg-red  checked:bg-bg-red"
+                      />
+                      <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-3.5 w-3.5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          strokeWidth="1"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                      </span>
+                    </div>
+                    <p>{color.name}</p>
+                  </label>
                 ))}
             </div>
             <button
