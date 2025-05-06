@@ -1,6 +1,7 @@
 "use client";
 import { useCart } from "@/components/context/cart";
 import { CartProduct } from "@/components/icons/cart-product";
+import { useRouter } from "next/navigation";
 
 export const ButtonsBuy = ({
   product,
@@ -9,11 +10,19 @@ export const ButtonsBuy = ({
   product: any;
   selectedColorIndex: number;
 }) => {
-  const { cart, addToCart } = useCart();
+  const { cart, buyNow, addToCart } = useCart();
+  const router = useRouter();
+
   return (
     <div className="flex flex-wrap gap-[10px]  mb-[20px]">
       <div className="flex gap-[10px]  w-full grow lg:w-auto">
-        <button className="px-[20px] grow w-full  py-[8px] rounded-[4px] text-[18px] font-medium bg-white text-center text-black border border-main2 cursor-pointer hover:bg-bg-red hover:border-bg-red hover:text-white transition-colors duration-300">
+        <button
+          className="px-[20px] grow w-full  py-[8px] rounded-[4px] text-[18px] font-medium bg-white text-center text-black border border-main2 cursor-pointer hover:bg-bg-red hover:border-bg-red hover:text-white transition-colors duration-300"
+          onClick={() => {
+            buyNow(product);
+            router.push("/cart?buyNow=true");
+          }}
+        >
           Купить сейчас
         </button>
 

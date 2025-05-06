@@ -3,6 +3,7 @@ import { formatPrice } from "@/utils/format-price";
 import { getStrapiMedia } from "@/utils/strapi";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import "swiper/css";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
@@ -14,7 +15,8 @@ import { RightIcon } from "../icons/right";
 
 export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
   const swiperRef = useRef<null | SwiperRef>(null);
-  const { addToCart } = useCart();
+  const { addToCart, buyNow } = useCart();
+  const router = useRouter();
 
   const handleButtonLeftClick = () => {
     swiperRef.current?.swiper.slidePrev();
@@ -41,8 +43,8 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
       >
         {productsOfDay.map((product) => (
           <SwiperSlide key={product.documentId}>
-            <div className="flex gap-[20px] min-h-[288px] lg:min-h-[251px] ">
-              <div className="w-[calc(50%-10px)] relative bg-bg-grey rounded-[8px] ">
+            <div className="flex gap-[20px] min-h-[288px] lg:min-h-[251px] p-[15px] bg-bg-grey h-full rounded-[8px]">
+              <div className="w-[calc(50%-10px)] relative bg-white rounded-[8px] ">
                 <Link href={`/catalog/${product.slug}`}>
                   <Image
                     src={getStrapiMedia(product.images[0]?.url)}
@@ -79,12 +81,15 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
                       {formatPrice(product.price)}
                     </span>
                   </button>
-                  <Link
-                    href="/cart"
-                    className="p-[12px] text-[18px] rounded-[4px] bg-bg-grey w-full block text-center font-medium hover:bg-bg-red hover:text-white transition-colors duration-300"
+                  <button
+                    className="p-[12px] text-[18px] rounded-[4px] bg-bg-grey w-full block text-center font-medium hover:bg-bg-red hover:text-white transition-colors duration-300 cursor-pointer"
+                    onClick={() => {
+                      buyNow(product);
+                      router.push("/cart?buyNow=true");
+                    }}
                   >
                     Купить сейчас
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>

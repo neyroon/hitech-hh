@@ -117,6 +117,7 @@ export default function Catalog({
         populate: {
           colors: { populate: "*" },
           images: { populate: "*" },
+          promocodes: { populate: "*" },
         },
         pagination: { page: currentPage, pageSize: 12 },
       },

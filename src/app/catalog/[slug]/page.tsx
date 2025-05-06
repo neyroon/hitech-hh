@@ -26,6 +26,9 @@ export default async function Product({
         images: { populate: "*" },
         characters: { populate: "*" },
         colors: { populate: "*" },
+        certificates: { populate: "*" },
+        instruction: { populate: "*" },
+        promocodes: { populate: "*" },
       },
     },
     {
@@ -35,7 +38,6 @@ export default async function Product({
   );
   const productWithData = await fetchAPI(`/products?${query}`);
   const product = productWithData.data[0];
-  console.log(product);
   const characters = [
     { title: "Артикул:", description: product.wb_article },
     { title: "Категория товара:", description: product.category.name },

@@ -41,7 +41,6 @@ export const ProductBlock = ({
   const withSearchParams = useSearchParams();
   const pathName = usePathname();
   const router = useRouter();
-  console.log(selectedColorSlug, selectedColorIndex);
   useEffect(() => {
     const params = new URLSearchParams(withSearchParams);
     params.set("color", selectedColorSlug);
@@ -192,9 +191,43 @@ export const ProductBlock = ({
             </ul>
           </div>
         </div>
-        <div className="  p-[20px] rounded-[8px] bg-bg-grey flex flex-col gap-[20px]">
-          <p className="text-[16px] font-semibold">Дополнение:</p>
-        </div>
+        {(product?.certificates?.[0] || product?.instruction) && (
+          <div className="  p-[20px] rounded-[8px] bg-bg-grey flex flex-col gap-[20px]">
+            <p className="text-[16px] font-semibold">Дополнение:</p>
+            <div className="flex gap-[10px]">
+              {product?.certificates?.[0] && (
+                <Link
+                  href={getStrapiMedia(product.certificates[0].url)}
+                  className="bg-white rounded-[4px] p-[12px] flex flex-col items-center gap-[10px] border border-white hover:border-bg-red transition-colors duration-300 "
+                >
+                  <Image
+                    src="/cert.png"
+                    width={40}
+                    height={40}
+                    alt="Сертификат"
+                    className="w-[40px] h-[40px] "
+                  />
+                  <p className="text-[12px]">Сертификат</p>
+                </Link>
+              )}
+              {product?.instruction?.url && (
+                <Link
+                  href={getStrapiMedia(product.instruction?.url)}
+                  className="bg-white rounded-[4px] p-[12px] flex flex-col items-center gap-[10px] border border-white hover:border-bg-red transition-colors duration-300 "
+                >
+                  <Image
+                    src="/instruction.png"
+                    width={40}
+                    height={40}
+                    alt="Инструкция"
+                    className="w-[40px] h-[40px] "
+                  />
+                  <p className="text-[12px]">Инструкция</p>
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

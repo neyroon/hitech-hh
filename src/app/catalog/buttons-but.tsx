@@ -2,9 +2,11 @@
 import { useCart } from "@/components/context/cart";
 import { CartProduct } from "@/components/icons/cart-product";
 import { formatPrice } from "@/utils/format-price";
+import { useRouter } from "next/navigation";
 
 export const ButtonsBuy = ({ product }: { product: any }) => {
-  const { addToCart } = useCart();
+  const { addToCart, buyNow } = useCart();
+  const router = useRouter();
   return (
     <div>
       <button
@@ -16,7 +18,13 @@ export const ButtonsBuy = ({ product }: { product: any }) => {
           {formatPrice(product.price)}
         </span>
       </button>
-      <button className="p-[12px] rounded-[4px] text-[18px] font-medium bg-bg-grey w-full block text-center cursor-pointer hover:bg-bg-red hover:text-white transition-colors duration-300">
+      <button
+        className="p-[12px] rounded-[4px] text-[18px] font-medium bg-bg-grey w-full block text-center cursor-pointer hover:bg-bg-red hover:text-white transition-colors duration-300 "
+        onClick={() => {
+          buyNow(product);
+          router.push("/cart?buyNow=true");
+        }}
+      >
         Купить сейчас
       </button>
     </div>
