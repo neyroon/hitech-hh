@@ -64,7 +64,10 @@ export const CartBlock = ({ buyNow }: { buyNow: boolean }) => {
 
   return (
     <>
-      <Script src="https://widgets.saferoute.ru/cart/api.js" />
+      <Script
+        src="https://widgets.saferoute.ru/cart/api.js"
+        strategy="beforeInteractive"
+      />
       {cart.products.length > 0 || isReady ? (
         <>
           {isReady ? (
