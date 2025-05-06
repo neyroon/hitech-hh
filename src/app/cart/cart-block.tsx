@@ -25,6 +25,7 @@ export const CartBlock = ({ buyNow }: { buyNow: boolean }) => {
 
   useEffect(() => {
     if (isReady) {
+      console.log("from ready");
       const widget = new SafeRouteCartWidget("saferoute-cart-widget", {
         apiScript: "/saferoute-widget-api.php",
         discount: buyNow
@@ -40,6 +41,7 @@ export const CartBlock = ({ buyNow }: { buyNow: boolean }) => {
               price: product.price,
             })),
       });
+      console.log(widget);
       widget.on("start", () => console.log("start"));
     }
   }, [isReady]);
@@ -66,8 +68,8 @@ export const CartBlock = ({ buyNow }: { buyNow: boolean }) => {
     <>
       <Script
         src="https://widgets.saferoute.ru/cart/api.js"
-        strategy="beforeInteractive"
         onReady={() => {
+          console.log(buyNow && cart.buyNowProduct ? true : false);
           setReady(buyNow && cart.buyNowProduct ? true : false);
         }}
       />
