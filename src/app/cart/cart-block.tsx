@@ -18,9 +18,7 @@ export const CartBlock = ({ buyNow }: { buyNow: boolean }) => {
     increaseQuantity,
     removeFromCart,
   } = useCart();
-  const [isReady, setReady] = useState(
-    buyNow && cart.buyNowProduct ? true : false
-  );
+  const [isReady, setReady] = useState(false);
   const [promo, setPromo] = useState("");
   const [isPromoClicked, setIsPromoClicked] = useState(false);
   const [isPromoApplied, setisPromoApplied] = useState(false);
@@ -69,6 +67,9 @@ export const CartBlock = ({ buyNow }: { buyNow: boolean }) => {
       <Script
         src="https://widgets.saferoute.ru/cart/api.js"
         strategy="beforeInteractive"
+        onReady={() => {
+          setReady(buyNow && cart.buyNowProduct ? true : false);
+        }}
       />
       {cart.products.length > 0 || isReady ? (
         <>
