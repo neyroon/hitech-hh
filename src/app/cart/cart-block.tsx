@@ -49,6 +49,11 @@ export const CartBlock = ({ buyNow }: { buyNow: boolean }) => {
               price: product.price,
             })),
       });
+      console.log({
+        name: cart.buyNowProduct.title,
+        count: cart.buyNowProduct.quantity,
+        price: cart.buyNowProduct.price,
+      });
       widget.on("start", () => console.log("start"));
     }
   }, [isReady, isScriptReady]);
