@@ -85,6 +85,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const buyNow = (product: any, colorIndex: number = 0) => {
     product.pickedColor = product.colors[colorIndex];
+    product.quantity = 1;
     setCart((prevCart) => {
       return {
         products: prevCart.products,

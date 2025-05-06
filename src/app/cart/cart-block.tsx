@@ -18,14 +18,16 @@ export const CartBlock = ({ buyNow }: { buyNow: boolean }) => {
     increaseQuantity,
     removeFromCart,
   } = useCart();
-  const [isReady, setReady] = useState(false);
+  const [isReady, setReady] = useState(
+    buyNow && cart.buyNowProduct ? true : false
+  );
+  const [isScriptReady, setIsScriptReady] = useState(false);
   const [promo, setPromo] = useState("");
   const [isPromoClicked, setIsPromoClicked] = useState(false);
   const [isPromoApplied, setisPromoApplied] = useState(false);
 
   useEffect(() => {
-    if (isReady) {
-      console.log("from ready");
+    if (isReady && isScriptReady) {
       const widget = new SafeRouteCartWidget("saferoute-cart-widget", {
         apiScript: "/saferoute-widget-api.php",
         discount: buyNow
@@ -34,17 +36,22 @@ export const CartBlock = ({ buyNow }: { buyNow: boolean }) => {
         enableAcquiring: true,
         splitFullnameInput: true,
         products: buyNow
-          ? [cart.buyNowProduct]
+          ? [
+              {
+                name: cart.buyNowProduct.title,
+                count: cart.buyNowProduct.quantity,
+                price: cart.buyNowProduct.price,
+              },
+            ]
           : cart.products.map((product) => ({
               name: product.title,
               count: product.quantity,
               price: product.price,
             })),
       });
-      console.log(widget);
       widget.on("start", () => console.log("start"));
     }
-  }, [isReady]);
+  }, [isReady, isScriptReady]);
 
   const handlePromoChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPromo(e.currentTarget.value);
@@ -69,8 +76,7 @@ export const CartBlock = ({ buyNow }: { buyNow: boolean }) => {
       <Script
         src="https://widgets.saferoute.ru/cart/api.js"
         onReady={() => {
-          console.log(buyNow && cart.buyNowProduct ? true : false);
-          setReady(buyNow && cart.buyNowProduct ? true : false);
+          setIsScriptReady(true);
         }}
       />
       {cart.products.length > 0 || isReady ? (
