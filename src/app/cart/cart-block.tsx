@@ -18,7 +18,9 @@ export const CartBlock = ({ buyNow }: { buyNow: boolean }) => {
     increaseQuantity,
     removeFromCart,
   } = useCart();
-  const [isReady, setReady] = useState(buyNow ? true : false);
+  const [isReady, setReady] = useState(
+    buyNow && cart.buyNowProduct ? true : false
+  );
   const [promo, setPromo] = useState("");
   const [isPromoClicked, setIsPromoClicked] = useState(false);
   const [isPromoApplied, setisPromoApplied] = useState(false);
