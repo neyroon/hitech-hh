@@ -58,7 +58,7 @@ export const CartBlock = () => {
                     }`}
                     className="flex flex-col lg:flex-row gap-[30px] items-center justify-between"
                   >
-                    <div className="flex flex-row gap-[10px]">
+                    <div className="flex flex-row gap-[10px] w-full lg:w-auto">
                       <Image
                         src={getStrapiMedia(product?.images[0]?.url)}
                         width={88}

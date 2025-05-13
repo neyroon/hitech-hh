@@ -4,7 +4,7 @@ import classnames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { LogoIcon } from "../icons/logo";
 import { SearchBar } from "../search-bar";
 
@@ -156,8 +156,8 @@ export const HeaderMobile = ({ categories }: { categories: any }) => {
               )}
             >
               <div className="flex flex-col gap-[10px]">
-                {categories.map((category) => (
-                  <>
+                {categories.map((category, i) => (
+                  <Fragment key={i}>
                     <button
                       className={classnames(
                         "flex items-center justify-between p-[10px]  rounded-[10px] cursor-pointer",
@@ -205,7 +205,7 @@ export const HeaderMobile = ({ categories }: { categories: any }) => {
                         </div>
                       </div>
                     )}
-                  </>
+                  </Fragment>
                 ))}
               </div>
             </div>
