@@ -25,8 +25,6 @@ export default function Catalog({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const withSearchParams = useSearchParams();
-
   const {
     priceFrom,
     priceTo,
@@ -35,6 +33,7 @@ export default function Catalog({
     colors: colorsParams,
     page,
   } = use(searchParams);
+  const withSearchParams = useSearchParams();
   const pathName = usePathname();
   const router = useRouter();
 
