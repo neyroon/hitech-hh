@@ -1,6 +1,5 @@
 "use client";
 import { useCart } from "@/components/context/cart";
-import { CartProduct } from "@/components/icons/cart-product";
 import { LogoIcon } from "@/components/icons/logo";
 import { RatingIcon } from "@/components/icons/rating";
 import { formatPrice } from "@/utils/format-price";
@@ -235,7 +234,7 @@ export const ProductBlock = ({
           )}
         </div>
       </div>
-      <div className="flex lg:hidden justify-between fixed bg-white w-full left-0 bottom-[75px] px-[20px] py-[10px] z-[49]">
+      <div className="flex lg:hidden justify-between fixed bg-white w-full left-0 bottom-[74px] px-[20px] py-[10px] z-[49]">
         <div className="flex items-center gap-[8px] shrink-0">
           <span className="text-[16px] font-medium">
             {formatPrice(selectedPrice)}
@@ -252,7 +251,6 @@ export const ProductBlock = ({
             addToCart(product, 1, selectedColorIndex);
           }}
         >
-          <CartProduct />
           <span className="">В корзину</span>
         </button>
       </div>
