@@ -234,7 +234,7 @@ export const ProductBlock = ({
           )}
         </div>
       </div>
-      <div className="flex lg:hidden justify-between fixed bg-white w-full left-0 bottom-[74px] px-[20px] py-[10px] z-[49]">
+      <div className="flex lg:hidden justify-between fixed bg-white w-full left-0 bottom-[74px] px-[20px] py-[10px] z-[49] border-y border-bg-grey">
         <div className="flex items-center gap-[8px] shrink-0">
           <span className="text-[16px] font-medium">
             {formatPrice(selectedPrice)}

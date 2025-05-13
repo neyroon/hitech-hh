@@ -21,14 +21,14 @@ export const Breadcrumbs = ({
           <Fragment key={item.text}>
             {item.link ? (
               <>
-                <span className="w-[5px] h-[5px] rounded-full bg-grey"></span>{" "}
+                <span className="w-[5px] h-[5px] rounded-full bg-grey"></span>
                 <Link href={item.link} className="text-[14px] text-grey">
                   {item.text}
                 </Link>
               </>
             ) : (
-              <div className="flex flex-wrap gap-[8px] items-center">
-                <span className="w-[5px] h-[5px] rounded-full bg-main2"></span>
+              <div className="flex  gap-[8px] items-center">
+                <span className="w-[5px] h-[5px] rounded-full shrink-0 bg-main2"></span>
                 <span key={item.text} className="text-[14px] text-main2">
                   {item.text}
                 </span>

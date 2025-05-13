@@ -13,7 +13,7 @@ export const StatusBar = () => {
   const { cart } = useCart();
   return (
     <nav className="block lg:hidden fixed bottom-0 left-0 right-0 bg-white  py-[14px] px-[20px] z-[49]">
-      <div className="flex items-center justify-center gap-[6px]">
+      <div className="flex items-center justify-between gap-[6px]">
         <Link
           href="/"
           className={classNames(
