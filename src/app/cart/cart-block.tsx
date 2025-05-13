@@ -140,13 +140,6 @@ export const CartBlock = () => {
               </div>
             </div>
             <div className="flex flex-col gap-[20px]">
-              <div className="bg-white p-[30px] rounded-[10px]">
-                <h3 className="mb-[20px] text-[22px] font-medium">
-                  Условия заказа:
-                </h3>
-                <p>Доставка: бесплатно.</p>
-                <p>Способы оплаты:</p>
-              </div>
               <div className="bg-white p-[20px] lg:p-[30px] rounded-[10px]">
                 <div className="mb-[20px] flex items-center justify-between">
                   <h3 className="text-[22px] font-medium">Итого:</h3>
