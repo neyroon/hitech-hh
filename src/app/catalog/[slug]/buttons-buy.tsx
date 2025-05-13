@@ -20,7 +20,7 @@ export const ButtonsBuy = ({
           className="px-[20px] grow w-full  py-[8px] rounded-[4px] text-[18px] font-medium bg-white text-center text-black border border-main2 cursor-pointer hover:bg-bg-red hover:border-bg-red hover:text-white transition-colors duration-300"
           onClick={() => {
             buyNow(product);
-            router.push("/cart?buyNow=true");
+            router.push("/checkout?buyNow=true");
           }}
         >
           Купить сейчас

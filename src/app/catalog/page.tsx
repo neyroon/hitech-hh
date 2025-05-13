@@ -25,6 +25,8 @@ export default function Catalog({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const withSearchParams = useSearchParams();
+
   const {
     priceFrom,
     priceTo,
@@ -33,7 +35,6 @@ export default function Catalog({
     colors: colorsParams,
     page,
   } = use(searchParams);
-  const withSearchParams = useSearchParams();
   const pathName = usePathname();
   const router = useRouter();
 
@@ -629,7 +630,7 @@ export default function Catalog({
                 categories.map((category) => (
                   <div
                     key={category.name}
-                    className="flex flex-col not-last:mb-[14px] "
+                    className="flex flex-col not-last:mb-[20px] "
                   >
                     <div
                       className="flex gap-[8px] items-center justify-between cursor-pointer px-[10px] "

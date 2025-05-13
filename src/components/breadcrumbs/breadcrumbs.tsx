@@ -10,7 +10,7 @@ export const Breadcrumbs = ({
 }) => {
   return (
     <Section className="py-[14px]">
-      <div className="flex gap-[8px] items-center">
+      <div className="flex flex-wrap gap-[8px] items-center">
         <Link
           href="/"
           className="text-grey hover:text-bg-red transition-colors duration-300"
@@ -27,12 +27,12 @@ export const Breadcrumbs = ({
                 </Link>
               </>
             ) : (
-              <>
+              <div className="flex flex-wrap gap-[8px] items-center">
                 <span className="w-[5px] h-[5px] rounded-full bg-main2"></span>
                 <span key={item.text} className="text-[14px] text-main2">
                   {item.text}
                 </span>
-              </>
+              </div>
             )}
           </Fragment>
         ))}

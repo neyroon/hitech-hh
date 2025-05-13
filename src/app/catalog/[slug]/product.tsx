@@ -23,7 +23,7 @@ export const ProductBlock = ({
   characters: any;
   colorFromParams?: string | string[];
 }) => {
-  const { addToCart } = useCart();
+  const { buyNow } = useCart();
   const [selectedColorIndex, setSelectedColorIndex] = useState(() => {
     const el = colorFromParams
       ? product.colors.findIndex((item) => item.color.slug === colorFromParams)
@@ -111,14 +111,8 @@ export const ProductBlock = ({
               <button
                 className="px-[16px] bg-bg-red text-white grow py-[8px] rounded-[4px] text-center cursor-pointer"
                 onClick={() => {
-                  product.price = product.colors[selectedColorIndex].price;
-                  product.price_discount =
-                    product.colors[selectedColorIndex].price_discount;
-                  addToCart(
-                    product,
-                    1,
-                    product.colors[selectedColorIndex].color.slug
-                  );
+                  buyNow(product);
+                  router.push("/checkout?buyNow=true");
                 }}
               >
                 Купить

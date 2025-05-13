@@ -90,7 +90,7 @@ export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
                     className="p-[12px] rounded-[4px] bg-bg-grey hover:bg-bg-red hover:text-white transition-colors duration-300 w-full block text-center text-[18px] font-medium cursor-pointer"
                     onClick={() => {
                       buyNow(product);
-                      router.push("/cart?buyNow=true");
+                      router.push("/checkout?buyNow=true");
                     }}
                   >
                     Купить сейчас

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { InstagramFooterIcon } from "../icons/instagram-footer";
 import { LogoIcon } from "../icons/logo";
 import { RutubeFooterIcon } from "../icons/rutube-footer";
 import { TgFooterIcon } from "../icons/tg-footer";
@@ -63,9 +62,6 @@ export const Footer = () => {
             <Link href="mailto:hitech.comp@mail.ru">hitech.comp@mail.ru</Link>
           </div>
           <div className="flex gap-[10px]">
-            <Link href="inst">
-              <InstagramFooterIcon />
-            </Link>
             <Link href="vk">
               <VkFooterIcon />
             </Link>

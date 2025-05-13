@@ -56,7 +56,7 @@ export default async function Home() {
 
               <Link
                 href="/catalog"
-                className="bg-white self-center lg:self-auto flex justify-center items-center w-[230px] h-[45px] rounded-[4px] hover:bg-bg-red hover:text-white text-black text-[18px] font-medium transition-colors duration-300"
+                className="bg-white self-center lg:self-auto flex justify-center items-center w-full lg:w-[230px] h-[45px] rounded-[4px] hover:bg-bg-red hover:text-white text-black text-[18px] font-medium transition-colors duration-300"
               >
                 Перейти в каталог
               </Link>

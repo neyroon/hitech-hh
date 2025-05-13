@@ -182,7 +182,7 @@ export const HeaderMobile = ({ categories }: { categories: any }) => {
                       <div className="mb-[40px] mt-[20px]">
                         <div className="flex flex-wrap gap-[10px] items-stretch">
                           {category.device_types.map((type) => (
-                            <Link
+                            <a
                               href={`/catalog?category=${currentCategory.slug}&deviceTypes=${type.slug}`}
                               key={type.name}
                             >
@@ -198,7 +198,7 @@ export const HeaderMobile = ({ categories }: { categories: any }) => {
                                   {type.name}
                                 </p>
                               </div>
-                            </Link>
+                            </a>
                           ))}
                         </div>
                       </div>

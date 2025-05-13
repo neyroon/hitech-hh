@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface CartType {
   products: any[];
@@ -33,6 +39,19 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     totalPriceDiscount: 0,
     buyNowProduct: null,
   });
+
+  useEffect(() => {
+    if (cart.totalPrice > 0 && cart.totalQuantity > 0) {
+      sessionStorage.setItem("cart", JSON.stringify(cart));
+    }
+  }, [cart]);
+
+  useEffect(() => {
+    const sessionCart = sessionStorage.getItem("cart");
+    if (sessionCart) {
+      setCart(JSON.parse(sessionCart));
+    }
+  }, []);
 
   // Добавление товара в корзину (увеличение количества, если товар уже есть)
   const addToCart = (

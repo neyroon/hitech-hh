@@ -22,7 +22,7 @@ export const ButtonsBuy = ({ product }: { product: any }) => {
         className="p-[12px] rounded-[4px] text-[18px] font-medium bg-bg-grey w-full block text-center cursor-pointer hover:bg-bg-red hover:text-white transition-colors duration-300 "
         onClick={() => {
           buyNow(product);
-          router.push("/cart?buyNow=true");
+          router.push("/checkout?buyNow=true");
         }}
       >
         Купить сейчас

@@ -43,8 +43,8 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
       >
         {productsOfDay.map((product) => (
           <SwiperSlide key={product.documentId}>
-            <div className="flex gap-[20px] min-h-[288px] lg:min-h-[251px] p-[15px] bg-bg-grey h-full rounded-[8px]">
-              <div className="w-[calc(50%-10px)] relative bg-white rounded-[8px] ">
+            <div className="flex gap-[10px] lg:gap-[20px] min-h-[288px] lg:min-h-[251px] p-[5px] lg:p-[15px] bg-bg-grey h-full rounded-[8px]">
+              <div className="w-full relative bg-white rounded-[8px] ">
                 <Link href={`/catalog/${product.slug}`}>
                   <Image
                     src={getStrapiMedia(product.images[0]?.url)}
@@ -65,7 +65,7 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
                   </span>
                 </div>
               </div>
-              <div className="w-[calc(50%-10px)] flex flex-col justify-between">
+              <div className="w-full flex flex-col justify-between">
                 <Link href={`/catalog/${product.slug}`}>
                   <p>{product.title}</p>
                 </Link>
@@ -77,15 +77,15 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
                     }}
                   >
                     <CartProduct />
-                    <span className="text-[18px] font-medium">
+                    <span className="text-[16px] lg:text-[18px] font-medium">
                       {formatPrice(product.price)}
                     </span>
                   </button>
                   <button
-                    className="p-[12px] text-[18px] rounded-[4px] bg-bg-grey w-full block text-center font-medium hover:bg-bg-red hover:text-white transition-colors duration-300 cursor-pointer"
+                    className="p-[12px] text-[16px] lg:text-[18px] rounded-[4px] bg-bg-grey w-full block text-center font-medium hover:bg-bg-red hover:text-white transition-colors duration-300 cursor-pointer"
                     onClick={() => {
                       buyNow(product);
-                      router.push("/cart?buyNow=true");
+                      router.push("/checkout?buyNow=true");
                     }}
                   >
                     Купить сейчас

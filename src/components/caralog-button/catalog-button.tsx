@@ -3,7 +3,6 @@ import { useOutsideClick } from "@/hooks/click-outside";
 import { getStrapiMedia } from "@/utils/strapi";
 import classnames from "classnames";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { RightIcon } from "../icons/right";
@@ -100,7 +99,7 @@ export const CatalogButton = ({ categories }: { categories: any }) => {
             </h3>
             <div className="flex flex-wrap gap-[20px] items-stretch">
               {currentCategory.device_types.map((type) => (
-                <Link
+                <a
                   href={`/catalog?category=${currentCategory.slug}&deviceTypes=${type.slug}`}
                   key={type.name}
                 >
@@ -114,7 +113,7 @@ export const CatalogButton = ({ categories }: { categories: any }) => {
                     />
                     <p className="text-center text-black">{type.name}</p>
                   </div>
-                </Link>
+                </a>
               ))}
             </div>
           </div>
