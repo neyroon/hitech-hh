@@ -18,7 +18,7 @@ export const SituationsMobile = ({ situations }: { situations: any }) => {
               alt="Изображение ситуации"
               width={167}
               height={123}
-              className="mt-[-20px] h-[80px] w-[108px] lg:h-[123px] object-contain lg:w-[167px]"
+              className="h-[80px] w-[108px] lg:h-[123px] object-contain lg:w-[167px]"
             />
           </div>
         </SwiperSlide>

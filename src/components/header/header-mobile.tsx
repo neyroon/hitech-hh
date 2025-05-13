@@ -116,12 +116,14 @@ export const HeaderMobile = ({ categories }: { categories: any }) => {
                 Гарантия и сервисные центры
               </Link>
             </nav>
-            <Link href="tel:+79811895734" className="text-grey">
-              +7 (981) 189-57-34
-            </Link>
-            <Link href="mailto:hitech.comp@mail.ru" className="text-grey">
-              hitech.comp@mail.ru
-            </Link>
+            <div className="flex flex-col gap-[10px]">
+              <Link href="tel:+79811895734" className="text-grey">
+                +7 (981) 189-57-34
+              </Link>
+              <Link href="mailto:hitech.comp@mail.ru" className="text-grey">
+                hitech.comp@mail.ru
+              </Link>
+            </div>
           </>
         )}
         {isCatalogOpen && (
