@@ -3,6 +3,8 @@ import { fetchAPI } from "@/utils/strapi";
 import Link from "next/link";
 import { CatalogButton } from "../caralog-button";
 import { LogoIcon } from "../icons/logo";
+import { TgFooterIcon } from "../icons/tg-footer";
+import { WhatsappFooterIcon } from "../icons/whatsapp-footer";
 import { SearchBar } from "../search-bar";
 import { HeaderCart } from "./header-cart";
 import { HeaderMobile } from "./header-mobile";
@@ -19,7 +21,7 @@ export const Header = async () => {
         {!isMobile && (
           <div className="hidden lg:block w-[1264px] px-[20px] xl:px-0">
             <nav className="flex justify-between text-grey mb-[10px]">
-              <ul className="flex gap-[20px]">
+              <ul className="flex  gap-[20px]">
                 <li>
                   <Link
                     href="/about"
@@ -41,19 +43,22 @@ export const Header = async () => {
                     href="/warranty"
                     className="hover:text-main2  transition-colors duration-300"
                   >
-                    Гарантия и сервисные центры
+                    Условия гарантии
                   </Link>
                 </li>
               </ul>
-              <ul className="flex gap-[20px]">
+              <ul className="flex items-center gap-[20px]">
                 <li>
-                  <Link
-                    href="tel:+79811895734"
-                    className="hover:text-main2  transition-colors duration-300"
-                  >
-                    +7 (981) 189-57-34
+                  <Link href="https://t.me/@HELP_Saferet">
+                    <TgFooterIcon className="w-[30px] h-[30px]" />
                   </Link>
                 </li>
+                <li>
+                  <Link href="https://wa.me/79811895734">
+                    <WhatsappFooterIcon className="w-[30px] h-[30px]" />
+                  </Link>
+                </li>
+                <li className="text-grey text-[12px]">Тех. поддержка</li>
                 <li>
                   <Link
                     href="mailto:hitech.comp@mail.ru"

@@ -74,12 +74,10 @@ export default function Catalog({
   const [topFilters, setTopFilters] = useState<{
     availability: null | string;
     is_promotion: null | boolean;
-    is_discount: null | boolean;
     is_new: null | boolean;
   }>({
     availability: null,
     is_promotion: null,
-    is_discount: null,
     is_new: null,
   });
   const [products, setProducts] = useState<any[]>([]);
@@ -104,7 +102,6 @@ export default function Catalog({
           },
           availability: { $eq: topFilters.availability },
           is_new: { $eq: topFilters.is_new },
-          is_discount: { $eq: topFilters.is_discount },
           is_promotion: { $eq: topFilters.is_promotion },
           colors: {
             color: {
@@ -253,7 +250,6 @@ export default function Catalog({
     setPickedDeviceTypes([]);
     setTopFilters({
       availability: null,
-      is_discount: null,
       is_new: null,
       is_promotion: null,
     });
@@ -307,7 +303,6 @@ export default function Catalog({
               setTopFilters((prev) => ({
                 ...prev,
                 is_new: prev.is_new === null ? true : !prev.is_new,
-                is_discount: false,
                 is_promotion: false,
               }))
             }
@@ -316,29 +311,9 @@ export default function Catalog({
           </button>
           <button
             className={classNames(
-              "px-[16px] py-[8px] rounded-[4px] text-white hover:bg-main2 transition-colors duration-300 bg-bg-green cursor-pointer",
+              "px-[16px] py-[8px] rounded-[4px] text-white  hover:bg-main2 transition-colors duration-300 cursor-pointer",
               {
-                "bg-bg-green": !topFilters.is_discount,
-                "bg-main2 text-white": topFilters.is_discount,
-              }
-            )}
-            onClick={() =>
-              setTopFilters((prev) => ({
-                ...prev,
-                is_discount:
-                  prev.is_discount === null ? true : !prev.is_discount,
-                is_new: false,
-                is_promotion: false,
-              }))
-            }
-          >
-            Скидки
-          </button>
-          <button
-            className={classNames(
-              "px-[16px] py-[8px] rounded-[4px] text-white bg-bg-orange hover:bg-main2 transition-colors duration-300 cursor-pointer",
-              {
-                "bg-bg-orange": !topFilters.is_promotion,
+                "bg-red-like": !topFilters.is_promotion,
                 "bg-main2 text-white": topFilters.is_promotion,
               }
             )}
@@ -347,7 +322,6 @@ export default function Catalog({
                 ...prev,
                 is_promotion:
                   prev.is_promotion === null ? true : !prev.is_promotion,
-                is_discount: false,
                 is_new: false,
               }))
             }

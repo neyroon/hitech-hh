@@ -1,4 +1,4 @@
-export const WhatsappFooterIcon = () => {
+export const WhatsappFooterIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       width="40"
@@ -6,6 +6,7 @@ export const WhatsappFooterIcon = () => {
       viewBox="0 0 40 41"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <rect y="0.200195" width="40" height="40" rx="20" fill="black" />
       <path

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { LogoIcon } from "../icons/logo";
-import { RutubeFooterIcon } from "../icons/rutube-footer";
 import { TgFooterIcon } from "../icons/tg-footer";
+import { TTIcon } from "../icons/tt";
 import { VkFooterIcon } from "../icons/vk-footer";
 import { WhatsappFooterIcon } from "../icons/whatsapp-footer";
 import { YoutubeFooterIcon } from "../icons/youtube-footer";
@@ -12,7 +12,7 @@ export const Footer = () => {
     { text: "Статьи", link: "/articles" },
     { text: "О компании", link: "/about" },
     { text: "Доставка и оплата", link: "/delivery" },
-    { text: "Гарантия и сервисные центры", link: "/warranty" },
+    { text: "Условия гарантии", link: "/warranty" },
   ];
   const catalogItems = [
     { text: "Пылесосы", link: "/" },
@@ -56,26 +56,25 @@ export const Footer = () => {
           <p>Контакты</p>
           <div>
             <div className="flex justify-between mb-[10px]">
-              <Link href="tel:+79811895734">+7 (981) 189-57-34</Link>
-              <span>вт-вс 11:00-20:00</span>
+              <span>Пн-Вс с 9:00 до 21:00</span>
             </div>
             <Link href="mailto:hitech.comp@mail.ru">hitech.comp@mail.ru</Link>
           </div>
           <div className="flex gap-[10px]">
-            <Link href="vk">
-              <VkFooterIcon />
-            </Link>
-            <Link href="tg">
+            <Link href="https://t.me/+79811895734">
               <TgFooterIcon />
             </Link>
-            <Link href="whatsapp">
-              <WhatsappFooterIcon />
+            <Link href="https://vk.com/hitech_hh">
+              <VkFooterIcon />
             </Link>
-            <Link href="yt">
+            <Link href="https://gclnk.com/ZkM4pMWG">
+              <TTIcon />
+            </Link>
+            <Link href="https://gclnk.com/jctxufUT">
               <YoutubeFooterIcon />
             </Link>
-            <Link href="rutube">
-              <RutubeFooterIcon />
+            <Link href="https://wa.me/79811895734">
+              <WhatsappFooterIcon />
             </Link>
           </div>
         </div>

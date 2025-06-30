@@ -2,46 +2,47 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PayReceiptIcon } from "@/components/icons/pay-receipt";
 import { PaySiteIcon } from "@/components/icons/pay-site";
 import { Section } from "@/components/section";
+import { isMobileDevice } from "@/utils/is-mobile";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Delivery() {
+export default async function Delivery() {
+  const isMobile = await isMobileDevice();
+
   const cardItems = [
     {
-      title: (
-        <>
-          Клиент <br />
-          оформляет заказ
-        </>
-      ),
-      description: "Выбирает товар и удобный способ доставки прямо на сайте",
-    },
-    {
-      title: "Мы передаём посылку в службу доставки",
+      title: <>Оформление заказа</>,
       description:
-        "Отвозим в пункт выдачи CDEK, Почты России, 5Post, DPD, Boxberry или вызываем курьера",
+        "Вы выбираете нужный товар и оформляете заказ на сайте — это займёт всего пару минут.",
     },
     {
-      title: "Клиент получает заказ удобным способом",
+      title: "Подготовка и отправка",
+      description:
+        "Мы упаковываем заказ и передаём его в выбранную вами службу доставки: CDEK, Почта России, 5Post, DPD или Boxberry.",
+    },
+    {
+      title: "Доставка заказа",
       description: [
-        "Курьером до двери – привезут на дом",
-        "В пункте выдачи – можно забрать в CDEK, 5Post, DPD, Boxberry или Почте России.",
-        "Экспресс-доставка – для тех, кому нужно срочно",
+        "Курьерская доставка — привезут прямо к двери.",
+        "Самовывоз — можно забрать в ближайшем пункте выдачи.",
+        "Экспресс-доставка — если заказ нужен в кратчайшие сроки.",
       ],
     },
   ];
 
   const payItems = [
     {
-      title: "На сайте",
-      description: ["Банковские карты", "QR кодом", "MIR PAY"],
+      title: "Онлайн на сайте",
+      subtitle: "Оплатите заказ любым удобным способом:",
+      description: ["Банковской картой", "Через QR-код", "С помощью Mir Pay"],
       icon: <PaySiteIcon />,
     },
     {
       title: "При получении",
+      subtitle: "Вы можете оплатить заказ при получении:",
       description: [
-        "Наличными или картой в пунктах выдачи CDEK, 5Post, Boxberry, Почта России, DPD",
-        "Курьеру при доставке (наличными или картой)",
+        "Курьеру — наличными или картой",
+        "В пункте выдачи (CDEK, 5Post, Boxberry, DPD, Почта России) — наличными или картой",
       ],
       icon: <PayReceiptIcon />,
     },
@@ -51,8 +52,8 @@ export default function Delivery() {
     <>
       <Breadcrumbs items={[{ text: "Доставка и оплата" }]} />
       <Section className="pt-[30px] pb-[50px] lg:py-[50px] bg-bg-grey">
-        <div className="bg-main2 px-[20px] lg:px-[60px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px]">
-          <div className="flex flex-col gap-[20px] pt-[60px] pb-[20px] lg:py-[60px] lg:max-w-[681px]">
+        <div className="gradient-blue-2  lg:px-[60px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px]">
+          <div className="flex flex-col px-[20px] gap-[20px] pt-[60px] pb-[20px] lg:py-[60px] lg:max-w-[681px]">
             <h1 className="font-medium lg:font-semibold text-[22px] lg:text-[32px]">
               Доставка и оплата
             </h1>
@@ -65,17 +66,17 @@ export default function Delivery() {
             </Link>
           </div>
           <Image
-            src="/delivery.png"
-            width={464}
-            height={292}
+            src={isMobile ? "/delivery-mobile.png" : "/delivery.png"}
+            width={606}
+            height={449}
             alt="Доставка"
-            className="w-[295px] h-[175px] lg:w-[464px] lg:h-[292px] object-cover lg:mr-[97px]  self-center lg:self-auto"
+            className="w-auto h-[330px] lg:w-[606px] lg:h-[292px] object-cover lg:mr-[78px]  self-center lg:self-auto"
           />
         </div>
       </Section>
       <Section className="py-[50px] lg:py-[60px] bg-bg-grey">
         <h2 className="text-[24px] font-semibold mb-[40px]">
-          Как работает доставка
+          Как проходит доставка: шаг за шагом
         </h2>
         <div className="flex gap-[10px] flex-col lg:flex-row">
           {cardItems.map((item) => (
@@ -87,13 +88,16 @@ export default function Delivery() {
                 {item.title}
               </p>
               {Array.isArray(item.description) ? (
-                <ul className="list-disc">
-                  {item.description.map((desc) => (
-                    <li key={desc} className="ml-[15px] lg:ml-[20px]">
-                      {desc}
-                    </li>
-                  ))}
-                </ul>
+                <>
+                  Вы можете получить заказ одним из следующих способов:
+                  <ul className="list-disc">
+                    {item.description.map((desc) => (
+                      <li key={desc} className="ml-[15px] lg:ml-[20px]">
+                        {desc}
+                      </li>
+                    ))}
+                  </ul>
+                </>
               ) : (
                 <p>{item.description}</p>
               )}
@@ -109,7 +113,9 @@ export default function Delivery() {
         </div>
       </Section>
       <Section className="py-[50px] lg:py-[60px] bg-bg-grey">
-        <h2 className="text-[24px] font-semibold mb-[40px]">Способ оплаты</h2>
+        <h2 className="text-[24px] font-semibold mb-[40px]">
+          Как можно оплатить заказ
+        </h2>
         <div className="flex gap-[10px] flex-col lg:flex-row ">
           {payItems.map((item) => (
             <div
@@ -120,6 +126,7 @@ export default function Delivery() {
                 <p className="text-[16px] lg:text-[18px] font-medium lg:font-semibold mb-[10px]">
                   {item.title}
                 </p>
+                {item.subtitle}
                 <ul className="list-disc text-[10px] lg:text-[14px]">
                   {item.description.map((desc) => (
                     <li key={desc} className="ml-[15px] lg:ml-[20px]">

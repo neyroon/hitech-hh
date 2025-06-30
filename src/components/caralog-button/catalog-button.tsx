@@ -81,7 +81,7 @@ export const CatalogButton = ({ categories }: { categories: any }) => {
                     width={40}
                     height={40}
                     alt="Изображение категории"
-                    className="w-[40px] h-[40px]"
+                    className="w-[40px] h-[40px] object-contain"
                   />
                   <span className="text-black text-left">{category.name}</span>
                 </div>

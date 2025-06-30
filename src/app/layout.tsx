@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import { Montserrat, Roboto } from "next/font/google";
+import { BannerTop } from "@/components/banner-top";
 import { CartProvider } from "@/components/context/cart";
-import Link from "next/link";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import type { Metadata } from "next";
+import { Montserrat, Roboto } from "next/font/google";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Выберите бытовую технику для дома и бизнеса",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 const montserattSans = Montserrat({
-  weight: ["600", "400", "500", "300"],
+  weight: ["700", "600", "400", "500", "300"],
   variable: "--font-montserrat-sans",
   subsets: ["cyrillic", "latin"],
 });
@@ -39,6 +39,7 @@ export default function RootLayout({
       <body
         className={`${montserattSans.variable} ${RobotoSans.variable} antialiased pb-[75px] lg:pb-0`}
       >
+        <BannerTop />
         <CartProvider>
           <Header />
           <main className="min-h-[246px] lg:min-h-[512px]">{children}</main>

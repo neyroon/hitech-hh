@@ -1,4 +1,10 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { TgFooterIcon } from "@/components/icons/tg-footer";
+import { TTIcon } from "@/components/icons/tt";
+import { VkFooterIcon } from "@/components/icons/vk-footer";
+import { WhatsappFooterIcon } from "@/components/icons/whatsapp-footer";
+import { YoutubeFooterIcon } from "@/components/icons/youtube-footer";
+import { Partners } from "@/components/partners";
 import { Reviews } from "@/components/reviews";
 import { Section } from "@/components/section";
 import { fetchFromServer } from "@/utils/fetch";
@@ -9,82 +15,96 @@ import Link from "next/link";
 export default async function About() {
   const cardItems = [
     {
-      title: "Как всё началось: решение, которого не было",
+      title: "Как все начиналось",
       description: (
         <>
-          В 1995 году инженер и автолюбитель{" "}
-          <span className="font-semibold">Марк Шульц</span> столкнулся с
-          проблемой — поддерживать чистоту в машине было неудобно. Обычные
-          пылесосы были громоздкими, слабомощными или требовали розетки. Тогда
-          он решил создать{" "}
-          <span className="font-semibold">
-            компактный, но мощный автомобильный пылесос
-          </span>
-          , который работал от прикуривателя. Это устройство стало настоящим
-          <span className="font-semibold">хитом</span>, и так родился бренд{" "}
-          <span className="font-semibold">HiTech</span>.
+          История HITECH (изначально SAFERET) началась почти 10 лет назад.
+          Основатели бренда, Артем и Юля, арендовали небольшой офис площадью 10
+          квадратных метров. Первыми товарами стали автомобильные пылесосы —
+          всего 50 штук. Этот скромный старт стал основой для бурного роста
+          компании. Чтобы продолжить развитие и расширить ассортимент, Артем не
+          побоялся сделать смелый шаг — продал свой автомобиль и вложил все
+          средства в будущее бренда.
         </>
       ),
     },
     {
-      title: "Из авто в дом: технологии, которые завоевали доверие",
+      title: "Рост и развитие",
       description: (
         <>
-          После успеха автомобильных моделей{" "}
-          <span className="font-semibold">в 2000 году</span> HiTech расширил
-          линейку и выпустил{" "}
-          <span className="font-semibold">пылесосы для дома</span>. Их ключевой
-          особенностью стали <span className="font-semibold">HEPA-фильтры</span>
-          , задерживающие 99,9% пыли и аллергенов. Это сделало технику
-          незаменимой для семей и людей с аллергией.
+          Автомобильные пылесосы быстро завоевали популярность и позволили
+          HITECH занять лидирующие позиции в своей категории. Однако со временем
+          конкуренция обострилась: на рынке были игроки, желающие вытеснить
+          перспективного новичка. Вместо борьбы демпингом Артем и Юля приняли
+          стратегическое решение — сменить вектор развития и сфокусироваться на
+          инновационных продуктах, которых еще не было на рынке. Так появились
+          флагманские модели: вертикальные сенсорные пылесосы с 8 режимами
+          работы и аккумулятором на 60 минут, моющие пылесосы для мебели и
+          полов, а также другие передовые устройства. Это позволило не просто
+          удержаться бренду на рынке, но и выйти в новые ниши.
         </>
       ),
     },
     {
-      title: "Прорыв: робот-пылесос, который изменил уборку",
+      title: "Философия бренда",
       description: (
         <>
-          В <span className="font-semibold">2005 году</span>HiTech представил
-          первый <span className="font-semibold">робот-пылесос</span>. Он не
-          просто убирал автоматически, а{" "}
-          <span className="font-semibold">запоминал планировку</span>,
-          оптимизировал маршрут и подстраивался под покрытия. Это стало
-          революцией в уборке.
+          <p>
+            Артем и Юля выбирают лучшие идеи в сфере бытовой техники, адаптируют
+            их под запросы рынка и предлагают покупателям стильные, удобные и
+            функциональные устройства.
+          </p>
+          <br />
+          <p>Основные принципы:</p>
+          <ul className="list-disc ml-[20px]">
+            <li>Качественная техника по доступным ценам.</li>
+            <li>Современный минималистичный дизайн. </li>
+            <li>Простота использования и надежность.</li>
+            <li>Быстрая доставка через маркетплейсы и собственный сайт.</li>
+          </ul>
         </>
       ),
     },
     {
-      title: "Больше, чем уборка: расширение ассортимента",
+      title: "Маскот бренда — Хайтеша",
       description: (
         <>
-          <span className="font-semibold">2010</span> – запуск{" "}
-          <span className="font-semibold">кофемашин</span> с точной настройкой
-          крепости и температуры. <br />
-          <span className="font-semibold">
-            2015 – пылесосы с влажной уборкой
-          </span>
-          , которые одновременно собирали пыль и мыли пол. <br />
-          <span className="font-semibold">
-            2018 – пылесосы для химчистки мебели
-          </span>
-          , справляющиеся с любыми загрязнениями
+          <p>
+            Наш цифровой помощник — это обаятельный и умный робот Хайтеша. Он
+            обожает наводить порядок, тестировать новые рецепты и делиться
+            лайфхаками, как упростить быт с помощью техники. Хайтеша говорит
+            просто о сложном, помогает лучше понимать возможности устройств и
+            делает общение с брендом живым и дружелюбным.
+          </p>
         </>
       ),
     },
     {
-      title: "HiTech сегодня: инновации без границ",
+      title: "Будущее и цели",
       description: (
         <>
-          К <span className="font-semibold">2025</span> году HiTech стал одним
-          из <span className="font-semibold">лидеров рынка Европы и Азии</span>.
-          Компания делает ставку на{" "}
-          <span className="font-semibold">
-            экологичность, энергоэффективность и умные технологии
-          </span>
-          . Последний прорыв –{" "}
-          <span className="font-semibold">&quot;умная кухня&quot;</span>, где
-          вся техника объединена в единую экосистему и управляется голосом или
-          приложением.
+          <p>
+            HITECH активно развивается и строит планы на будущее. В ближайшее
+            время планируется:
+          </p>
+          <br />
+          <ul className="list-disc ml-[15px]">
+            <li>
+              Открытие флагманских магазинов, где клиенты смогут протестировать
+              технику.
+            </li>
+            <li>Расширение ассортимента новыми инновационными продуктами.</li>
+            <li>
+              Поддержка собственного сайта и активное продвижение в соцсетях.
+            </li>
+            <li>Укрепление позиций на рынке и выход в новые регионы России.</li>
+          </ul>
+          <br />
+          <p>
+            Мы уверены, что процессы уборки и приготовления еду могут быть
+            легкими и приятными. HITECH делает технологии доступными, а
+            повседневные заботы — проще!
+          </p>
         </>
       ),
     },
@@ -94,33 +114,39 @@ export default async function About() {
     "https://feedbacks-api.wildberries.ru/api/v1/feedbacks",
     {
       isAnswered: true,
-      take: 70,
+      take: 100,
       skip: 0,
     },
     { headers: { Authorization: process.env.NEXT_PUBLIC_WB_TOKEN } }
   );
   const reviewsWithFilter = reviews.data.feedbacks.filter(
-    (feedback) => feedback.pros && feedback.cons && feedback.photoLinks
+    (feedback) =>
+      feedback.pros &&
+      feedback.cons &&
+      feedback.photoLinks &&
+      feedback.productValuation === 5
   );
-
+  console.log(reviews.data.feedbacks);
   const isMobile = await isMobileDevice();
 
   return (
     <>
       <Breadcrumbs items={[{ text: "О компании" }]} />
       <Section className="pt-[30px] pb-[50px] bg-bg-grey">
-        <div className="bg-main2 px-[20px] lg:px-[60px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px]">
+        <div className="gradient-blue-2 overflow-hidden relative px-[20px] lg:px-[60px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px]">
           <div className="flex flex-col gap-[20px] pt-[50px] pb-[10px] lg:py-[60px] lg:max-w-[632px]">
             <h1 className="font-medium lg:font-semibold text-[22px] lg:text-[24px]">
               О компании
             </h1>
             <p className="text-[18px] lg:text-[22px] font-medium ">
-              HiTech — техника, которая освобождает ваше время
+              Техника, на которую не надо работать — она работает на вас.
             </p>
             <p className="text-[16px] ">
-              Мы производим умную бытовую технику для дома и бизнеса: пылесосы,
-              отпариватели, кофемашины, аэрогрили и многое другое. HiTech берет
-              рутину на себя, чтобы у вас было больше времени на важное.
+              HITECH — это история о том, как из крошечного офиса вырос бренд,
+              который сегодня помогает тысячам людей делать уборку и готовку
+              проще. Мы создаём технику, которая сочетает в себе передовые
+              технологии, стиль и доступность — чтобы каждый мог позволить себе
+              комфортный быт.
             </p>
             <Link
               href="/catalog"
@@ -130,11 +156,11 @@ export default async function About() {
             </Link>
           </div>
           <Image
-            src="/about.png"
-            width={399}
-            height={358}
-            alt="Гарантия"
-            className="w-[335px] h-[300px] lg:w-[399px] lg:h-[358px] object-cover  self-center lg:self-auto"
+            src={isMobile ? "/about-mobile.png" : "/about.png"}
+            width={800}
+            height={557}
+            alt="Изображение"
+            className=" self-center mt-[-50%] lg:mt-0 lg:absolute bottom-0 lg:right-[-200px] xl:right-0 lg:self-auto"
           />
         </div>
       </Section>
@@ -143,8 +169,9 @@ export default async function About() {
           История компании
         </h2>
         <p className="text-[12px] lg:text-[18px] mb-[40px]">
-          История бренда HiTech: как идея одного человека изменила миллионы
-          домов
+          HITECH — это стремительно развивающийся российский бренд бытовой
+          техники, который завоевал доверие и любовь клиентов благодаря своему
+          качеству за разумную стоимость.
         </p>
         <div className="flex flex-col lg:flex-row gap-[40px]">
           <div className="flex flex-col gap-[20px]">
@@ -164,13 +191,9 @@ export default async function About() {
             <div className="lg:sticky lg:top-[103px] lg:pt-[20px]">
               <p className="text-[18px] font-semibold mb-[20px]">Наша миссия</p>
               <p className="text-[18px]">
-                Мы создаём технику,{" "}
-                <span className="font-semibold">
-                  которая освобождает вас от рутины и даёт больше свободы для
-                  жизни
-                </span>
-                . С HiTech вы забываете о сложностях быта и делаете только то,
-                что приносит удовольствие.
+                Мы стремимся к тому, чтобы каждая семья могла позволить себе
+                качественную и инновационную бытовую технику. <br /> Мы создаём
+                решения, которые экономят время, силы и делают быт легче.
               </p>
             </div>
           </div>
@@ -185,21 +208,46 @@ export default async function About() {
         </div>
         <Reviews reviews={reviewsWithFilter} isMobile={isMobile} />
       </Section>
-      <Section className="py-[50px] ">
+      <Section className="py-[50px] lg:py-[100px] bg-bg-grey">
+        <h2 className="text-[24px] font-semibold mb-[50px]">
+          Наши официальные партнеры
+        </h2>
+        <Partners />
+      </Section>
+      <Section className="py-[50px] lg:py-[100px] ">
         <div className="flex flex-col lg:flex-row gap-[40px] justify-between">
           <div>
             <h2 className="text-[22px] lg:text-[24px] font-medium lg:font-semibold mb-[40px]">
               Контакты
             </h2>
-            <p className="text-[18px] mb-[20px]">Адрес: г. Москва </p>
-            <p className="text-[18px] mb-[20px]">+7 (981) 189-57-34</p>
-            <p className="text-[18px] mb-[40px]">вт-вс 11:00-20:00</p>
+            <p className="text-[18px] mb-[20px]">
+              Адрес: Санкт-Петербург, Обводный канал 199-201
+            </p>
+            <p className="text-[18px] mb-[20px]">Пн-Вс с 9:00 до 21:00</p>
+
             <Link
-              href="tel:+79811895734"
-              className="bg-bg-red flex justify-center items-center w-[213px] h-[45px] rounded-[4px] text-white text-[18px] font-medium transition-colors duration-300 hover:bg-main2"
+              href="mailto:hitech.comp@mail.ru"
+              className="text-[18px]  mb-[40px] underline"
             >
-              Связаться
+              hitech.comp@mail.ru
             </Link>
+            <div className="flex mt-[20px] items-center gap-[10px]">
+              <Link href="https://t.me/HH_HITECH">
+                <TgFooterIcon />
+              </Link>
+              <Link href="https://wa.me/79811895734">
+                <WhatsappFooterIcon />
+              </Link>
+              <Link href="https://vk.com/hitech_hh">
+                <VkFooterIcon />
+              </Link>
+              <Link href="https://gclnk.com/ZkM4pMWG">
+                <TTIcon />
+              </Link>
+              <Link href="https://gclnk.com/jctxufUT">
+                <YoutubeFooterIcon />
+              </Link>
+            </div>
           </div>
 
           <iframe

@@ -6,6 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { LogoIcon } from "../icons/logo";
+import { TgFooterIcon } from "../icons/tg-footer";
+import { WhatsappFooterIcon } from "../icons/whatsapp-footer";
 import { SearchBar } from "../search-bar";
 
 export const HeaderMobile = ({ categories }: { categories: any }) => {
@@ -113,16 +115,22 @@ export const HeaderMobile = ({ categories }: { categories: any }) => {
                 Доставка и оплата
               </Link>
               <Link href="/warranty" className="text-[16px] text-grey">
-                Гарантия и сервисные центры
+                Условия гарантии
               </Link>
             </nav>
-            <div className="flex flex-col gap-[10px]">
-              <Link href="tel:+79811895734" className="text-grey">
-                +7 (981) 189-57-34
-              </Link>
-              <Link href="mailto:hitech.comp@mail.ru" className="text-grey">
+            <div className="flex flex-col gap-[20px] text-[18px]">
+              Пн-Вс с 9:00 до 21:00
+              <Link href="mailto:hitech.comp@mail.ru" className=" underline">
                 hitech.comp@mail.ru
               </Link>
+              <div className="flex items-center gap-[10px]">
+                <Link href="https://t.me/@HELP_Saferet">
+                  <TgFooterIcon className="w-[40px] h-[40px]" />
+                </Link>
+                <Link href="https://wa.me/79811895734">
+                  <WhatsappFooterIcon className="w-[40px] h-[40px]" />
+                </Link>
+              </div>
             </div>
           </>
         )}

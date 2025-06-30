@@ -61,7 +61,7 @@ export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
                   </div>
                 )}
                 {product.is_hit && (
-                  <div className="py-[3px] px-[5px] rounded-[2px] bg-bg-green text-white absolute top-[10px] right-[10px]">
+                  <div className="py-[3px] px-[5px] rounded-[2px] bg-red-like text-white absolute top-[10px] right-[10px]">
                     Хит продаж
                   </div>
                 )}

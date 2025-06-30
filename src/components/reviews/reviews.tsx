@@ -37,7 +37,7 @@ export const Reviews = ({
         slidesPerView={1.3}
         direction="horizontal"
         speed={700}
-        breakpoints={{ 1024: { slidesPerView: 2 } }}
+        breakpoints={{ 1024: { slidesPerView: 3 } }}
         ref={swiperRef}
         className=""
       >

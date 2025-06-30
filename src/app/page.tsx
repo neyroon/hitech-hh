@@ -27,13 +27,17 @@ export default async function Home() {
     "https://feedbacks-api.wildberries.ru/api/v1/feedbacks",
     {
       isAnswered: true,
-      take: 70,
+      take: 100,
       skip: 0,
     },
     { headers: { Authorization: process.env.NEXT_PUBLIC_WB_TOKEN } }
   );
   const reviewsWithFilter = reviews.data.feedbacks.filter(
-    (feedback) => feedback.pros && feedback.cons && feedback.photoLinks
+    (feedback) =>
+      feedback.pros &&
+      feedback.cons &&
+      feedback.photoLinks &&
+      feedback.productValuation === 5
   );
   const situations = await fetchAPI(
     `/situations?populate[device_types][populate]=*&populate[image][populate]=*&populate[category][populate]=*`
@@ -44,10 +48,10 @@ export default async function Home() {
     <>
       <Section className="[&>div]:px-0 pt-[20px] pb-[50px] lg:py-[80px] bg-bg-grey">
         <div className="flex flex-col lg:flex-row gap-[20px]">
-          <div className="bg-main2 px-[20px] pt-[40px] pb-0 lg:p-[30px] lg:pr-0 lg:min-h-[366px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px] relative w-full lg:w-[calc(61%-10px)]">
-            <div className="flex flex-col  gap-[20px]">
+          <div className="bg-main2 gradient-blue-mobile lg:min-h-[366px] flex flex-col justify-between gap-[20px] lg:flex-row text-white rounded-[10px] relative w-full lg:w-[calc(61%-10px)]">
+            <div className="flex flex-col  gap-[20px] px-[20px] pt-[40px] pb-0 lg:p-[30px] lg:pr-0">
               <h1 className="font-semibold text-[24px] lg:text-[32px]">
-                Производитель <br /> бытовой техники Hitech
+                Производитель <br /> бытовой техники HITECH
               </h1>
               <p className="text-[16px] mb-[30px]">
                 Выберите бытовую технику <br />
@@ -62,16 +66,16 @@ export default async function Home() {
               </Link>
             </div>
             <Image
-              src="/main-banner.png"
+              src={isMobile ? "/main-banner-mobile.png" : "/main-banner.png"}
               width={409}
-              height={264}
+              height={336}
               priority
-              alt="Гарантия"
-              className="w-full h-[248px] mt-[20px] lg:mt-0 relative lg:top-[27px] lg:w-[278px] lg:h-[264px] object-contain  self-center lg:self-auto"
+              alt="изображение"
+              className="w-full h-auto mt-[-20px] lg:mt-0 relative lg:absolute lg:right-0 lg:bottom-0  lg:w-[409px] lg:h-[336px] object-cover  self-center lg:self-auto"
             />
           </div>
           <div className="lg:w-[calc(39%-10px)] p-[30px] bg-white rounded-[10px] relative">
-            <h2 className="text-[18px] font-semibold mb-[30px]">Товары дня</h2>
+            <h2 className="text-[18px] font-semibold mb-[30px]">Новинки</h2>
             <ProductsOfDay productsOfDay={productsOfDay.data.products} />
           </div>
         </div>
@@ -111,17 +115,16 @@ export default async function Home() {
                       }${item.device_types
                         .map((item) => `&deviceTypes=${item.slug}`)
                         .join("")}`}
-                      className="bg-bg-grey rounded-[8px] flex  gap-[10px] p-[10px] lg:p-[20px] hover:shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] transition-shadow duration-300"
+                      className="gradient-blue relative overflow-hidden rounded-[8px] flex  gap-[10px] min-h-[143px] p-[10px] lg:p-[20px] hover:shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] transition-shadow duration-300"
                     >
-                      <Markdown className="grow text-[12px] lg:text-[14px]">
+                      <Markdown className="grow  z-10 [&_p_strong]:font-bold lg:text-[14px] text-white">
                         {item.name}
                       </Markdown>
                       <Image
                         src={getStrapiMedia(item.image.url)}
                         alt="Изображение ситуации"
-                        width={167}
-                        height={123}
-                        className="mt-[-20px] h-[80px] w-[108px] lg:h-[123px] object-contain lg:w-[167px]"
+                        fill
+                        className=" h-[80px] w-[108px] lg:h-[123px] object-contain lg:w-[167px]"
                       />
                     </Link>
                   );

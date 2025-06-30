@@ -10,11 +10,13 @@
   --color-whatsapp: #48c95f;
   --color-bg-email: #17152d;
   --color-bg-inst: #ee2a7b;
-  --color-bg-grey: #f9f9f9;
+  --color-bg-grey: #eee;
   --color-bg-green: #00a43d;
   --color-bg-red: #dc1b26;
   --color-bg-orange: #ff8000;
   --color-bg-purple: #a73afd;
+  --color-bg-blue: #005bff;
+  --color-bg-orange: #ff5226;
 }
 
 .double-slider-box {
@@ -108,4 +110,37 @@ p {
   height: 9px;
   border: none;
   opacity: 1;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.gradient-blue {
+  background: linear-gradient(152deg, #020a26 50.99%, #020b25 112.13%);
+}
+.gradient-blue-2 {
+  background: linear-gradient(134deg, #17152d 48.4%, #4b4593 128.84%), #17152d;
+}
+@media screen and (max-width: 1024px) {
+  .gradient-blue-mobile {
+    background: linear-gradient(174deg, #17152d 57.67%, #4b4593 108.98%),
+      #17152d;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .gradient-blue,
+  .gradient-blue-2 {
+    background: linear-gradient(174deg, #17152d 57.67%, #4b4593 108.98%);
+  }
+}
+
+.gradient-red {
+  background: linear-gradient(111deg, #ff3b30 51.32%, #cd2c23 104.9%);
 }
