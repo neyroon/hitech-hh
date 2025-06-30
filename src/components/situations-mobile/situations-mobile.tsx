@@ -21,7 +21,7 @@ export const SituationsMobile = ({ situations }: { situations: any }) => {
               src={getStrapiMedia(situation.image.url)}
               alt="Изображение ситуации"
               fill
-              className="h-[80px] w-[108px] lg:h-[123px] object-contain lg:w-[167px]"
+              className="h-[80px] w-[108px] lg:h-[123px] lg:w-[167px] object-cover"
             />
           </Link>
         </SwiperSlide>
