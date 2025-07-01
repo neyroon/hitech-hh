@@ -30,7 +30,6 @@ export const CheckoutBlock = ({ buyNow }: { buyNow: boolean }) => {
               price: product.price,
             })),
       });
-      widget.on("start", () => console.log("start"));
     }
   }, [isScriptReady]);
 

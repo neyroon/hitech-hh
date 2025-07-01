@@ -5,12 +5,13 @@ import { VkFooterIcon } from "@/components/icons/vk-footer";
 import { WhatsappFooterIcon } from "@/components/icons/whatsapp-footer";
 import { YoutubeFooterIcon } from "@/components/icons/youtube-footer";
 import { Partners } from "@/components/partners";
-import { Reviews } from "@/components/reviews";
+import { ReviewsFallback } from "@/components/reviews/skeleton";
+import { ReviewsSuspense } from "@/components/reviews/suspense";
 import { Section } from "@/components/section";
-import { fetchFromServer } from "@/utils/fetch";
 import { isMobileDevice } from "@/utils/is-mobile";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default async function About() {
   const cardItems = [
@@ -110,23 +111,6 @@ export default async function About() {
     },
   ];
 
-  const reviews = await fetchFromServer(
-    "https://feedbacks-api.wildberries.ru/api/v1/feedbacks",
-    {
-      isAnswered: true,
-      take: 100,
-      skip: 0,
-    },
-    { headers: { Authorization: process.env.NEXT_PUBLIC_WB_TOKEN } }
-  );
-  const reviewsWithFilter = reviews.data.feedbacks.filter(
-    (feedback) =>
-      feedback.pros &&
-      feedback.cons &&
-      feedback.photoLinks &&
-      feedback.productValuation === 5
-  );
-  console.log(reviews.data.feedbacks);
   const isMobile = await isMobileDevice();
 
   return (
@@ -183,7 +167,7 @@ export default async function About() {
                 <p className="mb-[20px] text-[18px] font-semibold">
                   {item.title}
                 </p>
-                <p className="text-[16px]">{item.description}</p>
+                <div className="text-[16px]">{item.description}</div>
               </div>
             ))}
           </div>
@@ -206,7 +190,9 @@ export default async function About() {
             Wildberries
           </div>
         </div>
-        <Reviews reviews={reviewsWithFilter} isMobile={isMobile} />
+        <Suspense fallback={<ReviewsFallback isMobile={isMobile} />}>
+          <ReviewsSuspense />
+        </Suspense>
       </Section>
       <Section className="py-[50px] lg:py-[100px] bg-bg-grey">
         <h2 className="text-[24px] font-semibold mb-[50px]">

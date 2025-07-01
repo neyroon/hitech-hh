@@ -70,7 +70,7 @@ export const CartBlock = () => {
                         <p>{product.title}</p>
                         {product.pickedColor?.color?.name && (
                           <p className="text-grey">
-                            Цвет: {product.pickedColor.color.name}
+                            Цвет: {product.pickedColor?.color?.name}
                           </p>
                         )}
                         <p className="text-grey">

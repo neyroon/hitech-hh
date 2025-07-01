@@ -56,7 +56,6 @@ export const Form = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    console.log(form.get("imageFile"));
     try {
       const res = await fetch("/callback", {
         method: "POST",

@@ -1,19 +1,21 @@
 import { ArticleWithSwiperHorizontal } from "@/components/article-card";
 import { ProductsHits } from "@/components/products-hits";
 import { ProductsOfDay } from "@/components/products-of-day";
-import { Reviews } from "@/components/reviews";
+import { ReviewsFallback } from "@/components/reviews/skeleton";
+import { ReviewsSuspense } from "@/components/reviews/suspense";
 import { Section } from "@/components/section";
 import { SituationsMobile } from "@/components/situations-mobile";
-import { fetchFromServer } from "@/utils/fetch";
 import { isMobileDevice } from "@/utils/is-mobile";
 import { fetchAPI, getStrapiMedia } from "@/utils/strapi";
 import Markdown from "markdown-to-jsx";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import "swiper/css";
 
 export default async function Home() {
   const itemsCount = 10;
+
   const productsOfDay = await fetchAPI(
     `/products-day?populate[products][populate]=*`
   );
@@ -23,22 +25,7 @@ export default async function Home() {
   const articleItems = await fetchAPI(
     `/articles?populate=*&sort=updatedAt:desc&&pagination[page]=1&pagination[pageSize]=${itemsCount}`
   );
-  const reviews = await fetchFromServer(
-    "https://feedbacks-api.wildberries.ru/api/v1/feedbacks",
-    {
-      isAnswered: true,
-      take: 100,
-      skip: 0,
-    },
-    { headers: { Authorization: process.env.NEXT_PUBLIC_WB_TOKEN } }
-  );
-  const reviewsWithFilter = reviews.data.feedbacks.filter(
-    (feedback) =>
-      feedback.pros &&
-      feedback.cons &&
-      feedback.photoLinks &&
-      feedback.productValuation === 5
-  );
+
   const situations = await fetchAPI(
     `/situations?populate[device_types][populate]=*&populate[image][populate]=*&populate[category][populate]=*`
   );
@@ -141,7 +128,9 @@ export default async function Home() {
             Wildberries
           </div>
         </div>
-        <Reviews reviews={reviewsWithFilter} isMobile={isMobile} />
+        <Suspense fallback={<ReviewsFallback isMobile={isMobile} />}>
+          <ReviewsSuspense />
+        </Suspense>
       </Section>
       <Section className=" py-[50px] lg:py-[80px] ">
         <div className="flex flex-col lg:flex-row gap-[10px] justify-between lg:items-center mb-[50px]">

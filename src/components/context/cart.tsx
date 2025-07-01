@@ -174,13 +174,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       const product = prevCart.products.find(
         (item) =>
           item.documentId === documentId &&
-          item.pickedColor.color.slug === item.colors[colorIndex].color.slug
+          item.pickedColor?.color?.slug === item.colors[colorIndex]?.color?.slug
       );
       return {
         products: prevCart.products.filter(
           (item) =>
             item.documentId !== documentId &&
-            item.pickedColor.color.slug !== item.colors[colorIndex].color.slug
+            item.pickedColor?.color?.slug !==
+              item.colors[colorIndex]?.color?.slug
         ),
         totalPrice:
           prevCart.totalPrice -
@@ -201,12 +202,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       const product = prevCart.products.find(
         (item) =>
           item.documentId === documentId &&
-          item.pickedColor.color.slug === product.colors[colorIndex]?.color.slug
+          item.pickedColor?.color?.slug ===
+            product.colors[colorIndex]?.color?.slug
       );
       return {
         products: prevCart.products.map((item) =>
           item.documentId === documentId &&
-          item.pickedColor.color.slug === product.colors[colorIndex]?.color.slug
+          item.pickedColor?.color?.slug ===
+            product?.colors[colorIndex]?.color?.slug
             ? { ...item, quantity: item.quantity + 1 }
             : item
         ),
@@ -229,15 +232,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       const product = prevCart.products.find(
         (item) =>
           item.documentId === documentId &&
-          item.pickedColor.color.slug === product.colors[colorIndex]?.color.slug
+          item.pickedColor?.color?.slug ===
+            product?.colors[colorIndex]?.color?.slug
       );
       if (product.quantity === 1) return prevCart;
       return {
         products: prevCart.products
           .map((item) =>
             item.documentId === documentId &&
-            item.pickedColor.color.slug ===
-              product.colors[colorIndex]?.color.slug
+            item.pickedColor?.color?.slug ===
+              product.colors[colorIndex]?.color?.slug
               ? { ...item, quantity: item.quantity - 1 }
               : item
           )
