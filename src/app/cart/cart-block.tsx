@@ -64,7 +64,7 @@ export const CartBlock = () => {
                         width={88}
                         height={88}
                         alt="Изображение товара"
-                        className="w-[88px] h-[88px] object-contain"
+                        className="w-[88px] h-[88px] object-cover"
                       />
                       <div className="flex flex-col gap-[14px] lg:w-[383px]">
                         <p>{product.title}</p>

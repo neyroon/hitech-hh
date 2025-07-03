@@ -528,7 +528,7 @@ export default function Catalog({
                           width={300}
                           height={340}
                           alt="Изображение товара"
-                          className="w-full h-[340px] object-contain bg-white rounded-[8px]"
+                          className="w-full h-[340px] object-cover bg-white rounded-[8px]"
                         />
                         {product.is_promotion && (
                           <div className="py-[3px] px-[5px] rounded-[2px] bg-bg-orange text-white absolute top-[10px] right-[10px]">

@@ -50,7 +50,7 @@ export const ProductsOfDay = ({ productsOfDay }: { productsOfDay: any }) => {
                     src={getStrapiMedia(product.images[0]?.url)}
                     fill
                     alt="Изображение товара"
-                    className="object-contain"
+                    className="object-cover"
                   />
                 </Link>
                 {product.is_promotion && (

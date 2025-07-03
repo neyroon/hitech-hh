@@ -52,7 +52,7 @@ export const ProductsHits = ({ productsOfDay }: { productsOfDay: any }) => {
                     width={300}
                     height={340}
                     alt="Изображение товара"
-                    className="h-[340px] object-contain bg-white rounded-[8px]"
+                    className="h-[340px] object-cover bg-white rounded-[8px]"
                   />
                 </Link>
                 {product.is_promotion && (
