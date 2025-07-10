@@ -29,6 +29,7 @@ export default async function Product({
         certificates: { populate: "*" },
         instruction: { populate: "*" },
         promocodes: { populate: "*" },
+        marketplaces: { populate: "*" },
       },
     },
     {

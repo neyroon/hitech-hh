@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "feedback08.wbbasket.ru",
+        hostname: "**.wbbasket.ru",
         pathname: "/**",
       },
     ],

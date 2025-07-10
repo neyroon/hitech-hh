@@ -127,27 +127,41 @@ export const ProductBlock = ({
                 </button>
               </div>
             </div>
-            <div className="flex flex-col lg:flex-row gap-[14px] justify-between items-center">
-              <div className="w-full lg:w-[169px] h-[55px] bg-bg-purple rounded-[8px] flex items-center justify-center">
-                <Image
-                  src="/wb-logo.png"
-                  width={129}
-                  height={35}
-                  alt="Логотип WB"
-                />
-              </div>
-              <div className="flex gap-[20px] w-full lg:w-auto items-center">
-                <span className="text-[18px] text-bg-green">
-                  {formatPrice(product.wb_price)}
-                </span>
-                <Link
-                  href={product.wb_link}
-                  className="bg-white px-[20px] grow py-[8px] rounded-[4px] text-center"
+            {product.marketplaces.map((marketplace) => (
+              <div
+                key={marketplace.id}
+                className="flex flex-col lg:flex-row gap-[14px] justify-between items-center"
+              >
+                <div
+                  className={classNames(
+                    "w-full lg:w-[169px] h-[55px] bg-bg-purple rounded-[8px] flex items-center justify-center"
+                  )}
+                  style={
+                    marketplace.color
+                      ? { backgroundColor: marketplace.color.value }
+                      : {}
+                  }
                 >
-                  Купить
-                </Link>
+                  <Image
+                    src={getStrapiMedia(marketplace.image.url)}
+                    width={129}
+                    height={35}
+                    alt="Логотип WB"
+                  />
+                </div>
+                <div className="flex gap-[20px] w-full lg:w-auto items-center">
+                  <span className="text-[18px] text-bg-green">
+                    {formatPrice(marketplace.price)}
+                  </span>
+                  <Link
+                    href={marketplace.link}
+                    className="bg-white px-[20px] grow py-[8px] rounded-[4px] text-center"
+                  >
+                    Купить
+                  </Link>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
           <Description product={product} />
         </div>
