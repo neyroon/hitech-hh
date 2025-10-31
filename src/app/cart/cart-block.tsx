@@ -100,7 +100,8 @@ export const CartBlock = () => {
                             onClick={() =>
                               decreaseQuantity(
                                 product.documentId,
-                                product.pickedColor?.color?.slug
+                                product.pickedColor?.color?.slug,
+                                product
                               )
                             }
                             className="text-grey cursor-pointer"
@@ -114,7 +115,8 @@ export const CartBlock = () => {
                             onClick={() =>
                               increaseQuantity(
                                 product.documentId,
-                                product.pickedColor?.color?.slug
+                                product.pickedColor?.color?.slug,
+                                product
                               )
                             }
                             className="cursor-pointer"
