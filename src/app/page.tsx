@@ -1,8 +1,6 @@
 import { ArticleWithSwiperHorizontal } from "@/components/article-card";
 import { ProductsHits } from "@/components/products-hits";
 import { ProductsOfDay } from "@/components/products-of-day";
-import { ReviewsFallback } from "@/components/reviews/skeleton";
-import { ReviewsSuspense } from "@/components/reviews/suspense";
 import { Section } from "@/components/section";
 import { SituationsMobile } from "@/components/situations-mobile";
 import { isMobileDevice } from "@/utils/is-mobile";
@@ -10,7 +8,6 @@ import { fetchAPI, getStrapiMedia } from "@/utils/strapi";
 import Markdown from "markdown-to-jsx";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 import "swiper/css";
 
 export default async function Home() {
@@ -121,7 +118,7 @@ export default async function Home() {
           </>
         </div>
       </Section>
-      <Section className="py-[50px] lg:py-[80px] bg-bg-grey ">
+      {/* <Section className="py-[50px] lg:py-[80px] bg-bg-grey ">
         <div className="flex flex-wrap items-center gap-[10px] lg:gap-[20px] mb-[50px]">
           <h2 className="text-[24px] font-semibold">Отзывы покупателей</h2>
           <div className="text-white bg-bg-purple py-[8px] px-[12px] rounded-[3px]">
@@ -131,7 +128,7 @@ export default async function Home() {
         <Suspense fallback={<ReviewsFallback isMobile={isMobile} />}>
           <ReviewsSuspense />
         </Suspense>
-      </Section>
+      </Section> */}
       <Section className=" py-[50px] lg:py-[80px] ">
         <div className="flex flex-col lg:flex-row gap-[10px] justify-between lg:items-center mb-[50px]">
           <h2 className="text-[22px] lg:text-[24px] font-medium lg:font-semibold ">

@@ -5,13 +5,10 @@ import { VkFooterIcon } from "@/components/icons/vk-footer";
 import { WhatsappFooterIcon } from "@/components/icons/whatsapp-footer";
 import { YoutubeFooterIcon } from "@/components/icons/youtube-footer";
 import { Partners } from "@/components/partners";
-import { ReviewsFallback } from "@/components/reviews/skeleton";
-import { ReviewsSuspense } from "@/components/reviews/suspense";
 import { Section } from "@/components/section";
 import { isMobileDevice } from "@/utils/is-mobile";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 
 export default async function About() {
   const cardItems = [
@@ -183,7 +180,7 @@ export default async function About() {
           </div>
         </div>
       </Section>
-      <Section className="py-[50px] lg:py-[100px] bg-bg-grey">
+      {/* <Section className="py-[50px] lg:py-[100px] bg-bg-grey">
         <div className="flex flex-wrap items-center gap-[10px] lg:gap-[20px] mb-[50px]">
           <h2 className="text-[24px] font-semibold">Отзывы покупателей</h2>
           <div className="text-white bg-bg-purple py-[8px] px-[12px] rounded-[3px]">
@@ -193,7 +190,7 @@ export default async function About() {
         <Suspense fallback={<ReviewsFallback isMobile={isMobile} />}>
           <ReviewsSuspense />
         </Suspense>
-      </Section>
+      </Section> */}
       <Section className="py-[50px] lg:py-[100px] bg-bg-grey">
         <h2 className="text-[24px] font-semibold mb-[50px]">
           Наши официальные партнеры
