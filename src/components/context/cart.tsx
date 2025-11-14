@@ -182,7 +182,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           item.documentId === documentId &&
           item.pickedColor?.color?.slug === colorSlug
       );
-      console.log(product);
       return {
         products: prevCart.products.filter(
           (item) =>
@@ -192,7 +191,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         totalPrice:
           prevCart.totalPrice -
           (product?.colors?.find((colors) => {
-            console.log(colors, "colors");
             return colors.color.slug === colorSlug;
           })?.price || product.price),
         totalQuantity: prevCart.totalQuantity - product.quantity,
