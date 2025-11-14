@@ -97,13 +97,14 @@ export const CartBlock = () => {
                       <div className="flex items-center gap-[20px]">
                         <div className="px-[8px] lg:px-[14px] py-[6px] w-[124px] lg:w-[120px] lg:h-[50px] bg-bg-grey rounded-[8px] flex items-center justify-between ">
                           <button
-                            onClick={() =>
+                            onClick={() => {
+                              console.log(product.pickedColor, "pickedColor");
                               decreaseQuantity(
                                 product.documentId,
                                 product.pickedColor?.color?.slug,
                                 product
-                              )
-                            }
+                              );
+                            }}
                             className="text-grey cursor-pointer"
                           >
                             <MinusIcon />

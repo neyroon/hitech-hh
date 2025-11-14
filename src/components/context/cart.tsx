@@ -22,15 +22,15 @@ export interface CartContextType {
   cart: CartType;
   addToCart: (product: any, quantity: number, colorIndex?: number) => void;
   applyPromocode: (promocode: string) => void;
-  removeFromCart: (documentId: number, colorIndex: number) => void;
+  removeFromCart: (documentId: number, colorSlug: string) => void;
   increaseQuantity: (
     documentId: number,
-    colorIndex: number,
+    colorSlug: string,
     currentProduct: any
   ) => void;
   decreaseQuantity: (
     documentId: number,
-    colorIndex: number,
+    colorSlug: string,
     currentProduct: any
   ) => void;
   buyNow: (product: any, colorIndex?: number) => void;
@@ -49,9 +49,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    if (cart.totalPrice > 0 && cart.totalQuantity > 0) {
-      sessionStorage.setItem("cart", JSON.stringify(cart));
-    }
+    sessionStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   useEffect(() => {
@@ -177,28 +175,32 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Удаление товара из корзины по id
-  const removeFromCart = (documentId: number, colorIndex: number) => {
+  const removeFromCart = (documentId: number, colorSlug: string) => {
     setCart((prevCart) => {
       const product = prevCart.products.find(
         (item) =>
           item.documentId === documentId &&
-          item.pickedColor?.color?.slug === item.colors[colorIndex]?.color?.slug
+          item.pickedColor?.color?.slug === colorSlug
       );
+      console.log(product);
       return {
         products: prevCart.products.filter(
           (item) =>
             item.documentId !== documentId &&
-            item.pickedColor?.color?.slug !==
-              item.colors[colorIndex]?.color?.slug
+            item.pickedColor?.color?.slug !== colorSlug
         ),
         totalPrice:
           prevCart.totalPrice -
-          (product.colors[colorIndex]?.price || product.price),
+          (product?.colors?.find((colors) => {
+            console.log(colors, "colors");
+            return colors.color.slug === colorSlug;
+          })?.price || product.price),
         totalQuantity: prevCart.totalQuantity - product.quantity,
         totalPriceDiscount:
-          prevCart.totalPriceDiscount +
-          (product.colors[colorIndex]?.price_discount ||
-            product.price_discount ||
+          prevCart.totalPriceDiscount -
+          (product?.colors?.find((colors) => colors.color.slug === colorSlug)
+            ?.price_discount ||
+            product?.price_discount ||
             product.price),
       };
     });
@@ -207,31 +209,33 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // Увеличение количества товара в корзине
   const increaseQuantity = (
     documentId: number,
-    colorIndex: number,
+    colorSlug: string,
     currentProduct: any
   ) => {
     setCart((prevCart) => {
       const product = prevCart.products.find(
         (item) =>
           item.documentId === documentId &&
-          item.pickedColor?.color?.slug ===
-            currentProduct.colors[colorIndex]?.color?.slug
+          item.pickedColor?.color?.slug === colorSlug
       );
+      if (!product) return prevCart;
       return {
+        ...prevCart,
         products: prevCart.products.map((item) =>
           item.documentId === documentId &&
-          item.pickedColor?.color?.slug ===
-            product?.colors[colorIndex]?.color?.slug
+          item.pickedColor?.color?.slug === colorSlug
             ? { ...item, quantity: item.quantity + 1 }
             : item
         ),
         totalPrice:
           prevCart.totalPrice +
-          (product.colors[colorIndex]?.price || product.price),
+          (product.colors?.find((colors) => colors.color.slug === colorSlug)
+            ?.price || product.price),
         totalQuantity: prevCart.totalQuantity + 1,
         totalPriceDiscount:
           prevCart.totalPriceDiscount +
-          (product.colors[colorIndex]?.price_discount ||
+          (product.colors?.find((colors) => colors.color.slug === colorSlug)
+            ?.price_discount ||
             product.price_discount ||
             product.price),
       };
@@ -241,32 +245,38 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // Уменьшение количества товара в корзине, удаление если количество становится 0
   const decreaseQuantity = (
     documentId: number,
-    colorIndex: number,
+    colorSlug: string,
     currentProduct: any
   ) => {
     setCart((prevCart) => {
       const product = prevCart.products.find(
         (item) =>
           item.documentId === documentId &&
-          item.pickedColor?.color?.slug ===
-            currentProduct?.colors[colorIndex]?.color?.slug
+          item.pickedColor?.color?.slug === colorSlug
       );
-      if (product.quantity === 1) return prevCart;
+      if (!product) return prevCart;
       return {
+        ...prevCart,
         products: prevCart.products
           .map((item) =>
             item.documentId === documentId &&
-            item.pickedColor?.color?.slug ===
-              product.colors[colorIndex]?.color?.slug
+            item.pickedColor?.color?.slug === colorSlug
               ? { ...item, quantity: item.quantity - 1 }
               : item
           )
           .filter((item) => item.quantity > 0),
-        totalPrice: prevCart.totalPrice - product.price,
+        totalPrice:
+          prevCart.totalPrice -
+          (product.colors?.find((colors) => colors.color.slug === colorSlug)
+            ?.price || product.price),
         totalQuantity: prevCart.totalQuantity - 1,
         totalPriceDiscount:
-          prevCart.totalPriceDiscount +
-          (product.price_discount || product.price),
+          prevCart.totalPriceDiscount -
+          (product.colors?.find((colors) => colors.color.slug === colorSlug)
+            ?.price_discount ||
+            product.price_discount ||
+            product.price ||
+            0),
       };
     });
   };
