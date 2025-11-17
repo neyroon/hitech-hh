@@ -58,7 +58,7 @@ export default function RootLayout({
           <div>
             <img
               src="https://mc.yandex.ru/watch/105326975"
-              style="position:absolute; left:-9999px;"
+              style={{ position: "absolute", left: "-9999px" }}
               alt=""
             />
           </div>
