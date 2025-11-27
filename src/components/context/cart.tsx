@@ -49,15 +49,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    sessionStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  useEffect(() => {
     const sessionCart = sessionStorage.getItem("cart");
     if (sessionCart) {
       setCart(JSON.parse(sessionCart));
     }
   }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   // Добавление товара в корзину (увеличение количества, если товар уже есть)
   const addToCart = (
