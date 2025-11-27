@@ -14,11 +14,13 @@ export default async function Home() {
   const itemsCount = 10;
 
   const productsOfDay = await fetchAPI(
-    `/products-day?populate[products][populate]=*`
+    `/products-day?populate[0]=products.colors.color&populate[1]=products.images`
   );
+
   const productHits = await fetchAPI(
-    `/products?filters\[is_hit\][$eq]=true&populate=*&pagination[page]=1&pagination[pageSize]=${itemsCount}`
+    `/products?filters\[is_hit\][$eq]=true&populate[0]=colors.color&populate[1]=images&pagination[page]=1&pagination[pageSize]=${itemsCount}`
   );
+
   const articleItems = await fetchAPI(
     `/articles?populate=*&sort=updatedAt:desc&&pagination[page]=1&pagination[pageSize]=${itemsCount}`
   );

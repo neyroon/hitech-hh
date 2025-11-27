@@ -57,7 +57,7 @@ export default async function Product({
   ];
 
   const producSimilar = await fetchAPI(
-    `/products?filters\[category\]\[slug\][$eq]=${product.category.slug}&populate=*&pagination[page]=1&pagination[pageSize]=10`
+    `/products?filters\[category\]\[slug\][$eq]=${product.category.slug}&populate[0]=colors.color&populate[1]=images&pagination[page]=1&pagination[pageSize]=10`
   );
   // const reviews = product.wb_article
   //   ? await fetchFromServer(

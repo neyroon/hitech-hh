@@ -553,7 +553,7 @@ export default function Catalog({
                         <p className="mb-[14px]">{product.title}</p>
                       </Link>
 
-                      <ButtonsBuy product={product} />
+                      <ButtonsBuy product={product} selectedColorIndex={0} />
                     </div>
                   </div>
                 ))

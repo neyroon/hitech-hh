@@ -66,11 +66,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     colorIndex: number = 0
   ) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.products.find(
-        (item) =>
+      const existingItem = prevCart.products.find((item) => {
+        return (
           item.documentId === product.documentId &&
-          item.pickedColor === product.colors[colorIndex]
-      );
+          item.pickedColor.id === product.colors[colorIndex].id
+        );
+      });
       if (existingItem) {
         return {
           products: prevCart.products.map((item) =>
