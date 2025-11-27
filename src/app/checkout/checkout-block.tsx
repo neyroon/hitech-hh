@@ -11,9 +11,6 @@ export const CheckoutBlock = ({ buyNow }: { buyNow: boolean }) => {
     if (isScriptReady) {
       const widget = new SafeRouteCartWidget("saferoute-cart-widget", {
         apiScript: "/saferoute-widget-api.php",
-        discount: buyNow
-          ? cart.buyNowProduct.price_discount
-          : cart.totalPriceDiscount - cart.totalPrice,
         enableAcquiring: true,
         splitFullnameInput: true,
         products: buyNow
