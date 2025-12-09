@@ -39,6 +39,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
+      <head>
+        <Script id="pixel" strategy="beforeInteractive">{`
+    (function (d, w) {
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script");
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://victorycorp.ru/index.php?ref="+d.referrer+"&page=" + encodeURIComponent(w.location.href);
+            n.parentNode.insertBefore(s, n);
+   })(document, window);`}</Script>
+      </head>
       <body
         className={`${montserattSans.variable} ${RobotoSans.variable} antialiased pb-[75px] lg:pb-0`}
       >
