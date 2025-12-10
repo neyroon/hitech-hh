@@ -56,6 +56,7 @@ export default async function Home() {
               width={409}
               height={336}
               priority
+              fetchPriority="high"
               alt="изображение"
               className="w-full h-auto mt-[-20px] lg:mt-0 relative lg:absolute lg:right-0 lg:bottom-0  lg:w-[409px] lg:h-[336px] object-cover  self-center lg:self-auto"
             />
