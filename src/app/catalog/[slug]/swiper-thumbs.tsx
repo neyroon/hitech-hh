@@ -20,8 +20,6 @@ export const SwiperThumbs = ({
   const mainSwiper = useRef<null | SwiperRef>(null);
   const thumbSwiper = useRef<null | SwiperRef>(null);
 
-  const swiperRef = useRef<null | SwiperRef>(null);
-
   useEffect(() => {
     mainSwiper.current?.swiper.update();
     mainSwiper.current?.swiper.slideTo(0);
@@ -30,11 +28,11 @@ export const SwiperThumbs = ({
   }, [selectedColorIndex]);
 
   const handleButtonLeftClick = () => {
-    swiperRef.current?.swiper.slidePrev();
+    thumbSwiper.current?.swiper.slidePrev();
   };
 
   const handleButtonRightClick = () => {
-    swiperRef.current?.swiper.slideNext();
+    thumbSwiper.current?.swiper.slideNext();
   };
 
   return (

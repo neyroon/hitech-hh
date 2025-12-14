@@ -14,6 +14,8 @@ export const BannerTop = async () => {
           alt="изображение"
           width={544}
           height={108}
+          loading="eager"
+          fetchPriority="high"
           className="w-[110px] lg:w-[17%] absolute left-0 lg:left-auto lg:static h-[165px] lg:h-[108px] object-cover"
         />
         <div className="flex items-center z-10 flex-col lg:gap-[30px] xl:flex-row">
@@ -36,6 +38,8 @@ export const BannerTop = async () => {
           alt="изображение"
           width={544}
           height={108}
+          loading="eager"
+          fetchPriority="high"
           className="absolute right-0 lg:right-auto lg:static 2xl:absolute 2xl:right-0 w-[168px] lg:w-[17%] h-[165px] lg:h-[108px] object-cover"
         />
       </div>
